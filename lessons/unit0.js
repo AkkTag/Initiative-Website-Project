@@ -2,7 +2,7 @@ lessonContentData["Unit 0"] = {
 
     "0.1 About the Course": `
 
-        <section id="learning" class="lesson-section">
+        <section id="content" class="lesson-section">
 
             <h2>Welcome to AP Computer Science A</h2>
 
@@ -49,7 +49,7 @@ lessonContentData["Unit 0"] = {
             </ul>
         </section>
 
-        <section id="mistakes" class="lesson-section">
+        <section id="misconceptions" class="lesson-section">
 
             <h2>Frequently Asked Questions</h2>
 
@@ -65,7 +65,7 @@ lessonContentData["Unit 0"] = {
 
         <section id="ask-online" class="lesson-section">
 
-            <h2>Common Mistakes</h2>
+            <h2>Common Misconceptions</h2>
 
             <P>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
