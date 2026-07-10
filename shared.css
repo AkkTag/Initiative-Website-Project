@@ -122,11 +122,11 @@ width:60%;
     width: 260px;
     height: 95px;
 
-    padding: 18px 54px;
+    padding: 18px 24px;
 
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 18px;
 
     background: #111827;
 
@@ -176,8 +176,28 @@ width:60%;
     font-size:24px;
 } */
 
+/* .ai-card .ai-avatar {
+    position: fixed;
+    right: 155px;
+    bottom: 3px;
+    width: 100px;
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 2001;
+    pointer-events: none;
+}
+
+.ai-card .ai-avatar i{
+    font-size: 22px;
+    color: white;
+} */
+
 .ai-card .ai-info {
-    margin-left: 24px;
+    margin-left: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
