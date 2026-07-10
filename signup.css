@@ -1,0 +1,254 @@
+body{
+    margin:0;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:'Poppins',sans-serif;
+
+    background: 
+        url("assets/Constarration Background.png"),
+        linear-gradient(-45deg, #98c9fa, #4a90e2, #7fdbff, #6c5ce7);
+        
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    animation: gradientBG 12s ease infinite;
+}
+
+/* Animation keyframes */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.signup-card{
+
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    width: 320px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+
+    /* width:370px;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+    text-align:center; */
+}
+
+.signup-card h2{
+
+    margin-bottom:20px;
+}
+
+.social-title{
+
+    color:#4a90e2;
+    font-size:14px;
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+.social-buttons{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+
+    margin-bottom:25px;
+}
+
+.social-btn{
+
+    width:85%;
+    margin:auto;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.social-btn:hover{
+
+    transform:translateY(-2px);
+}
+
+.google{
+
+    background:#bbddff;
+}
+
+.microsoft{
+
+    background:#f3f3f3;
+}
+
+.yahoo{
+
+    background:#eee7ff;
+}
+
+.divider{
+
+    margin:20px 0;
+
+    color:#4a90e2;
+
+    opacity:.8;
+
+    font-weight:600;
+}
+
+.input-group{
+
+    text-align:left;
+
+    margin-bottom:15px;
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color: #333;
+
+    font-size:12px;
+}
+
+.input-group input{
+
+    width:93%;
+
+    display:block;
+
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.2s ease;
+
+    padding:10px;
+/* 
+    border-radius:10px;
+
+    border:none;
+
+    outline:none;
+
+    transition:.2s; */
+}
+
+/* Focus animation */
+.input-group input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74,144,226,0.4);
+  transform: scale(1.02);
+}
+
+/* .input-group input:focus{
+
+    transform:scale(1.02);
+
+    box-shadow:0 0 10px rgba(255,255,255,.4);
+} */
+
+.signup-btn{
+
+    width:85%;
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#4a90e2;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.signup-btn:hover{
+
+    background:#357bd8;
+
+    transform:translateY(-2px);
+}
+
+.links{
+
+    margin-top:20px;
+}
+
+.links a{
+
+    color:#4a90e2;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    text-decoration:none;
+}
+
+.links a:hover{
+
+    text-decoration:underline;
+}
+
+.auth-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .auth-wrapper h1{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #58a0ff;          Blue
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+} */

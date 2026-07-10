@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Content</title>
+
+    <link rel="stylesheet" href="course-content.css">
+    <link rel="stylesheet" href="shared.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (needed for fa-user / fa-robot icons used below) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+<div class="course-layout">
+
+    <img src="assets/Star Logo Icon.png" alt="Star Logo" class="logo-star second">
+
+    <!-- Left Sidebar -->
+    <aside class="course-sidebar">
+
+        <div class="sidebar-header">
+            <h2>Computer Science A</h2>
+            <div class="badge">AP</div>
+            <div class="badge">Grade 11-12</div>
+
+        </div>
+
+        <div class="unit-list" role="listbox" aria-label="Course units">
+
+            <div class="unit active" role="option" tabindex="0" aria-selected="true">
+                Unit 0
+            </div>
+
+            <div class="unit" role="option" tabindex="0" aria-selected="false">
+                Unit 1
+            </div>
+
+            <div class="unit" role="option" tabindex="0" aria-selected="false">
+                Unit 2
+            </div>
+
+            <div class="unit" role="option" tabindex="0" aria-selected="false">
+                Unit 3
+            </div>
+
+            <div class="unit" role="option" tabindex="0" aria-selected="false">
+                Unit 4
+            </div>
+
+        </div>
+
+        <!-- Lesson Sidebar -->
+
+        <aside class="lesson-sidebar" role="listbox" aria-label="Lessons in selected unit"></aside>
+
+
+        <div class="panel-row">
+            <div class="profile-card">
+
+                <div class="avatar">
+
+                    <i class="fas fa-user"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>Akshaj</h3>
+
+                    <p>Grade 11 Student</p>
+
+                </div>
+
+            </div>
+
+            <!--AI Panel-->
+
+            <div class="ai-card">
+
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+
+                <div class="ai-info">
+                    <h3>Starr AI</h3>
+                    <p>Ask Starr anything.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </aside>
+
+
+    
+
+    <!-- Main Content -->
+
+    <main class="lesson-content">
+
+        <div class="lesson-header">
+            
+            <div class="lesson-header-inner">
+                
+                <div class="lesson-title">
+                    <div id="unit-title" class="unit-text">Unit 0 | Getting Started</div>
+                    <div id="lesson-box" class="lesson-text">0.1 About the Course</div>
+                </div>
+
+                <!-- <div class="lesson-title">
+                    <h1 id="unit-title">Unit 0 | Getting Started</h1>
+                    <input id="lesson-box" type="text" readonly placeholder="Select a lesson" />
+                </div> -->
+
+                <nav class="lesson-tabs">
+
+                    <a href="#learning" class="tab active">Learning</a>
+
+                    <a href="#what-youll-learn" class="tab">Questions</a>
+
+                    <a href="#mistakes" class="tab">Mistakes</a>
+
+                    <a href="#ask-online" class="tab">Ask Online</a>
+
+                </nav>
+
+            </div>
+        </div>
+
+        <div class="lesson-body"></div>
+        
+    </main>
+
+</div>
+
+<script src="course-data.js"></script>
+<script src="lesson-data.js"></script>
+
+<script src="lessons/unit0.js"></script>
+<script src="lessons/unit1.js"></script>
+<script src="lessons/unit2.js"></script>
+<script src="lessons/unit3.js"></script>
+<script src="lessons/unit4.js"></script>
+
+<script src="course-content.js"></script>
+
+</body>
+</html>

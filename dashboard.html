@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="shared.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/7c74d0d9d5.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="dashboard">
+
+    <img src="assets/Star Element Icon.png" alt="Star Element" class="floating-star star-left">
+    <img src="assets/Star Element Icon.png" alt="Star Element" class="floating-star star-right">
+    <img src="assets/Star Element Icon.png" alt="Star Element" class="floating-star star-top">
+    <img src="assets/Star Element Icon.png" alt="Star Element" class="floating-star star-bottom">
+    <img src="assets/Star Element Icon.png" alt="Star Element" class="floating-star star-center">
+
+    <img src="assets/Star Logo Icon.png" alt="Star Logo" class="logo-star first">
+    <img src="assets/Star Logo Icon.png" alt="Star Logo" class="logo-star second">
+
+    <!-- Welcome Banner -->
+
+    <!--
+    <section class="welcome-banner">
+
+        <div class="overlay">
+
+            <h1>Welcome back, Akshaj!</h1>
+
+            <p>Continue your learning journey.</p>
+
+        </div>
+
+        code for the badge (currently in the top-right of screen), modify as needed
+        <div class="badge">
+            AP
+        </div>
+
+    </section>-->
+
+    <section class="welcome-banner">
+
+        <div class="overlay">
+
+            <h1>Welcome back, Akshaj</h1>
+
+            <p>Pick up where you left off and keep building momentum.</p>
+            
+            <!--
+            <div class="banner-actions">
+                <button class="primary-btn">Continue Learning</button>
+                <button class="secondary-btn">View Progress</button>
+            </div>-->
+
+        </div>
+
+        <!-- <div class="badge">AP</div> -->
+
+    </section>
+
+    
+
+    <!-- Course Grid -->
+
+    <section class="course-grid">
+        
+        <!--
+        <div class="progress">
+
+            <div class="progress-fill"></div>
+
+        </div>
+        -->
+        
+        <div class="course-card blue" id="apcsa-card">
+
+            <i class="fas fa-laptop-code"></i>
+
+            <h2>AP Computer Science A</h2>
+
+            <p>Java programming, FRQs, MCQs and exam review.</p>
+
+            <!-- Progress bar -->
+            <div class="progress">
+                <div class="progress-fill"></div>
+            </div>
+
+            <p class="progress-text"></p>
+            
+            <button class="course-btn">Open Course</button>
+            
+            <!-- Button replacement (see section 2)
+            <button class="course-btn">Continue</button>
+            -->
+
+        </div>
+
+        <!--
+        <div class="course-card blue">
+
+            <i class="fas fa-laptop-code"></i>
+
+            <h2>AP Computer Science A</h2>
+
+            <p>Java programming, FRQs, MCQs and exam review.</p>
+
+            <p class="progress-text">72% Complete</p>
+
+        </div>
+        -->
+
+        <div class="course-card green" id="adfunc-card">
+
+            <i class="fas fa-calculator"></i>
+
+            <h2>Advanced Functions</h2>
+
+            <p>Lessons, practice questions and notes.</p>
+
+            <!-- Progress bar -->
+            <div class="progress">
+                <div class="progress-fill"></div>
+            </div>
+
+            <p class="progress-text"></p>
+            
+            <button class="course-btn">Open Course</button>
+
+            <!--<p class="progress-text">72% Complete</p>-->
+
+        </div>
+
+        <div class="course-card lime" id="chem-card">
+
+            <i class="fas fa-flask"></i>
+
+            <h2>Chemistry</h2>
+
+            <p>Stoichiometry, equilibrium, acids & bases.</p>
+
+            <!-- Lime Specific Progress bar (not currently in effect)-->
+            <div class="lime-progress">
+                <div class="progress-fill"></div>
+            </div>
+
+            <p class="lime-progress-text"></p>
+            
+            <button class="course-btn">Open Course</button>
+
+            <!--<p class="progress-text">72% Complete</p>-->
+
+        </div>
+
+        <div class="course-card purple" id="econ-card">
+
+            <i class="fas fa-chart-line"></i>
+
+            <h2>Economics</h2>
+
+            <p>Research, graphs and analytical skills.</p>
+
+            <!-- Progress bar -->
+            <div class="progress">
+                <div class="progress-fill"></div>
+            </div>
+
+            <p class="progress-text"></p>
+            
+            <button class="course-btn">Open Course</button>
+
+            <!--<p class="progress-text">72% Complete</p>-->
+
+        </div>
+
+    </section>
+
+    <!-- User Panel -->
+
+    <div class="panel-row">
+        <div class="profile-card">
+
+            <div class="avatar">
+
+                <i class="fas fa-user"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Akshaj</h3>
+
+                <p>Student Account</p>
+
+            </div>
+
+        </div>
+
+        <!--AI Panel-->
+
+        <div class="ai-card">
+
+            <div class="ai-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+
+            <div class="ai-info">
+                <h3>Starr AI</h3>
+                <p>Ask Starr anything.</p>
+            </div>
+
+        </div>
+    </div>
+
+    
+
+</div>
+
+<script src="script.js" defer></script>
+
+</body>
+</html>

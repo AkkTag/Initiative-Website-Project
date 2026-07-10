@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+
+  
+
+  /* Animated gradient */
+
+  /* background-image: url("assets/Constarration Background.png"); */
+  
+  background: 
+    url("assets/Constarration Background.png"),
+    linear-gradient(-45deg, #98c9fa, #4a90e2, #7fdbff, #6c5ce7);
+    
+  /* background: linear-gradient(-45deg, #98c9fa, #4a90e2, #7fdbff, #6c5ce7); */
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: gradientBG 12s ease infinite;
+  
+}
+
+/* Animation keyframes */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* Card */
+.login-card {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  width: 320px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* Title */
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+/* Input group */
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+.input-group input {
+  width: 93%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Focus animation */
+.input-group input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74,144,226,0.4);
+  transform: scale(1.02);
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #4a90e2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-btn:hover {
+  background: #357bd8;
+  transform: translateY(-2px);
+}
+
+/* Links */
+.links {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #4a90e2;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.auth-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-wrapper h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #7cb5ff;          /* Blue */
+    margin-top: 0px;
+    letter-spacing: 2px;
+}
