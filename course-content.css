@@ -89,42 +89,13 @@ body{
 .unit-list::-webkit-scrollbar-thumb:hover{
     background:#6B7280;
 }
-/*
-.sidebar-header{
 
-    background:#1F2937;
-
-    border-radius:14px;
-
-    padding:18px;
-
-    font-size:17px;
-
-    font-weight:700;
-
-    line-height:1.4;
-
-    flex-shrink:0;
-
-    color: #BEFF62;
-
-    align-items: center;
-}
-*/
 .sidebar-header h2 {
     margin: 0;
     font-size: 1.6rem;
     color: white;
     font-weight: 700;
 }
-
-/* .sidebar-header p {
-    margin: 4px 0 0;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 400;
-    color: #BEFF62;
-} */
 
 .sidebar-header .badge {
     position:static;
@@ -156,7 +127,6 @@ body{
 }
 
 .unit{
-    /* background: #1F2937; */
     background: #c6e1ff;
 
     padding: 16px;
@@ -169,35 +139,13 @@ body{
 
     font-weight: 600;
 
-    /* color:#D1D5DB; */
     color: #1E3A8A;
 }
-
-/*
-.unit{
-
-    background:#1F2937;
-
-    padding:16px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-    font-weight:600;
-
-    color:#D1D5DB;
-}
-*/
 
 .unit:hover{
 
     background: #AFCFFF;
-    /* background:#374151; */
 
-    /* color: #0F172A; */
     color:white;
 
     transform:translateX(6px);
@@ -206,57 +154,9 @@ body{
 .unit.active{
 
     background:#556EE6;
-    /* background:#4F46E5; */
 
     color:white;
 }
-
-
-/* ===========================
-   PROFILE
-=========================== */
-
-/* .profile-box{
-
-    background:#1F2937;
-
-    border-radius:14px;
-
-    padding:14px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    flex-shrink:0;
-}
-
-.profile-box img{
-
-    width:52px;
-
-    height:52px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-}
-
-.profile-box h4{
-
-    font-size:15px;
-
-    margin-bottom:3px;
-}
-
-.profile-box p{
-
-    color:#9CA3AF;
-
-    font-size:13px;
-} */
 
 
 /* ===========================
@@ -278,7 +178,6 @@ body{
     overflow-y:auto;
 
     background:#1E3A8A;
-    /* background:#2A0AAE; */
 
     border-radius:0 16px 16px 0;
 
@@ -298,25 +197,6 @@ body{
 
     z-index:200;
 }
-
-/*
-.lesson-sidebar{
-
-    background:#2A0AAE;
-
-    overflow:hidden;
-
-    display:flex;
-
-    flex-direction:column;
-
-    padding:20px;
-
-    gap:10px;
-
-    color:white;
-}
-*/
 
 .lesson-sidebar.show{
 
@@ -368,8 +248,6 @@ body{
     transform:translateX(6px);
 }
 
-/* Ask Starr anything. line handled in shared.css (.ai-card p) */
-
 .lesson.active{
 
     background:#BEFF62;
@@ -389,14 +267,13 @@ body{
    MAIN CONTENT
 =========================== */
 
-/*placeholder colour for lesson-content background: #556EE6*/
 .lesson-content{
 
     background:linear-gradient(-45deg, #98c9fa, #4a90e2, #7fdbff, #6c5ce7);
     background-size: 400% 400%;
     animation: gradientBG 12s ease infinite;
     
-    padding:0px; /*look at this later*/
+    padding:0px;
     height: 100vh;
     overflow-y:auto;
     scroll-padding-top: 200px;
@@ -460,6 +337,11 @@ body{
     color:#111827;
 }
 
+.lesson-body h2{
+    margin-top: 4px;
+    margin-bottom: 18px;
+}
+
 .lesson-body p{
     color:#4B5563;
 }
@@ -498,8 +380,6 @@ body{
     padding:28px 35px 0px;
     text-align: center;
 
-    /* border-bottom:1px solid #ececec; */
-
 }
 
 .lesson-title .unit-text{
@@ -525,8 +405,6 @@ body{
     gap:10px;
 
     padding: 4px 0px 16px 0px;
-
-    /* background:#fafafa; */
 
 }
 
@@ -556,7 +434,6 @@ body{
 
 .tab.active{
 
-    /* background:#4a90e2; */
     background: #556EE6;
 
     color:white;
