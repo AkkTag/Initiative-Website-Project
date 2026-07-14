@@ -89,13 +89,42 @@ body{
 .unit-list::-webkit-scrollbar-thumb:hover{
     background:#6B7280;
 }
+/*
+.sidebar-header{
 
+    background:#1F2937;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    line-height:1.4;
+
+    flex-shrink:0;
+
+    color: #BEFF62;
+
+    align-items: center;
+}
+*/
 .sidebar-header h2 {
     margin: 0;
     font-size: 1.6rem;
     color: white;
     font-weight: 700;
 }
+
+/* .sidebar-header p {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 400;
+    color: #BEFF62;
+} */
 
 .sidebar-header .badge {
     position:static;
@@ -127,6 +156,7 @@ body{
 }
 
 .unit{
+    /* background: #1F2937; */
     background: #c6e1ff;
 
     padding: 16px;
@@ -139,13 +169,35 @@ body{
 
     font-weight: 600;
 
+    /* color:#D1D5DB; */
     color: #1E3A8A;
 }
+
+/*
+.unit{
+
+    background:#1F2937;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-weight:600;
+
+    color:#D1D5DB;
+}
+*/
 
 .unit:hover{
 
     background: #AFCFFF;
+    /* background:#374151; */
 
+    /* color: #0F172A; */
     color:white;
 
     transform:translateX(6px);
@@ -154,9 +206,57 @@ body{
 .unit.active{
 
     background:#556EE6;
+    /* background:#4F46E5; */
 
     color:white;
 }
+
+
+/* ===========================
+   PROFILE
+=========================== */
+
+/* .profile-box{
+
+    background:#1F2937;
+
+    border-radius:14px;
+
+    padding:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    flex-shrink:0;
+}
+
+.profile-box img{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+}
+
+.profile-box h4{
+
+    font-size:15px;
+
+    margin-bottom:3px;
+}
+
+.profile-box p{
+
+    color:#9CA3AF;
+
+    font-size:13px;
+} */
 
 
 /* ===========================
@@ -178,6 +278,7 @@ body{
     overflow-y:auto;
 
     background:#1E3A8A;
+    /* background:#2A0AAE; */
 
     border-radius:0 16px 16px 0;
 
@@ -197,6 +298,25 @@ body{
 
     z-index:200;
 }
+
+/*
+.lesson-sidebar{
+
+    background:#2A0AAE;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:20px;
+
+    gap:10px;
+
+    color:white;
+}
+*/
 
 .lesson-sidebar.show{
 
@@ -248,6 +368,8 @@ body{
     transform:translateX(6px);
 }
 
+/* Ask Starr anything. line handled in shared.css (.ai-card p) */
+
 .lesson.active{
 
     background:#BEFF62;
@@ -267,13 +389,14 @@ body{
    MAIN CONTENT
 =========================== */
 
+/*placeholder colour for lesson-content background: #556EE6*/
 .lesson-content{
 
     background:linear-gradient(-45deg, #98c9fa, #4a90e2, #7fdbff, #6c5ce7);
     background-size: 400% 400%;
     animation: gradientBG 12s ease infinite;
     
-    padding:0px;
+    padding:0px; /*look at this later*/
     height: 100vh;
     overflow-y:auto;
     scroll-padding-top: 200px;
@@ -338,12 +461,164 @@ body{
 }
 
 .lesson-body h2{
-    margin-top: 4px;
-    margin-bottom: 18px;
+
+    margin-bottom:20px;
 }
 
 .lesson-body p{
     color:#4B5563;
+}
+
+.content-table{
+
+    width:100%;
+    max-width:900px;
+    border-collapse:collapse;
+
+    margin-top:16px;
+    margin-bottom:22px;
+
+    border-radius:12px;
+    overflow:hidden;
+
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+}
+
+.content-table th,
+.content-table td{
+
+    text-align:left;
+
+    padding:14px 18px;
+
+    border-bottom:1px solid #E5E7EB;
+}
+
+.content-table th{
+
+    background:#556EE6;
+    color:white;
+
+    font-weight:600;
+    font-size:.95rem;
+}
+
+.content-table td{
+
+    color:#4B5563;
+    font-size:.95rem;
+    line-height:1.6;
+}
+
+.content-table td:first-child{
+
+    font-weight:600;
+    color:#1F2937;
+    white-space:nowrap;
+}
+
+.content-table .unit-subtitle{
+
+    display:block;
+
+    margin-top:3px;
+
+    font-weight:600;
+    font-size:.82rem;
+    color:#6B7280;
+    white-space:normal;
+}
+
+.content-table tbody tr:nth-child(even){
+
+    background:#F5F7FB;
+}
+
+.content-table tbody tr:hover{
+
+    background:#EDF1FD;
+}
+
+.faq-list{
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    margin-bottom:22px;
+    max-width:900px;
+}
+
+.faq-item{
+
+    background:#F5F7FB;
+
+    border:1px solid #E5E7EB;
+    border-radius:12px;
+
+    padding:2px 20px;
+
+    transition:.2s;
+}
+
+.faq-item[open]{
+
+    background:white;
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+}
+
+.faq-item summary{
+
+    list-style:none;
+
+    cursor:pointer;
+
+    padding:16px 0;
+
+    font-weight:600;
+    font-size:1rem;
+    color:#1F2937;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.faq-item summary::-webkit-details-marker{
+
+    display:none;
+}
+
+.faq-item summary::after{
+
+    content:"+";
+
+    font-size:1.3rem;
+    font-weight:400;
+    color:#556EE6;
+
+    transition:transform .25s;
+    flex-shrink:0;
+}
+
+.faq-item[open] summary::after{
+
+    transform:rotate(45deg);
+}
+
+.faq-item summary:hover{
+
+    color:#556EE6;
+}
+
+.faq-item p{
+
+    margin:0 0 18px;
+    color:#4B5563;
+    font-size:.95rem;
+    line-height:1.7;
+    max-width:none;
 }
 
 .lesson-header{
@@ -380,6 +655,8 @@ body{
     padding:28px 35px 0px;
     text-align: center;
 
+    /* border-bottom:1px solid #ececec; */
+
 }
 
 .lesson-title .unit-text{
@@ -405,6 +682,8 @@ body{
     gap:10px;
 
     padding: 4px 0px 16px 0px;
+
+    /* background:#fafafa; */
 
 }
 
@@ -434,6 +713,7 @@ body{
 
 .tab.active{
 
+    /* background:#4a90e2; */
     background: #556EE6;
 
     color:white;
@@ -476,3 +756,19 @@ html{
 
     border-radius:20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* color: #6B7280; gray
+color:#8FBF2E; dark lime */

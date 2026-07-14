@@ -31,6 +31,35 @@ lessonContentData["Unit 0"] = {
                 </p>
             </div>
 
+            <h3>Unit Overview</h3>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>What You'll Learn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Unit 1<br><span class="unit-subtitle">Using Objects and Methods</span></td>
+                        <td>The basics of Java syntax — variables, data types, expressions, and how to call methods from built-in classes like Math and String.</td>
+                    </tr>
+                    <tr>
+                        <td>Unit 2<br><span class="unit-subtitle">Selection and Iteration</span></td>
+                        <td>How to control program flow using boolean logic, if statements, and while/for loops to repeat and select actions.</td>
+                    </tr>
+                    <tr>
+                        <td>Unit 3<br><span class="unit-subtitle">Class Creation</span></td>
+                        <td>How to design your own classes — writing constructors, methods, and using scope and access modifiers correctly.</td>
+                    </tr>
+                    <tr>
+                        <td>Unit 4<br><span class="unit-subtitle">Data Collections</span></td>
+                        <td>Working with collections of data using arrays and ArrayLists, plus searching, sorting, and recursive algorithms.</td>
+                    </tr>
+                </tbody>
+            </table>
+
         </section>
 
         <section id="what-youll-learn" class="lesson-section">
@@ -43,13 +72,54 @@ lessonContentData["Unit 0"] = {
                 the material with confidence.
             </p>
 
-            <h3>Do I need prior programming experience?</h3>
+            <div class="faq-list">
 
-            <p>
-                No prior experience is required. AP CSA is built to take you from your
-                very first line of Java to writing full object-oriented programs by the
-                end of the course.
-            </p>
+                <details class="faq-item">
+                    <summary>Do I need prior programming experience?</summary>
+                    <p>
+                        No prior experience is required. AP CSA is built to take you from
+                        your very first line of Java to writing full object-oriented
+                        programs by the end of the course.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Which Java environment should I use?</summary>
+                    <p>
+                        Any standard Java IDE works, but we recommend starting with a
+                        beginner-friendly option covered in Unit 0.3 — Java Development
+                        Environments — so your setup matches what's used in class.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How is this course structured?</summary>
+                    <p>
+                        The course is broken into five units, moving from Java basics and
+                        objects, through selection and iteration, into class creation, and
+                        finally data collections like arrays and ArrayLists.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What if I fall behind on a topic?</summary>
+                    <p>
+                        Every lesson stays available for review at any time, and Starr AI
+                        is here to re-explain a concept, walk through examples, or quiz you
+                        whenever you need a refresher.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How does this course prepare me for the AP Exam?</summary>
+                    <p>
+                        Each unit builds directly toward the skills tested on the AP CSA
+                        Exam, with practice questions and FRQ-style problems woven
+                        throughout so exam prep happens as you learn, not just at the end.
+                    </p>
+                </details>
+
+            </div>
 
             <div class="tip-box">
                 <h3>⭐ Starr Tip</h3>
@@ -111,7 +181,115 @@ lessonContentData["Unit 0"] = {
     ,
 
     "0.2 About the Exam": `
-        ...
+
+        <section id="content" class="lesson-section">
+
+            <h2>About the CSA Exam</h2>
+
+            <h3>Exam Duration</h3>
+
+            <p>
+                The AP Computer Science A Exam is <strong>3 hours</strong> long.
+            </p>
+
+            <h3>Exam Structure</h3>
+
+            <p>
+                The exam is split into two sections: <strong>42 multiple-choice
+                questions</strong> and <strong>4 free-response questions</strong>.
+            </p>
+
+            <h3>Exam Weightings</h3>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Exam Weighting</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Unit 1<br><span class="unit-subtitle">Using Objects and Methods</span></td>
+                        <td>20%</td>
+                    </tr>
+                    <tr>
+                        <td>Unit 2<br><span class="unit-subtitle">Selection and Iteration</span></td>
+                        <td>25%</td>
+                    </tr>
+                    <tr>
+                        <td>Unit 3<br><span class="unit-subtitle">Class Creation</span></td>
+                        <td>20%</td>
+                    </tr>
+                    <tr>
+                        <td>Unit 4<br><span class="unit-subtitle">Data Collections</span></td>
+                        <td>35%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="what-youll-learn" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are the questions Starr hears most often about the exam itself —
+                answered up front so you know exactly what to expect on test day.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Is the AP CSA Exam curved?</summary>
+                    <p>
+                        The College Board sets score cutoffs after the exam is
+                        administered, based on how students performed that year, so the
+                        exact cutoff for each score (1–5) can shift slightly from year to
+                        year.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I use a calculator on the exam?</summary>
+                    <p>
+                        No. The AP CSA Exam does not allow calculators, but it also
+                        doesn't require one — the exam focuses on programming logic and
+                        Java syntax rather than numerical calculation.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do I need to memorize every Java class and method?</summary>
+                    <p>
+                        No. You're only responsible for the classes and methods listed in
+                        the official Java Quick Reference (JQR), which is provided to you
+                        during the exam. Learn more about this in "0.4 Java Quick Reference (JQR)".
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How is the free-response section graded?</summary>
+                    <p>
+                        Each free-response question is scored on a point system, with
+                        partial credit awarded for correct logic even if your code isn't
+                        perfectly written or doesn't compile.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Which units are tested the most?</summary>
+                    <p>
+                        Based on the exam weightings above, Unit 4 (Data Collections)
+                        carries the heaviest weighting, so arrays, ArrayLists, searching,
+                        and sorting are worth extra review time.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
     `,
 
     "0.3 Java Development Environments": `
