@@ -323,7 +323,21 @@ lessonContentData["Unit 0"] = {
                 of a source code editor, build automation tools, and a debugger.
             </p>
 
+            <p>
+                IDEs generally fall into two categories: <strong>cloud-based IDEs</strong> 
+                that run in your browser, and <strong>desktop IDEs</strong> that you install 
+                on your computer.
+            </p>
+
             <h3>Cloud IDEs</h3>
+
+            <ul>
+                <li>Online GDB — a simple browser-based compiler and debugger that supports Java and many other languages</li>
+                <li>Replit — a full-featured cloud IDE with project hosting, collaboration tools, and support for Java</li>
+                <li>JDoodle — a lightweight online compiler that lets you quickly write and execute Java code</li>
+                <li>Programiz Online Compiler — a beginner-friendly editor for running short Java programs</li>
+                <li>W3Schools Java Compiler — a simple in-browser editor useful for quick tests and practice</li>
+            </ul>
 
             <p>
                 The AP Computer Science A Exam is <strong>3 hours</strong> long.
@@ -344,3 +358,19 @@ lessonContentData["Unit 0"] = {
     `
 
 };
+
+
+
+
+{/* <p>
+                To translate our written source code into object code that the computer 
+                can understand, we need to use a compiler. We can write code in any 
+                general-purpose text editor, but the compiler comes built-in with a tool 
+                called an <strong>Integrated Development Environment (IDE)</strong>.
+            </p>
+
+            <p>
+                An IDE is a software application that provides comprehensive facilities 
+                to computer programmers for software development. It typically consists 
+                of a source code editor, build automation tools, and a debugger.
+            </p> */}
