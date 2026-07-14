@@ -186,17 +186,28 @@ lessonContentData["Unit 0"] = {
 
             <h2>About the CSA Exam</h2>
 
+            <p>
+                The AP Computer Science A Exam tests one's knowledge of Java basics
+                and general programming concepts. It challenges <strong>critical thinking 
+                </strong>and <strong>problem solving</strong> skills and one's ability to 
+                write, read, organize, and debug code. Comparative to more academic exams 
+                in math and English, the AP CSA Exam is less demanding and promotes higher 
+                chances of <strong>success</strong>.
+            </p>
+
             <h3>Exam Duration</h3>
 
             <p>
                 The AP Computer Science A Exam is <strong>3 hours</strong> long.
+                Refer to College Board's official <strong>Course and Exam Description</strong>
+                for more information on when the exam is administered and how to register.
             </p>
 
             <h3>Exam Structure</h3>
 
             <p>
                 The exam is split into two sections: <strong>42 multiple-choice
-                questions</strong> and <strong>4 free-response questions</strong>.
+                questions</strong> (MCQ) and <strong>4 free-response questions</strong> (FRQ).
             </p>
 
             <h3>Exam Weightings</h3>
@@ -290,10 +301,42 @@ lessonContentData["Unit 0"] = {
             </div>
 
         </section>
+
     `,
 
     "0.3 Java Development Environments": `
-        ...
+        
+        <section id="content" class="lesson-section">
+
+            <h2>Integrated Development Environments (IDEs)</h2>
+
+            <p>
+                To translate our written source code into object code that the computer 
+                can understand, we need to use a compiler. We can write code in any 
+                general-purpose text editor, but the compiler comes built-in with a tool 
+                called an <strong>Integrated Development Environment (IDE)</strong>.
+            </p>
+
+            <p>
+                An IDE is a software application that provides comprehensive facilities 
+                to computer programmers for software development. It typically consists 
+                of a source code editor, build automation tools, and a debugger.
+            </p>
+
+            <h3>Cloud IDEs</h3>
+
+            <p>
+                The AP Computer Science A Exam is <strong>3 hours</strong> long.
+                Refer to College Board's official <strong>Course and Exam Description</strong>
+                for more information on when the exam is administered and how to register.
+            </p>
+
+            <h3>Exam Structure</h3>
+
+            <p>
+                The exam is split into two sections: <strong>42 multiple-choice
+                questions</strong> (MCQ) and <strong>4 free-response questions</strong> (FRQ).
+            </p>
     `,
 
     "0.4 Java Quick Reference (JQR)": `
