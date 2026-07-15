@@ -62,7 +62,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="what-youll-learn" class="lesson-section">
+        <section id="questions" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -222,26 +222,26 @@ lessonContentData["Unit 0"] = {
                 <tbody>
                     <tr>
                         <td>Unit 1<br><span class="unit-subtitle">Using Objects and Methods</span></td>
-                        <td>20%</td>
+                        <td>15-25%</td>
                     </tr>
                     <tr>
                         <td>Unit 2<br><span class="unit-subtitle">Selection and Iteration</span></td>
-                        <td>25%</td>
+                        <td>25-35%</td>
                     </tr>
                     <tr>
                         <td>Unit 3<br><span class="unit-subtitle">Class Creation</span></td>
-                        <td>20%</td>
+                        <td>10-18%</td>
                     </tr>
                     <tr>
                         <td>Unit 4<br><span class="unit-subtitle">Data Collections</span></td>
-                        <td>35%</td>
+                        <td>30-40%</td>
                     </tr>
                 </tbody>
             </table>
 
         </section>
 
-        <section id="what-youll-learn" class="lesson-section">
+        <section id="questions" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -332,29 +332,293 @@ lessonContentData["Unit 0"] = {
             <h3>Cloud IDEs</h3>
 
             <ul>
-                <li>Online GDB — a simple browser-based compiler and debugger that supports Java and many other languages</li>
-                <li>Replit — a full-featured cloud IDE with project hosting, collaboration tools, and support for Java</li>
-                <li>JDoodle — a lightweight online compiler that lets you quickly write and execute Java code</li>
-                <li>Programiz Online Compiler — a beginner-friendly editor for running short Java programs</li>
-                <li>W3Schools Java Compiler — a simple in-browser editor useful for quick tests and practice</li>
+                <li><strong>Online GDB</strong> — a simple browser-based compiler and debugger that supports Java and many other languages</li>
+                <li><strong>Replit</strong> — a full-featured cloud IDE with project hosting, collaboration tools, and support for Java</li>
+                <li><strong>JDoodle</strong> — a lightweight online compiler that lets you quickly write and execute Java code</li>
+                <li><strong>Programiz Online Compiler</strong> — a beginner-friendly editor for running short Java programs</li>
+                <li><strong>W3Schools Java Compiler</strong> — a simple in-browser editor useful for quick tests and practice</li>
             </ul>
 
-            <p>
-                The AP Computer Science A Exam is <strong>3 hours</strong> long.
-                Refer to College Board's official <strong>Course and Exam Description</strong>
-                for more information on when the exam is administered and how to register.
-            </p>
+            <h3>Desktop IDEs</h3>
+
+            <ul>
+                <li><strong>BlueJ</strong> — a beginner-friendly IDE designed for teaching Java, with a simple interface and built-in visualization tools</li>
+                <li><strong>DrJava</strong> — a lightweight IDE for Java that emphasizes simplicity and ease of use, suitable for beginners</li>
+                <li><strong>IntelliJ IDEA</strong> — a powerful and popular IDE with advanced features, free for personal use</li>
+                <li><strong>Eclipse</strong> — a widely-used open-source IDE with extensive plugin support and a large community</li>
+                <li><strong>NetBeans</strong> — an open-source IDE that provides tools for Java development, including GUI design and debugging</li>
+                <li><strong>VSCode</strong> — a lightweight, highly customizable code editor that supports Java through extensions, popular across many programming languages</li>
+                <li><strong>jGRASP</strong> — a lightweight IDE built for teaching, known for automatically generating visualizations of code structure and data</li>
+            </ul>
 
             <h3>Exam Structure</h3>
 
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
             <p>
-                The exam is split into two sections: <strong>42 multiple-choice
-                questions</strong> (MCQ) and <strong>4 free-response questions</strong> (FRQ).
+                Choosing and setting up an IDE trips up a lot of new programmers.
+                Here are the questions Starr hears most often about Java development
+                environments.
             </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Do I need to install anything, or can I just use a website?</summary>
+                    <p>
+                        You don't need to install anything to get started — cloud IDEs like
+                        Online GDB or Replit run entirely in your browser. Installing a
+                        desktop IDE is only necessary if you want offline access or more
+                        advanced features.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Which IDE should I use for this course?</summary>
+                    <p>
+                        Any IDE that supports Java will work for this course, but beginner-friendly
+                        options like BlueJ or jGRASP make it easier to see how your code runs while
+                        you're still learning the basics.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What's the difference between a text editor and an IDE?</summary>
+                    <p>
+                        A text editor just lets you write code, while an IDE bundles a code
+                        editor together with a compiler, debugger, and other tools — so you
+                        can write, run, and fix your code all in one place.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I switch IDEs partway through the course?</summary>
+                    <p>
+                        Yes. Since Java code is portable between environments, you can switch
+                        IDEs at any point without losing your work — just make sure to copy
+                        over your source files.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why does my code work in one IDE but not another?</summary>
+                    <p>
+                        This usually happens because of different default Java versions or
+                        project settings between IDEs. Double-check that both environments are
+                        using the same Java version if you run into unexpected errors.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do cloud IDEs save my work automatically?</summary>
+                    <p>
+                        It depends on the platform — some, like Replit, save your work
+                        automatically to an account, while others, like JDoodle or Programiz,
+                        may not save anything unless you copy your code somewhere safe.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
     `,
 
     "0.4 Java Quick Reference (JQR)": `
-        ...
+
+        <section id="content" class="lesson-section">
+
+            <h2>Java Quick Reference</h2>
+
+            <p>
+                This table contains accessible methods from the Java library that may be
+                included on the AP Computer Science A Exam. Keep this page bookmarked —
+                you'll be given an identical reference sheet during the actual exam, so it's
+                worth getting familiar with it now.
+            </p>
+
+            <table class="content-table jqr-table">
+                <thead>
+                    <tr>
+                        <th>Class Constructors and Methods</th>
+                        <th>Explanation</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class="jqr-group"><td colspan="2">String Class</td></tr>
+
+                    <tr>
+                        <td><code>String(String str)</code></td>
+                        <td>Constructs a new <code>String</code> object that represents the same sequence of characters as <code>str</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>int length()</code></td>
+                        <td>Returns the number of characters in a <code>String</code> object</td>
+                    </tr>
+                    <tr>
+                        <td><code>String substring(int from, int to)</code></td>
+                        <td>Returns the substring beginning at index <code>from</code> and ending at index <code>to - 1</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>String substring(int from)</code></td>
+                        <td>Returns <code>substring(from, length())</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>int indexOf(String str)</code></td>
+                        <td>Returns the index of the first occurrence of <code>str</code>; returns <code>-1</code> if not found</td>
+                    </tr>
+                    <tr>
+                        <td><code>boolean equals(Object other)</code></td>
+                        <td>Returns <code>true</code> if <code>this</code> corresponds to the same sequence of characters as <code>other</code>; returns <code>false</code> otherwise</td>
+                    </tr>
+                    <tr>
+                        <td><code>int compareTo(String other)</code></td>
+                        <td>Returns a value &lt; 0 if <code>this</code> is less than <code>other</code>; returns 0 if <code>this</code> is equal to <code>other</code>; returns a value &gt; 0 if <code>this</code> is greater than <code>other</code>. Strings are ordered based upon the alphabet</td>
+                    </tr>
+                    <tr>
+                        <td><code>String[] split(String del)</code></td>
+                        <td>Returns a <code>String</code> array where each element is a substring of <code>this</code> String, which has been split around matches of the given expression <code>del</code></td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">Integer Class</td></tr>
+
+                    <tr>
+                        <td><code>Integer.MIN_VALUE</code></td>
+                        <td>The minimum value represented by an <code>int</code> or <code>Integer</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>Integer.MAX_VALUE</code></td>
+                        <td>The maximum value represented by an <code>int</code> or <code>Integer</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>static int parseInt(String s)</code></td>
+                        <td>Returns the <code>String</code> argument as an <code>int</code></td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">Double Class</td></tr>
+
+                    <tr>
+                        <td><code>static double parseDouble(String s)</code></td>
+                        <td>Returns the <code>String</code> argument as a <code>double</code></td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">Math Class</td></tr>
+
+                    <tr>
+                        <td><code>static int abs(int x)</code></td>
+                        <td>Returns the absolute value of an <code>int</code> value</td>
+                    </tr>
+                    <tr>
+                        <td><code>static double abs(double x)</code></td>
+                        <td>Returns the absolute value of a <code>double</code> value</td>
+                    </tr>
+                    <tr>
+                        <td><code>static double pow(double base, double exponent)</code></td>
+                        <td>Returns the value of the first parameter raised to the power of the second parameter</td>
+                    </tr>
+                    <tr>
+                        <td><code>static double sqrt(double x)</code></td>
+                        <td>Returns the nonnegative square root of a <code>double</code> value</td>
+                    </tr>
+                    <tr>
+                        <td><code>static double random()</code></td>
+                        <td>Returns a <code>double</code> value greater than or equal to <code>0.0</code> and less than <code>1.0</code></td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">ArrayList Class</td></tr>
+
+                    <tr>
+                        <td><code>int size()</code></td>
+                        <td>Returns the number of elements in the list</td>
+                    </tr>
+                    <tr>
+                        <td><code>boolean add(E obj)</code></td>
+                        <td>Appends <code>obj</code> to end of list; returns <code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>void add(int index, E obj)</code></td>
+                        <td>Inserts <code>obj</code> at position <code>index</code> (0 &lt;= <code>index</code> &lt;= size), moving elements at position <code>index</code> and higher to the right (adds 1 to their indices) and adds 1 to size</td>
+                    </tr>
+                    <tr>
+                        <td><code>E get(int index)</code></td>
+                        <td>Returns the element at position <code>index</code> in the list</td>
+                    </tr>
+                    <tr>
+                        <td><code>E set(int index, E obj)</code></td>
+                        <td>Replaces the element at position <code>index</code> with <code>obj</code>; returns the element formerly at position <code>index</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>E remove(int index)</code></td>
+                        <td>Removes element from position <code>index</code>, moving elements at position <code>index + 1</code> and higher to the left (subtracts 1 from their indices and subtracts 1 from size; returns the element formerly at position <code>index</code></td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">File Class</td></tr>
+
+                    <tr>
+                        <td><code>File(String pathname)</code></td>
+                        <td>The <code>File</code> constructor that accepts a <code>String</code> pathname</td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">Scanner Class</td></tr>
+
+                    <tr>
+                        <td><code>Scanner(File f)</code></td>
+                        <td>The <code>Scanner</code> constructor that accepts a <code>File</code> for reading</td>
+                    </tr>
+                    <tr>
+                        <td><code>int nextInt()</code></td>
+                        <td>Returns the next <code>int</code> read from the file or input source if available. If the next <code>int</code> does not exist or is out of range, it will result in an <code>InputMismatchException</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>double nextDouble()</code></td>
+                        <td>Returns the next <code>double</code> read from the file or input source. If the next <code>double</code> does not exist, it will result in an <code>InputMismatchException</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>boolean nextBoolean()</code></td>
+                        <td>Returns the next <code>boolean</code> read from the file or input source. If the next <code>boolean</code> does not exist, it will result in an <code>InputMismatchException</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>String nextLine()</code></td>
+                        <td>Returns the next line of text as a <code>String</code> read from the file or input source; can return the empty string if called immediately after another <code>Scanner</code> method that is reading from the file or input source</td>
+                    </tr>
+                    <tr>
+                        <td><code>String next()</code></td>
+                        <td>Returns the next <code>String</code> read from the file or input source</td>
+                    </tr>
+                    <tr>
+                        <td><code>boolean hasNext()</code></td>
+                        <td>Returns <code>true</code> if there is a next item to read in the file or input source; <code>false</code> otherwise</td>
+                    </tr>
+                    <tr>
+                        <td><code>void close()</code></td>
+                        <td>Closes this scanner</td>
+                    </tr>
+
+                    <tr class="jqr-group"><td colspan="2">Object Class</td></tr>
+
+                    <tr>
+                        <td><code>boolean equals(Object other)</code></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><code>String toString()</code></td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <p class="jqr-source-note">
+                Source: College Board's official AP Computer Science A Java Quick Reference.
+            </p>
+
+        </section>
+
     `
 
 };
