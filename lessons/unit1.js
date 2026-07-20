@@ -486,7 +486,9 @@ lessonContentData["Unit 1"] = {
             </div>
 
         </section>
-    `,
+    `
+
+    ,
 
     "1.3 Expressions and Output": `
 
@@ -819,6 +821,550 @@ lessonContentData["Unit 1"] = {
                 <p>
                     Try asking: "Walk me through what gets printed if I use print() three
                     times in a row, then println() once."
+                </p>
+            </div>
+
+        </section>
+    `
+
+    ,
+
+    "1.4 Assignment Statements and Input": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Assignment Statements and Input</h2>
+
+            <p>
+                Declaring a variable only sets aside a labeled space in memory — it doesn't
+                give that variable a value on its own. To actually put a value into a
+                variable, whether that value comes from your code or from something the
+                user types, you need an assignment statement.
+            </p>
+
+            <h3>The Assignment Operator</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Assignment Operator ( = ):</span> allows a program to initialize or change the value stored in a variable. The value of the expression on the right is stored in the variable on the left.</p>
+            </div>
+
+            <p>
+                Every variable must be assigned a value before it can be used in an
+                expression, and that value must come from a compatible data type. A
+                variable is <strong>initialized</strong> the first time it's assigned a
+                value.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Statement</th>
+                        <th>What Happens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>int age = 17;</code></td>
+                        <td><code>age</code> is declared and initialized to <code>17</code> in a single statement</td>
+                    </tr>
+                    <tr>
+                        <td><code>age = 18;</code></td>
+                        <td>The value already stored in <code>age</code> is changed to <code>18</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>double gpa;<br>gpa = 3.9;</code></td>
+                        <td><code>gpa</code> is declared first with no value, then initialized separately on the next line</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                During execution, an expression on the right side of <code>=</code> is
+                evaluated down to a single value first — <em>then</em> that value is
+                stored in the variable on the left. The <code>=</code> symbol in Java
+                doesn't mean "equals" the way it does in math; it means "assign the value
+                on the right to the variable on the left."
+            </p>
+
+            <div class="tip-box">
+                <h3>🚫 Exclusion Statement</h3>
+                <p>
+                    The use of assignment operators inside expressions — like
+                    <code>a = b = 4;</code> or <code>a[i] += 5</code> — is outside the
+                    scope of the AP Computer Science A course and exam.
+                </p>
+            </div>
+
+            <h3>The Special Value: null</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">null:</span> a special literal value used to indicate that a reference is not associated with any object.</p>
+            </div>
+
+            <p>
+                Reference type variables work a little differently from primitives when it
+                comes to assignment. A reference variable can be assigned a new object, or
+                it can be assigned <code>null</code> to explicitly say "this variable isn't
+                pointing to anything right now."
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Statement</th>
+                        <th>What It Means</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>String name = "Akshaj";</code></td>
+                        <td><code>name</code> references a new <code>String</code> object containing the text <code>"Akshaj"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>String name = null;</code></td>
+                        <td><code>name</code> is explicitly set to reference no object at all</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    <code>null</code> only applies to <strong>reference types</strong>, like
+                    <code>String</code> or <code>ArrayList</code> — a primitive variable
+                    such as an <code>int</code> or <code>boolean</code> can never be
+                    <code>null</code>, since it always holds an actual value, not a
+                    reference.
+                </p>
+            </div>
+
+            <h3>Reading Input with the Scanner Class</h3>
+
+            <p>
+                Input can come in a variety of forms — tactile, audio, visual, or text. In
+                this course, the <code>Scanner</code> class is the tool used to read text
+                input typed in from the keyboard. Refer back to
+                <strong>0.4 Java Quick Reference (JQR)</strong> for the full list of
+                <code>Scanner</code> methods available to you on the exam.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>What It Does</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Scanner input = new Scanner(System.in);</code></td>
+                        <td>Creates a <code>Scanner</code> object connected to keyboard input</td>
+                    </tr>
+                    <tr>
+                        <td><code>int age = input.nextInt();</code></td>
+                        <td>Reads the next whole number typed by the user and assigns it to <code>age</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>String name = input.nextLine();</code></td>
+                        <td>Reads an entire line of text typed by the user and assigns it to <code>name</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Notice that reading input is really just another form of assignment — the
+                value returned by a <code>Scanner</code> method is evaluated first, then
+                stored in a variable on the left, exactly like any other assignment
+                statement.
+            </p>
+
+            <div class="tip-box">
+                <h3>🚫 Exclusion Statement</h3>
+                <p>
+                    Any specific form of input from the user — beyond reading it with
+                    <code>Scanner</code> — is outside the scope of the AP Computer Science A
+                    course and exam.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>What's the difference between = in Java and = in math?</summary>
+                    <p>
+                        In math, <code>=</code> states that two things are equal. In Java,
+                        <code>=</code> is an action — it evaluates the expression on the
+                        right and stores that resulting value into the variable on the
+                        left. They read the same but mean very different things.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I assign null to an int variable?</summary>
+                    <p>
+                        No. <code>null</code> only works with reference types. Primitive
+                        types like <code>int</code>, <code>double</code>, and
+                        <code>boolean</code> must always hold an actual value and can never
+                        be <code>null</code>.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What happens if I use a variable before assigning it a value?</summary>
+                    <p>
+                        Every variable must be assigned a value before it can be used in an
+                        expression. Trying to use an uninitialized variable will cause a
+                        compiler error, since Java has no value to work with yet.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why do I need a new Scanner object to read input?</summary>
+                    <p>
+                        The <code>Scanner</code> constructor connects your program to a
+                        specific input source — in this case, <code>System.in</code>, which
+                        represents the keyboard. Without creating that object first, there's
+                        no connection for the program to read input through.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"null means zero, or an empty value"</h3>
+
+            <p>
+                <code>null</code> doesn't mean zero, an empty string, or "nothing" in a
+                numeric sense — it specifically means a reference variable isn't pointing
+                to any object at all. An empty <code>String</code> (<code>""</code>) is
+                still a real object; <code>null</code> is the complete absence of one.
+            </p>
+
+            <h3>"nextInt() and nextLine() work the same way"</h3>
+
+            <p>
+                <code>nextInt()</code> reads only the next number, leaving the rest of the
+                line (including the leftover newline character) unread. Calling
+                <code>nextLine()</code> immediately afterward can return an empty string
+                instead of the text you expected, since it picks up right where
+                <code>nextInt()</code> left off.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Assignment statements and <code>Scanner</code> input are two places where
+                small mistakes cause confusing bugs. Ask Starr to trace through your
+                assignment statements step by step, or to explain why your
+                <code>Scanner</code> input isn't behaving the way you expect.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking: "Why did my nextLine() return an empty string right after
+                    nextInt()?"
+                </p>
+            </div>
+
+        </section>
+    `
+
+    ,
+
+    "1.5 Casting and Range of Variables": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Casting and Range of Variables</h2>
+
+            <p>
+                Not every value fits neatly into the data type you want it in — sometimes
+                you need to explicitly convert between <code>int</code> and
+                <code>double</code>, and sometimes Java's own limits on how numbers are
+                stored in memory will affect the result you get, whether you intend it to
+                or not.
+            </p>
+
+            <h3>Casting Between Types</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Casting:</span> using the casting operators <code>(int)</code> and <code>(double)</code> to convert a value from one primitive numeric type to another.</p>
+            </div>
+
+            <p>
+                The casting operators <code>(int)</code> and <code>(double)</code> can be
+                used to convert a <code>double</code> value to an <code>int</code> value,
+                or vice versa. Casting a <code>double</code> value to an <code>int</code>
+                value causes the digits to the right of the decimal point to be
+                <strong>truncated</strong> — cut off, not rounded.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>(int) 9.7</code></td>
+                        <td><code>9</code> — everything after the decimal point is simply cut off</td>
+                    </tr>
+                    <tr>
+                        <td><code>(int) -9.7</code></td>
+                        <td><code>-9</code> — truncation moves toward zero, not down</td>
+                    </tr>
+                    <tr>
+                        <td><code>(double) 9</code></td>
+                        <td><code>9.0</code> — an <code>int</code> converted to a <code>double</code> keeps its full value</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Casting isn't always something you have to write out yourself. Some code
+                causes <code>int</code> values to be automatically cast — or
+                <strong>widened</strong> — to <code>double</code> values, such as when an
+                <code>int</code> and a <code>double</code> appear together in the same
+                arithmetic expression.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Since casting a <code>double</code> to an <code>int</code> truncates
+                    rather than rounds, values of type <code>double</code> can be rounded
+                    to the nearest integer using <code>(int)(x + 0.5)</code> for
+                    non-negative numbers, or <code>(int)(x - 0.5)</code> for negative
+                    numbers.
+                </p>
+            </div>
+
+            <h3>The Integer Class and Range</h3>
+
+            <p>
+                Integer values in Java are represented by values of type <code>int</code>,
+                which are stored using a finite amount of memory — specifically, 4 bytes.
+                Because that amount of memory is fixed, an <code>int</code> value must fall
+                somewhere within a specific range.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Constant</th>
+                        <th>What It Represents</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Integer.MAX_VALUE</code></td>
+                        <td>The value of the largest possible <code>int</code> value</td>
+                    </tr>
+                    <tr>
+                        <td><code>Integer.MIN_VALUE</code></td>
+                        <td>The value of the smallest possible <code>int</code> value</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Therefore, an <code>int</code> value must be in the range
+                <code>Integer.MIN_VALUE</code> to <code>Integer.MAX_VALUE</code>,
+                inclusive. These constants both live in Java's built-in
+                <code>Integer</code> class — refer back to
+                <strong>0.4 Java Quick Reference (JQR)</strong> for the full list of
+                <code>Integer</code> class members available on the exam.
+            </p>
+
+            <h3>Integer Overflow</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Integer Overflow:</span> what occurs when an expression evaluates to an int value outside the allowed range. The result is an int value in the allowed range, but not necessarily the value that was expected.</p>
+            </div>
+
+            <p>
+                For example, adding <code>1</code> to <code>Integer.MAX_VALUE</code>
+                doesn't cause an error — it silently wraps around to
+                <code>Integer.MIN_VALUE</code>, since the true mathematical result can't
+                fit inside 4 bytes of memory. This is one of the more dangerous kinds of
+                logic errors, since Java gives no warning that it happened.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Integer.MAX_VALUE + 1</code></td>
+                        <td><code>Integer.MIN_VALUE</code> — the value silently wraps around to the smallest possible <code>int</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Integer overflow won't crash your program or throw an exception — it
+                    just quietly produces the wrong number. Always be suspicious of
+                    unexpectedly negative results when working with very large
+                    <code>int</code> calculations.
+                </p>
+            </div>
+
+            <h3>Round-Off Error</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Round-Off Error:</span> what occurs when a double expression is more precise than can be stored in the allotted amount of memory, causing the result to be rounded to the nearest representable value.</p>
+            </div>
+
+            <p>
+                Computers allot a specified amount of memory to store data based on the
+                data type. If an expression would evaluate to a <code>double</code> that's
+                more precise than can be stored in that allotted amount of memory, a
+                round-off error occurs. The result is rounded to the nearest value that
+                <em>can</em> actually be represented — this happens naturally with
+                <code>double</code> values and can't be fully avoided by switching to
+                <code>int</code> values, since <code>int</code> can't store decimals at
+                all.
+            </p>
+
+            <div class="tip-box">
+                <h3>🚫 Exclusion Statement</h3>
+                <p>
+                    Other special decimal data types that can be used to avoid rounding
+                    errors are outside the scope of the AP Computer Science A course and
+                    exam.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Does casting a double to an int round the value?</summary>
+                    <p>
+                        No — casting truncates, meaning everything after the decimal point
+                        is simply cut off rather than rounded. <code>(int) 9.9</code>
+                        evaluates to <code>9</code>, not <code>10</code>. To round instead,
+                        add or subtract <code>0.5</code> before casting.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What happens if a calculation goes above Integer.MAX_VALUE?</summary>
+                    <p>
+                        The result overflows and wraps around to a value near
+                        <code>Integer.MIN_VALUE</code> instead of the mathematically
+                        correct answer. Java doesn't throw an error when this happens, so
+                        it can be easy to miss.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why do doubles sometimes show tiny rounding errors?</summary>
+                    <p>
+                        A <code>double</code> only has a fixed, finite amount of memory to
+                        represent a decimal value. When the true value needs more precision
+                        than that memory allows, Java rounds to the closest value it can
+                        actually store, which can introduce very small errors.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>When does an int get automatically widened to a double?</summary>
+                    <p>
+                        Java automatically widens an <code>int</code> to a
+                        <code>double</code> when the two types are mixed together in the
+                        same expression, since no information is lost going from a whole
+                        number to a decimal representation of that same number.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"Casting a double to an int rounds it"</h3>
+
+            <p>
+                Casting always truncates — it never rounds. <code>(int) 4.99</code>
+                evaluates to <code>4</code>, which surprises many students expecting
+                <code>5</code>. If you need rounding behavior, you have to add that logic
+                yourself.
+            </p>
+
+            <h3>"Integer overflow will cause my program to crash"</h3>
+
+            <p>
+                It won't. Integer overflow is a silent logic error — the program keeps
+                running and produces a value, just not the one you expected. This makes it
+                more dangerous than a run-time error, since nothing alerts you that
+                anything went wrong.
+            </p>
+
+            <h3>"Using double instead of int avoids all precision issues"</h3>
+
+            <p>
+                Switching to <code>double</code> avoids integer overflow, but introduces
+                its own limitation: round-off error. A <code>double</code> still has a
+                finite amount of memory, so extremely precise decimal values can still be
+                rounded to the nearest representable value.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Casting, overflow, and round-off error are subtle enough that they trip up
+                even experienced programmers. Ask Starr to trace through a casting
+                expression step by step, or to explain why a specific calculation produced
+                an unexpected result.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking: "Walk me through what happens when Integer.MAX_VALUE has 1
+                    added to it."
                 </p>
             </div>
 

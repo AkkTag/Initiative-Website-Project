@@ -62,7 +62,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="questions" class="lesson-section">
+        <section id="what-youll-learn" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -222,26 +222,26 @@ lessonContentData["Unit 0"] = {
                 <tbody>
                     <tr>
                         <td>Unit 1<br><span class="unit-subtitle">Using Objects and Methods</span></td>
-                        <td>15-25%</td>
+                        <td>20%</td>
                     </tr>
                     <tr>
                         <td>Unit 2<br><span class="unit-subtitle">Selection and Iteration</span></td>
-                        <td>25-35%</td>
+                        <td>25%</td>
                     </tr>
                     <tr>
                         <td>Unit 3<br><span class="unit-subtitle">Class Creation</span></td>
-                        <td>10-18%</td>
+                        <td>20%</td>
                     </tr>
                     <tr>
                         <td>Unit 4<br><span class="unit-subtitle">Data Collections</span></td>
-                        <td>30-40%</td>
+                        <td>35%</td>
                     </tr>
                 </tbody>
             </table>
 
         </section>
 
-        <section id="questions" class="lesson-section">
+        <section id="what-youll-learn" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -302,6 +302,52 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"MCQs are worth more than FRQs, so I should focus there"</h3>
+
+            <p>
+                The exam is roughly split 50/50 between the multiple-choice and
+                free-response sections in terms of overall score weight, so neither
+                section should be neglected — strong FRQ writing habits are just as
+                important as MCQ speed and accuracy.
+            </p>
+
+            <h3>"I need to get every FRQ perfectly correct to pass"</h3>
+
+            <p>
+                Free-response questions are scored with partial credit, meaning correct
+                logic can earn points even if the code has small syntax mistakes or
+                doesn't fully compile. A partial, well-reasoned answer is always better
+                than leaving a question blank.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Not sure how to pace your studying against the exam weightings above, or
+                want a mock FRQ to practice with? Starr AI is trained specifically on the
+                AP CSA curriculum and can generate practice questions or walk you through
+                how the exam is scored.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr to generate a short free-response question on a unit
+                    you want to review, or to explain how partial credit works on the FRQ
+                    section.
+                </p>
+            </div>
+
+        </section>
+
     `,
 
     "0.3 Java Development Environments": `
@@ -355,7 +401,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="questions" class="lesson-section">
+        <section id="what-youll-learn" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -422,6 +468,49 @@ lessonContentData["Unit 0"] = {
                     </p>
                 </details>
 
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"The fanciest IDE will make me a better programmer"</h3>
+
+            <p>
+                A powerful IDE can speed up your workflow, but it won't write correct
+                logic for you. Beginner-friendly IDEs like BlueJ or jGRASP are often
+                better learning tools precisely because they stay out of your way and let
+                you see exactly what your code is doing.
+            </p>
+
+            <h3>"Cloud IDEs are only for beginners"</h3>
+
+            <p>
+                Cloud IDEs like Replit are used well beyond intro courses — they're simply
+                a different tradeoff, favoring convenience and zero setup over the
+                offline access and deeper tooling a desktop IDE provides.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Not sure which IDE fits your setup, or running into an installation issue
+                with a desktop IDE? Starr AI can help you weigh the tradeoffs or
+                troubleshoot a setup problem without you needing to leave this page.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Which IDE should I use if I want to code both at
+                    school and at home?"
+                </p>
             </div>
 
         </section>
@@ -616,6 +705,88 @@ lessonContentData["Unit 0"] = {
             <p class="jqr-source-note">
                 Source: College Board's official AP Computer Science A Java Quick Reference.
             </p>
+
+        </section>
+
+        <section id="what-youll-learn" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Do I need to memorize this entire table?</summary>
+                    <p>
+                        No. You'll be given an identical copy of the Java Quick Reference
+                        during the actual exam, so the goal is to become familiar with what
+                        it contains and where to find things quickly, not to memorize every
+                        method signature.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can I use methods that aren't on this list?</summary>
+                    <p>
+                        The exam only expects you to know the classes and methods included
+                        in the JQR. Using an outside method in your own practice is fine,
+                        but stick to this reference when preparing for the exam itself.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why are some entries missing an explanation, like equals() in the Object class?</summary>
+                    <p>
+                        A few entries — like the general-purpose <code>equals()</code> and
+                        <code>toString()</code> methods in the <code>Object</code> class —
+                        are intentionally left without a fixed description, since their
+                        exact behavior depends on how a specific class overrides them.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"The JQR includes every method I'll ever need"</h3>
+
+            <p>
+                The JQR only covers the methods that could appear on the exam — real Java
+                programs, including ones you might build outside this course, will often
+                use classes and methods that aren't listed here at all.
+            </p>
+
+            <h3>"I don't need to practice with these methods since I'll have the sheet"</h3>
+
+            <p>
+                Having the reference sheet during the exam only helps if you already know
+                roughly how each method behaves — flipping through an unfamiliar table
+                under time pressure costs valuable minutes. Practice using these methods
+                now so the sheet becomes a quick refresher, not a first introduction.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Not sure which JQR method fits a problem you're working on? Starr AI can
+                help you pick the right method from this table, or walk through exactly
+                what a specific method call will return.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Which ArrayList method should I use to remove an
+                    item at a specific position?"
+                </p>
+            </div>
 
         </section>
 

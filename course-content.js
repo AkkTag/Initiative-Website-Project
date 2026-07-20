@@ -277,12 +277,16 @@ tabs.forEach(tab => {
         tabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
 
+        // Ignore intersection updates until the smooth scroll settles,
+        // otherwise sections passed through mid-scroll steal the active tab back.
+        isTabClickScrolling = true;
+
         if (targetId) {
             const targetSection = document.getElementById(targetId);
-            const lessonHeader = document.querySelector(".lesson-header");
+            const stickyTop = document.querySelector(".lesson-top-sticky");
 
             if (targetSection && lessonContent) {
-                const offset = lessonHeader ? lessonHeader.offsetHeight + 24 : 120;
+                const offset = stickyTop ? stickyTop.offsetHeight + 24 : 120;
                 const targetTop = targetSection.offsetTop - offset;
 
                 lessonContent.scrollTo({ top: targetTop, behavior: "smooth" });
@@ -299,6 +303,8 @@ tabs.forEach(tab => {
 // ---------------------
 
 const observer = new IntersectionObserver((entries) => {
+
+    if (isTabClickScrolling) return;
 
     entries.forEach(entry => {
 
@@ -323,6 +329,23 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 observer.disconnect();
+
+// Flag set true while a tab-click-triggered smooth scroll is in progress,
+// so the observer doesn't override the tab the user just clicked.
+let isTabClickScrolling = false;
+let scrollEndTimer = null;
+
+lessonContent.addEventListener("scroll", () => {
+
+    if (!isTabClickScrolling) return;
+
+    clearTimeout(scrollEndTimer);
+
+    scrollEndTimer = setTimeout(() => {
+        isTabClickScrolling = false;
+    }, 150);
+
+});
 
 
 // sections.forEach(section => observer.observe(section));
