@@ -2928,10 +2928,342 @@ lessonContentData["Unit 1"] = {
             </div>
 
         </section>
-    `
-    ,
-    
+    `,
 
+    "1.12 Objects: Instances of Classes": `
 
+        <section id="content" class="lesson-section">
+
+            <h2>Objects: Instances of Classes</h2>
+
+            <p>
+                Up to this point, you've seen classes as blueprints and methods as the
+                actions those blueprints can define. Lesson 1.12 connects those ideas to
+                something concrete: an <strong>object</strong>, which is a specific
+                instance of a class with its own stored data and behaviors.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Object:</span> a specific instance of a class that contains data and can have behaviors.</p>
+            </div>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Instance:</span> another word for an object created from a class.</p>
+            </div>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Class:</span> the formal implementation, or blueprint, of a type of object. A class describes what objects made from it can store and do.</p>
+            </div>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Superclass:</span> a class that another class extends. A superclass provides shared attributes and behaviors to its subclasses.</p>
+            </div>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Subclass:</span> a class that extends another class and inherits its attributes and behaviors, while also being able to define its own additional features.</p>
+            </div>
+
+            <h3>Classes and Objects</h3>
+
+            <p>
+                A class is like the plan for a house, while an object is one actual
+                house built from that plan. Every house made from the same blueprint
+                shares the same basic structure, but each one can still be a separate,
+                individual house. In the same way, objects created from the same class
+                share the same kind of data and behaviors, but each object is its own
+                distinct instance.
+            </p>
+
+            <h3>Inheritance Relationships</h3>
+
+            <p>
+                Some classes are built from other classes through <strong>inheritance</strong>.
+                Inheritance lets a new class reuse the attributes and behaviors of an
+                existing class instead of starting from scratch.
+            </p>
+
+            <p>
+                The easiest way to remember the relationship is with <strong>"is a"</strong>
+                language: a <strong>subclass is a superclass</strong>. That means the
+                subclass is a more specific kind of the superclass. For example, a
+                <code>Dog</code> class is a <code>Animal</code> class, and a
+                <code>Car</code> class might be a <code>Vehicle</code> class.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    If you can say the relationship out loud as "<code>Dog</code> is a
+                    <code>Animal</code>" or "<code>Rectangle</code> is a
+                    <code>Shape</code>," you're probably looking at a subclass-superclass
+                    relationship.
+                </p>
+            </div>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Object</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;">A blueprint or model</td>
+                        <td style="white-space:normal;">A specific thing created from that blueprint</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;">Defines what data and behaviors are possible</td>
+                        <td style="white-space:normal;">Holds actual data values and can use those behaviors</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;">Exists in the code as the definition</td>
+                        <td style="white-space:normal;">Exists at runtime as a created instance</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A class is the idea. An object is the thing itself. If you can keep
+                    that one distinction clear, a lot of later topics like constructors,
+                    instance methods, and references become much easier to understand.
+                </p>
+            </div>
+
+            <h3>Attributes and Behavior</h3>
+
+            <p>
+                The AP Computer Science A guide describes an object as a specific
+                instance of a class with <strong>defined attributes</strong>. That means
+                an object stores data that belongs to it, and those stored values help
+                determine its current state.
+            </p>
+
+            <p>
+                The guide also notes an <strong>Exclusion Statement</strong>: designing
+                and implementing relationships involving the <code>Object</code> class
+                are outside the scope of the AP Computer Science A course and exam
+                description. In other words, you are expected to understand that Java
+                classes ultimately relate back to <code>Object</code>, but you are not
+                expected to design inheritance relationships that specifically rely on
+                detailed behavior from <code>Object</code> itself.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Attribute:</span> a characteristic or piece of data that belongs to an object.</p>
+            </div>
+
+            <p>
+                Objects also have <strong>behaviors</strong>, which are the actions they
+                can perform through methods. In Java, those behaviors are often instance
+                methods, meaning they are called on a particular object rather than on
+                the class itself.
+            </p>
+
+            <h3>The Object Class</h3>
+
+            <p>
+                In Java, every class is ultimately connected to the <code>Object</code>
+                class, which is the root of the class hierarchy. That means even when a
+                class doesn't explicitly extend another class in your code, it still
+                inherits from <code>Object</code> somewhere in the background.
+            </p>
+
+            <p>
+                The <code>Object</code> class provides a common starting point for all
+                objects in Java. It helps make objects work together consistently, and
+                it is part of why every object can be treated as an object first, even
+                before you consider any more specific superclass it may have.
+            </p>
+
+            <h3>How Object References Are Stored</h3>
+
+            <p>
+                When you create an object, the variable does not store the full object
+                itself. Instead, it stores a <strong>reference</strong>, which is like
+                an address pointing to where the object lives in memory. The actual data
+                for the object is stored elsewhere, while the variable holds the
+                location needed to reach it.
+            </p>
+
+            <p>
+                This is why reference variables matter so much: if two variables refer to
+                the same object, they both point to the same memory location. Changing
+                the object through one variable changes the same object seen through the
+                other variable because both references lead to the same place.
+            </p>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    A reference is not the object itself. It is the address-like value
+                    that lets Java find the object in memory. The object data lives
+                    separately from the variable that refers to it.
+                </p>
+            </div>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">Car</span> {
+    String color;
+    int speed;
+    void accelerate() { ... }
+    void brake() { ... }
+}</pre>
+            </div>
+
+            <p>
+                In the example above, <code>color</code> and <code>speed</code> are
+                attributes, while <code>accelerate()</code> and <code>brake()</code> are
+                behaviors the object can perform.
+            </p>
+
+            <h3>Object State</h3>
+
+            <p>
+                The values stored inside an object at a given moment are often called its
+                <strong>state</strong>. Two objects made from the same class can still
+                have different states because their attribute values may be different.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Object</th>
+                        <th>Possible State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;"><code>car1</code></td>
+                        <td style="white-space:normal;"><code>color = "red"</code>, <code>speed = 35</code></td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>car2</code></td>
+                        <td style="white-space:normal;"><code>color = "blue"</code>, <code>speed = 0</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Different objects can come from the same class without being the same
+                    object. If two variables refer to two separate instances, changing
+                    one object's state does not automatically change the other's state.
+                </p>
+            </div>
+
+            <h3>Why This Matters</h3>
+
+            <p>
+                Understanding objects as instances of classes is the foundation for the
+                next lessons in this unit. Once you know that a class defines the model
+                and an object is a real example of that model, it becomes much easier to
+                understand object creation, instance methods, and how Java stores and
+                uses references.
+            </p>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>What is the difference between a class and an object?</summary>
+                    <p>
+                        A class is the blueprint or definition, while an object is a
+                        specific instance created from that class. The class describes
+                        what the object can store and do.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Is "instance" just another word for object?</summary>
+                    <p>
+                        Yes. In this context, an instance is a particular object made from
+                        a class.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can two objects from the same class have different values?</summary>
+                    <p>
+                        Yes. They can share the same class while still storing different
+                        attribute values, which means their states can be different.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do object behaviors come from methods?</summary>
+                    <p>
+                        Yes. Methods define the actions an object can perform, which is
+                        why behaviors are usually described in terms of methods.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"A class and an object are the same thing"</h3>
+
+            <p>
+                They are related, but not the same. A class is the blueprint, while an
+                object is a concrete instance built from that blueprint.
+            </p>
+
+            <h3>"All objects made from the same class are identical"</h3>
+
+            <p>
+                Objects can share the same class and still have different attribute
+                values. The class is the same, but the state of each object can differ.
+            </p>
+
+            <h3>"Only methods matter, not stored data"</h3>
+
+            <p>
+                Objects are defined by both their data and their behaviors. The
+                attributes describe what the object knows, and the methods describe
+                what it can do.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                This lesson is all about getting comfortable with the class-object
+                relationship, because that idea shows up everywhere else in Java. Ask
+                Starr to help you tell the difference between a class, an object, and an
+                instance in examples you already know.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking: "Explain the difference between a class and an object
+                    using a real-world example."
+                </p>
+            </div>
+
+        </section>
+    `,
 
 };
