@@ -2604,7 +2604,7 @@ lessonContentData["Unit 1"] = {
     `
     ,
 
-    "1.11 Math Class": `
+"1.11 Math Class": `
 
         <section id="content" class="lesson-section">
 
@@ -2807,6 +2807,68 @@ lessonContentData["Unit 1"] = {
                 </tbody>
             </table>
 
+            <h4 style="margin-bottom:14px; color:#1F2937; font-weight:700;">What About Inclusive of the Maximum?</h4>
+
+            <p style="max-width:900px;">
+                With <code>int</code> values, adding <code>1</code> before multiplying was
+                enough to make the maximum reachable, because an <code>int</code> range is
+                a finite list of whole numbers. A <code>double</code> range doesn't work
+                that way — <code>Math.random()</code> is defined to return a value
+                strictly less than <code>1.0</code>, so no amount of rearranging the
+                formula <code>min + (Math.random() * (max - min))</code> can make
+                <code>max</code> itself reachable. There is no way to make the maximum
+                inclusive using that version of the formula at all.
+            </p>
+
+            <p style="max-width:900px;">
+                What can be done instead is flipping which end of the range gets excluded.
+                Subtracting from <code>max</code> rather than adding to <code>min</code>
+                makes <code>max</code> the starting point of the range instead of its
+                upper limit:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:22px 28px; margin:0 0 14px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; color:#E5E7EB; white-space:pre-wrap;">double randomNum = max - Math.random() * (max - min);</pre>
+            </div>
+
+            <p style="max-width:900px;">
+                Since <code>Math.random()</code> can return <code>0.0</code>, subtracting
+                <code>0.0</code> from <code>max</code> leaves <code>max</code> itself as a
+                possible result — making the maximum inclusive. But because
+                <code>Math.random()</code> can never actually reach <code>1.0</code>, the
+                subtraction can never grow large enough to bring the result all the way
+                down to <code>min</code>, which makes the minimum excluded instead. The
+                trade-off flips: this version includes <code>max</code> but excludes
+                <code>min</code>.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Formula</th>
+                        <th>Possible Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;">Random double, 5.0 (excluded) up to and including 10.0</td>
+                        <td style="white-space:normal;"><code>10.0 - Math.random() * (10.0 - 5.0)</code></td>
+                        <td style="white-space:normal;">Any <code>double</code> in <code>(5.0, 10.0]</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    This inverted formula doesn't give you an inclusive minimum
+                    <em>and</em> maximum at the same time — it only moves which single end
+                    of the range is inclusive. If both ends genuinely need to be reachable,
+                    that isn't something <code>Math.random()</code> can produce on its own.
+                </p>
+            </div>
+
             <div class="tip-box">
                 <h3>⭐ Starr Tip</h3>
                 <p>
@@ -2874,6 +2936,18 @@ lessonContentData["Unit 1"] = {
                     </p>
                 </details>
 
+                <details class="faq-item">
+                    <summary>Why doesn't the double formula change for an inclusive maximum?</summary>
+                    <p>
+                        Because <code>Math.random()</code> never actually reaches
+                        <code>1.0</code>, there's no way to rearrange
+                        <code>min + (Math.random() * (max - min))</code> to make
+                        <code>max</code> reachable. Getting an inclusive maximum requires a
+                        different, inverted formula instead — one that flips which end of
+                        the range ends up excluded.
+                    </p>
+                </details>
+
             </div>
 
         </section>
@@ -2928,7 +3002,8 @@ lessonContentData["Unit 1"] = {
             </div>
 
         </section>
-    `,
+    `
+    ,
 
     "1.12 Objects: Instances of Classes": `
 
@@ -3037,7 +3112,7 @@ lessonContentData["Unit 1"] = {
                 </p>
             </div>
 
-            <h3>Attributes and Behavior</h3>
+            <h3>Attributes and Behaviors</h3>
 
             <p>
                 The AP Computer Science A guide describes an object as a specific
@@ -3046,15 +3121,17 @@ lessonContentData["Unit 1"] = {
                 determine its current state.
             </p>
 
-            <p>
-                The guide also notes an <strong>Exclusion Statement</strong>: designing
-                and implementing relationships involving the <code>Object</code> class
-                are outside the scope of the AP Computer Science A course and exam
-                description. In other words, you are expected to understand that Java
-                classes ultimately relate back to <code>Object</code>, but you are not
-                expected to design inheritance relationships that specifically rely on
-                detailed behavior from <code>Object</code> itself.
-            </p>
+            <div class="tip-box">
+                <h3>🚫 Exclusion Statement</h3>
+                <p>
+                    Designing and implementing relationships involving the
+                    <code>Object</code> class are outside the scope of the AP Computer
+                    Science A course and exam. You're expected to understand that Java
+                    classes ultimately relate back to <code>Object</code>, but you are
+                    not expected to design inheritance relationships that specifically
+                    rely on detailed behavior from <code>Object</code> itself.
+                </p>
+            </div>
 
             <div class="vocab-box">
                 <span class="vocab-label">Vocabulary</span>
@@ -3265,5 +3342,676 @@ lessonContentData["Unit 1"] = {
 
         </section>
     `,
+
+    "1.13 Object Creation and Storage (Instantiation)": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Object Creation and Storage (Instantiation)</h2>
+
+            <p>
+                The previous lesson introduced objects as instances of classes, but
+                stopped short of explaining exactly how an object comes into existence in
+                the first place. That's the job of a <strong>constructor</strong> — a
+                special block of code that runs whenever a new object is created, and
+                whose entire purpose is to set up that object's initial state.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Constructor:</span> a special method that is called to create objects. Constructors are called using the keyword <code>new</code>, and they have the same name as the class.</p>
+            </div>
+
+            <h3>The Constructor Signature</h3>
+
+            <p>
+                Just like the methods covered in Lesson 1.9, a constructor has a
+                signature — but a constructor signature works a little differently from a
+                method signature, since a constructor has no return type and must share
+                its name with the class.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Constructor signature:</span> consists of the constructor's name, which is the same as the class name, and the ordered list of parameter types. The parameter list, in the header of a constructor, lists the types of the values that are passed and their variable names.</p>
+            </div>
+
+            <p>
+                Here's the general template every constructor follows, with each piece
+                labeled the same way method headers were broken down earlier in this
+                unit:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:28px 32px; margin:22px 0 14px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="color:#F59E0B; font-weight:700;">public</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">ClassName</span><span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">type1 name1</span><span style="color:#9CA3AF;">, </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">type2 name2</span><span style="color:#9CA3AF;">) </span><span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">{</span>
+    this.name1 = name1;
+    this.name2 = name2;
+<span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">}</span></pre>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px; max-width:900px; margin-bottom:22px;">
+
+                <div style="display:flex; align-items:flex-start; gap:14px;">
+                    <span style="flex-shrink:0; width:16px; height:16px; border-radius:5px; background:#8FBF2E; margin-top:4px;"></span>
+                    <p style="margin:0; color:#4B5563;"><strong style="color:#1F2937;">Constructor name — <code>ClassName</code>:</strong> must be spelled exactly the same as the class it belongs to. Unlike a method, a constructor never has a return type — not even <code>void</code>.</p>
+                </div>
+
+                <div style="display:flex; align-items:flex-start; gap:14px;">
+                    <span style="flex-shrink:0; width:16px; height:16px; border-radius:5px; background:#0CC267; margin-top:4px;"></span>
+                    <p style="margin:0; color:#4B5563;"><strong style="color:#1F2937;">Parameter list — <code>(type1 name1, type2 name2)</code>:</strong> the values passed in when the object is created, used to set up that object's initial attributes.</p>
+                </div>
+
+                <div style="display:flex; align-items:flex-start; gap:14px;">
+                    <span style="flex-shrink:0; width:16px; height:16px; border-radius:5px; background:#D6A400; margin-top:4px;"></span>
+                    <p style="margin:0; color:#4B5563;"><strong style="color:#1F2937;">Block of code — <code>{ }</code>:</strong> typically assigns each parameter's value to the matching attribute, often using the <code>this</code> keyword to distinguish the attribute from the parameter that shares its name.</p>
+                </div>
+
+            </div>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Because a constructor's signature works exactly like a method
+                    signature — name plus ordered parameter types, no return type or
+                    parameter names included — the same rules from Lesson 1.9 apply
+                    directly here. The only real difference is that a constructor's name
+                    is locked to the class name instead of being chosen freely.
+                </p>
+            </div>
+
+            <h3>The new Keyword</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Instantiation:</span> the process of creating an object, typically by calling a constructor with the keyword <code>new</code>.</p>
+            </div>
+
+            <p>
+                An object is typically created using the keyword <code>new</code>,
+                followed by a call to one of the class's constructors. This is the moment
+                memory is actually set aside for the new object, and the constructor runs
+                to fill that memory with the object's starting values.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>What It Does</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;"><code>Car myCar = new Car("red", 0);</code></td>
+                        <td style="white-space:normal;"><code>new Car("red", 0)</code> instantiates a <code>Car</code> object, and the resulting reference is stored in <code>myCar</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Reading that line piece by piece: <code>new</code> triggers the creation
+                of a brand-new <code>Car</code> object, <code>Car("red", 0)</code> is the
+                constructor call that runs to set up that object, and
+                <code>Car myCar =</code> declares a reference variable and stores the
+                resulting object reference in it — exactly the same assignment process
+                covered back in Lesson 1.4.
+            </p>
+
+            <h3>Declaring Reference Variables and null</h3>
+
+            <p>
+                A variable of a reference type holds an object reference — or, if there is
+                no object yet, <code>null</code>. This should feel familiar from Lesson
+                1.4: a reference variable can be declared before it's ever assigned an
+                actual object, and until it is, <code>null</code> is used to explicitly
+                say the variable isn't pointing to anything.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Statement</th>
+                        <th>What It Means</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>Car myCar;</code></td>
+                        <td>Declares a reference variable with no object assigned yet — its value is undefined until it's assigned something</td>
+                    </tr>
+                    <tr>
+                        <td><code>Car myCar = null;</code></td>
+                        <td>Declares <code>myCar</code> and explicitly assigns it <code>null</code>, meaning it references no object at all</td>
+                    </tr>
+                    <tr>
+                        <td><code>myCar = new Car("red", 0);</code></td>
+                        <td>Assigns <code>myCar</code> a reference to a newly instantiated <code>Car</code> object</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Declaring a reference variable does not create an object. Only a call
+                    to <code>new</code> followed by a constructor actually instantiates
+                    one — until then, the variable either holds no usable value or
+                    explicitly holds <code>null</code>.
+                </p>
+            </div>
+
+            <h3>Parameters vs. Arguments</h3>
+
+            <p>
+                These two terms get mixed up constantly, but they describe two different
+                sides of the same constructor call.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Constructor argument:</span> a value that is passed into a constructor when the constructor is called. The arguments passed to a constructor must be compatible in order and number with the types identified in the parameter list in the constructor signature.</p>
+            </div>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Parameter</th>
+                        <th>Argument</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Where it appears</td>
+                        <td>In the constructor's own header, as part of its definition</td>
+                        <td>In the call to the constructor, wherever <code>new</code> is used</td>
+                    </tr>
+                    <tr>
+                        <td>Example</td>
+                        <td><code>public Car(String color, int speed)</code></td>
+                        <td><code>new Car("red", 0)</code></td>
+                    </tr>
+                    <tr>
+                        <td>What it is</td>
+                        <td>A placeholder name and type, waiting to receive a value</td>
+                        <td>The actual value being passed in for that placeholder</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                When calling a constructor, arguments are passed using <strong>call by
+                value</strong> — call by value initializes the parameters with copies of
+                the arguments. This means changes made to a parameter inside the
+                constructor don't affect the original value that was passed in from
+                outside.
+            </p>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Arguments must be compatible in order and number with the parameter
+                    list in the constructor signature. Passing the wrong number of
+                    arguments, or arguments of the wrong type in the wrong order, is a
+                    compile-time error — Java won't guess which constructor you meant.
+                </p>
+            </div>
+
+            <h3>Constructor Overloading</h3>
+
+            <p>
+                Constructors are said to be overloaded when there are multiple
+                constructors with different signatures. Just like the overloaded
+                <code>Math.abs()</code> methods from Lesson 1.11, overloaded constructors
+                share the same name — since every constructor must be named after its
+                class — but differ in their parameter lists, giving each one a distinct
+                signature.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">Car</span> {
+    String color;
+    int speed;
+
+    public Car() {
+        color = "white";
+        speed = 0;
+    }
+
+    public Car(String color) {
+        this.color = color;
+        speed = 0;
+    }
+
+    public Car(String color, int speed) {
+        this.color = color;
+        this.speed = speed;
+    }
+}</pre>
+            </div>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Call</th>
+                        <th>Constructor Used</th>
+                        <th>Resulting State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>new Car()</code></td>
+                        <td><code>Car()</code></td>
+                        <td><code>color = "white"</code>, <code>speed = 0</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>new Car("blue")</code></td>
+                        <td><code>Car(String)</code></td>
+                        <td><code>color = "blue"</code>, <code>speed = 0</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>new Car("red", 35)</code></td>
+                        <td><code>Car(String, int)</code></td>
+                        <td><code>color = "red"</code>, <code>speed = 35</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Java decides which overloaded constructor to call based entirely on
+                    the number and types of the arguments in the call — this is exactly
+                    why the parameter list, not the constructor name, is what
+                    distinguishes one signature from another.
+                </p>
+            </div>
+
+            <p>
+                Notice the first constructor, <code>Car()</code>, has an empty parameter
+                list. A constructor with no parameters like this is often called a
+                <strong>no-argument constructor</strong>, and it's typically used to assign
+                default values to every attribute.
+            </p>
+
+            <h3>Execution Flow of a Constructor Call</h3>
+
+            <p>
+                A constructor call interrupts the sequential execution of statements,
+                causing the program to first execute the statements in the constructor
+                before continuing. Once the last statement in the constructor has
+                executed, the flow of control is returned to the point immediately
+                following where the constructor was called.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th>What Happens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>The statement containing <code>new</code> begins executing, and program flow jumps into the matching constructor</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Every statement inside the constructor's body runs in sequence, typically assigning values to the new object's attributes</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Once the last statement in the constructor finishes, control returns to the point immediately after the original <code>new</code> call</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>The reference to the fully constructed object is assigned to the variable on the left, if there is one</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Think of a constructor call as a brief detour, not a separate path:
+                    execution always comes right back to where it left off once the
+                    constructor is done, just like calling any other method.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about constructors,
+                instantiation, and object creation.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Why doesn't a constructor have a return type, not even void?</summary>
+                    <p>
+                        A constructor isn't building a value to hand back the way a method
+                        does — it's setting up a brand-new object that <code>new</code>
+                        already handles returning a reference to. Because of that, not even
+                        <code>void</code> belongs in a constructor's header.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How is a constructor signature different from a method signature?</summary>
+                    <p>
+                        The idea is identical — name plus ordered parameter types, no
+                        return type or parameter names included. The only real difference
+                        is that a constructor's name is always locked to match its class
+                        name, while a method name can be chosen freely.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What decides which overloaded constructor gets called?</summary>
+                    <p>
+                        Java matches the number and types of the arguments in the
+                        <code>new</code> call against each constructor's signature. Whichever
+                        signature the arguments are compatible with is the constructor that
+                        runs.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does declaring a reference variable create an object?</summary>
+                    <p>
+                        No. Declaring a variable like <code>Car myCar;</code> only sets
+                        aside a labeled space for a future reference — an object is only
+                        actually created once <code>new</code> is used to call a
+                        constructor.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What happens to the rest of my program while a constructor runs?</summary>
+                    <p>
+                        Execution pauses at the point where <code>new</code> was called,
+                        runs every statement inside the constructor in order, and then
+                        returns to exactly where it left off once the constructor's last
+                        statement finishes.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"A constructor is just a method with the same name as the class"</h3>
+
+            <p>
+                Constructors and methods look similar, but a constructor has no return
+                type at all — not even <code>void</code> — and can only ever be called
+                using <code>new</code>. A method with the same name as its class but with
+                an actual return type is not a constructor.
+            </p>
+
+            <h3>"Overloaded constructors need different names to be valid"</h3>
+
+            <p>
+                Every constructor for a class must share the exact same name — the class
+                name itself. What makes overloaded constructors distinct is a different
+                parameter list, which gives each one a different signature even though the
+                name never changes.
+            </p>
+
+            <h3>"null and a default value like 0 mean the same thing"</h3>
+
+            <p>
+                <code>null</code> only applies to reference types and means "no object at
+                all," not a numeric default. A newly declared <code>int</code> can't be
+                <code>null</code>, and a reference variable set to <code>null</code> isn't
+                pointing to an object with empty or zeroed-out attributes — it isn't
+                pointing to any object.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Constructors and overloading trip up a lot of students right as classes
+                start getting more complex. Ask Starr to trace through which overloaded
+                constructor a specific <code>new</code> call would trigger, or to help you
+                write a set of overloaded constructors for a class you're building.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking: "Write three overloaded constructors for a Student class
+                    with name, grade, and GPA."
+                </p>
+            </div>
+
+        </section>
+    `
+    ,
+
+    "1.14 Calling Instance Methods": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Calling Instance Methods</h2>
+
+            <p>
+                Every method you've called so far in this unit — <code>Math.sqrt()</code>,
+                <code>Math.random()</code>, and the rest — has been a class method, called
+                through the class name itself. Instance methods work differently, and
+                knowing the difference is what makes calling them feel natural rather than
+                confusing.
+            </p>
+
+            <h3>What an Instance Method Is</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Instance method:</span> a method called on objects of the class, using the dot operator along with the object name to call instance methods.</p>
+            </div>
+
+            <p>
+                The key difference from a class method comes down to what sits on the left
+                side of the dot. A class method is called through the <em>class name</em>,
+                like <code>Math.sqrt()</code>. An instance method is called through an
+                <em>object</em> — a specific instance of a class — instead.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 32px; margin:22px 0; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> greeting = <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">new</span> String(<span style="color:#9CA3AF;">"hello"</span>);
+
+    <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">greeting</span><span style="color:#9CA3AF;">.</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">length</span><span style="color:#9CA3AF;">()</span></pre>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px; max-width:900px; margin-bottom:22px;">
+
+                <div style="display:flex; align-items:flex-start; gap:14px;">
+                    <span style="flex-shrink:0; width:16px; height:16px; border-radius:5px; background:#8FBF2E; margin-top:4px;"></span>
+                    <p style="margin:0; color:#4B5563;"><strong style="color:#1F2937;">Object name — <code>greeting</code>:</strong> the specific object the method is being called on, sitting to the left of the dot.</p>
+                </div>
+
+                <div style="display:flex; align-items:flex-start; gap:14px;">
+                    <span style="flex-shrink:0; width:16px; height:16px; border-radius:5px; background:#0CC267; margin-top:4px;"></span>
+                    <p style="margin:0; color:#4B5563;"><strong style="color:#1F2937;">Method name — <code>length</code>:</strong> the instance method being called, sitting to the right of the dot.</p>
+                </div>
+
+            </div>
+
+            <h3>Where and How the Dot Operator Is Used</h3>
+
+            <p>
+                The dot operator is what physically connects an object to the method being
+                called on it. It always sits directly between the object name and the
+                method name, in the form <code>objectName.methodName()</code> — the same
+                position it holds when calling a class method through a class name, just
+                with an object reference standing in place of the class name.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Call</th>
+                        <th>What It Means</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;"><code>greeting.length()</code></td>
+                        <td style="white-space:normal;">Calls the <code>length</code> instance method on the object referenced by <code>greeting</code></td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>greeting.toUpperCase()</code></td>
+                        <td style="white-space:normal;">Calls the <code>toUpperCase</code> instance method on that same object</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A quick way to tell class methods and instance methods apart: if what's
+                    to the left of the dot is a class name written in code exactly as the
+                    class itself, like <code>Math</code>, it's a class method. If it's a
+                    variable name referring to an actual object, like <code>greeting</code>,
+                    it's an instance method.
+                </p>
+            </div>
+
+            <h3>Calling a Method on null</h3>
+
+            <p>
+                Because an instance method is called on an object, that object actually has
+                to exist for the call to work. A reference variable that currently holds
+                <code>null</code> isn't pointing to any object at all — so calling an
+                instance method on it leaves nothing for that call to run on.
+            </p>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    A method call on a <code>null</code> reference will result in a
+                    <code>NullPointerException</code>. The program will compile without any
+                    issue, since Java has no way of knowing at compile time whether a
+                    reference will still be <code>null</code> once that line actually runs —
+                    the error only shows up at run time.
+                </p>
+            </div>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>What Happens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;"><code>String name = null;<br>name.length();</code></td>
+                        <td style="white-space:normal;">Compiles successfully, but throws a <code>NullPointerException</code> at run time, since <code>name</code> isn't referencing any actual <code>String</code> object</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>What's the actual difference between a class method call and an instance method call?</summary>
+                    <p>
+                        It comes down to what's on the left of the dot. A class method is
+                        called through the class name itself, like <code>Math.sqrt()</code>.
+                        An instance method is called through an object reference instead,
+                        like <code>greeting.length()</code>.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why doesn't calling a method on a null reference get caught at compile time?</summary>
+                    <p>
+                        The compiler only checks that the reference's declared type has that
+                        method available — it can't predict what the reference will actually
+                        point to once the program runs. Whether it's <code>null</code> at
+                        that moment is a run-time condition, not a compile-time one.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does the dot operator work differently for class methods vs. instance methods?</summary>
+                    <p>
+                        No — its job is identical in both cases. It connects whatever is on
+                        its left, whether that's a class name or an object name, to the
+                        method being called on its right.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"A NullPointerException means my code has a syntax error"</h3>
+
+            <p>
+                It doesn't — the code compiles just fine. A <code>NullPointerException</code>
+                is a run-time error, meaning it only shows up when the program actually
+                tries to call a method on a reference that turned out to be <code>null</code>.
+            </p>
+
+            <h3>"The dot operator behaves differently for objects than for classes"</h3>
+
+            <p>
+                The dot operator always does the same job — connecting something on its
+                left to a method or member on its right. What changes is only what sits on
+                the left: a class name for a class method, an object reference for an
+                instance method.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Spotting the difference between a class method call and an instance method
+                call — and predicting when a <code>NullPointerException</code> might happen
+                — are both skills worth practicing now. Ask Starr to trace through a short
+                snippet involving object references.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking: "Walk me through why this line throws a
+                    NullPointerException."
+                </p>
+            </div>
+
+        </section>
+    `
+    ,
 
 };
