@@ -3115,7 +3115,7 @@ lessonContentData["Unit 1"] = {
             <h3>Attributes and Behaviors</h3>
 
             <p>
-                The AP Computer Science A guide describes an object as a specific
+                An object is a specific
                 instance of a class with <strong>defined attributes</strong>. That means
                 an object stores data that belongs to it, and those stored values help
                 determine its current state.
@@ -4013,5 +4013,390 @@ lessonContentData["Unit 1"] = {
         </section>
     `
     ,
+
+    "1.15 String Manipulation": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>String Manipulation</h2>
+
+            <p>
+                Strings are one of the most important reference types in Java because they
+                let programs work with text. Whether you're reading input, building output,
+                comparing names, or extracting part of a word, the <code>String</code> class
+                is doing a lot of the heavy lifting in the background.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">String:</span> a String object represents a sequence of characters and can be created by using a string literal or by calling the String class constructor.</p>
+            </div>
+
+            <h3>The String Class</h3>
+
+            <p>
+                The <code>String</code> class is part of the <code>java.lang</code> package,
+                which means it is available by default. You do not need to import it before
+                using it in your program.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">java.lang package:</span> the package in Java that is available automatically and contains core classes such as <code>String</code>.</p>
+            </div>
+
+            <p>
+                A <code>String</code> object is immutable, meaning that once it is created,
+                its contents cannot be changed. Methods called on a <code>String</code> do
+                not alter the original object. Instead, if a new value is needed, Java makes
+                a new String object.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Immutable:</span> unable to be changed after it is created.</p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    If you call a String method and the text seems to "change," that is
+                    because Java created a new String behind the scenes. The original String
+                    stays exactly the same.
+                </p>
+            </div>
+
+            <h3>Creating Strings</h3>
+
+            <p>
+                Strings can be created using a string literal, or by calling the
+                <code>String</code> constructor. Both produce <code>String</code> objects.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Way to Create a String</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;">String literal</td>
+                        <td style="white-space:normal;"><code>String name = "Maya";</code></td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;">Constructor call</td>
+                        <td style="white-space:normal;"><code>String name = new String("Maya");</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>String Concatenation</h3>
+
+            <p>
+                String concatenation means joining Strings together. The <code>+</code>
+                operator is used to combine text, and if one side is a String, Java will
+                convert the other side into text as needed.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 32px; margin:22px 0; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> first = <span style="color:#9CA3AF;">"Ada"</span>;
+            <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> last = <span style="color:#9CA3AF;">"Lovelace"</span>;
+            <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> fullName = first + <span style="color:#9CA3AF;">" "</span> + last;</pre>
+            </div>
+
+            <p>
+                Concatenation happens from left to right. That means
+                <code>"5" + 3 + 2</code> becomes <code>"532"</code>, because once Java sees
+                a String, the rest of the expression is treated as text.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;"><code>"Hello" + " World"</code></td>
+                        <td style="white-space:normal;"><code>"Hello World"</code></td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>"Score: " + 95</code></td>
+                        <td style="white-space:normal;"><code>"Score: 95"</code></td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>2 + 3 + " points"</code></td>
+                        <td style="white-space:normal;"><code>"5 points"</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    The order matters. If the first part of the expression is a String, the
+                    rest will be joined as text too. If the String comes later, Java may do
+                    arithmetic first.
+                </p>
+            </div>
+
+            <h3>Method Overriding and toString()</h3>
+
+            <p>
+                Strings are objects, and many object-related methods depend on inheritance
+                and method overriding. A subclass can provide its own version of a method it
+                inherits from a superclass. A common example is overriding
+                <code>toString()</code> so an object can be described in a more useful way.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Method overriding:</span> when a subclass provides its own implementation of a method that is already defined in its superclass. The method name and parameter list stay the same, but the behavior changes.</p>
+            </div>
+
+            <p>
+                A typical <code>toString()</code> override might look like this:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 32px; margin:22px 0; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">toString</span><span style="color:#9CA3AF;">() {</span>
+                <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> <span style="color:#9CA3AF;">"Student{name='"</span> + name + <span style="color:#9CA3AF;">"', grade="</span> + grade + <span style="color:#9CA3AF;">"}"</span>;
+            <span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                If a <code>Student</code> object is printed, Java uses <code>toString()</code>
+                to get a String description. Overriding it gives the class control over how
+                its objects are shown as text.
+            </p>
+
+            <p>
+                The method name and parameter list stay the same when a method is overridden.
+                What changes is the behavior in the subclass.
+            </p>
+
+            <h3>Inheritance and the String Class</h3>
+
+            <p>
+                The <code>String</code> class belongs to Java's class hierarchy and ultimately
+                connects back to the <code>Object</code> class. That is one reason Strings
+                behave like objects even though they are used so often that they may feel
+                almost like a special built-in type.
+            </p>
+
+            <p>
+                The AP Computer Science A guide includes an <strong>Exclusion Statement</strong> here:
+                designing and implementing relationships involving the <code>String</code> class is outside
+                the scope of the AP Computer Science A course and exam description.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    For AP CSA, focus on how to use String methods and interpret String
+                    behavior. You are expected to understand Strings as objects, but not to
+                    build custom inheritance relationships around the String class itself.
+                </p>
+            </div>
+
+            <h3>Common String Methods from the Java Quick Reference</h3>
+
+            <p>
+                The following String methods are part of the Java Quick Reference and are
+                especially important for AP CSA. They help you inspect, compare, and extract
+                pieces of text.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>What It Does</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="white-space:normal;"><code>int length()</code></td>
+                        <td style="white-space:normal;">returns the number of characters in a String object</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>String substring(int from, int to)</code></td>
+                        <td style="white-space:normal;">returns the substring starting at <code>from</code> and ending at <code>to - 1</code></td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>String substring(int from)</code></td>
+                        <td style="white-space:normal;">returns the substring starting at <code>from</code> and ending at the last character</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>int indexOf(String str)</code></td>
+                        <td style="white-space:normal;">returns the index of the first occurrence of <code>str</code>, or <code>-1</code> if it is not found</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>boolean equals(Object other)</code></td>
+                        <td style="white-space:normal;">returns <code>true</code> if this object has the same sequence of characters as <code>other</code>, and <code>false</code> otherwise</td>
+                    </tr>
+                    <tr>
+                        <td style="white-space:normal;"><code>int compareTo(String other)</code></td>
+                        <td style="white-space:normal;">returns a value less than, equal to, or greater than zero depending on alphabetical order</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                A useful pattern is extracting one character at a time with
+                <code>substring(index, index + 1)</code>.
+            </p>
+
+            <h3>StringIndexOutOfBoundsException</h3>
+
+            <p>
+                Strings use zero-based indexing. That means the first character is at index
+                <code>0</code> and the last character is at index <code>length() - 1</code>.
+                If code tries to access a position outside that range, Java throws a
+                <code>StringIndexOutOfBoundsException</code>.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">StringIndexOutOfBoundsException:</span> a run-time error that happens when code tries to access a character position outside the valid range of a String.</p>
+            </div>
+
+            <p>
+                This can happen if an index is negative, if an index is larger than the last
+                valid character position, or if <code>substring</code> is called with invalid
+                start and end values.
+            </p>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    For a String with length <code>n</code>, the largest valid index is
+                    <code>n - 1</code>. In <code>substring(from, to)</code>, the
+                    <code>to</code> value is not included in the result, but the index values
+                    still have to stay within valid bounds.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Why are Strings considered objects?</summary>
+                    <p>
+                        Because Java stores Strings as objects with behavior, not as primitive
+                        values. Strings belong to the <code>java.lang</code> package and have
+                        methods you can call on them.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why doesn't a String method change the original String?</summary>
+                    <p>
+                        Strings are immutable. Once a String is created, its contents cannot be
+                        changed, so methods that seem to modify it actually return new Strings.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What does concatenation do?</summary>
+                    <p>
+                        Concatenation joins text together. If one side of the <code>+</code>
+                        operator is a String, Java converts the other value to text and combines
+                        them.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How is overriding toString() useful?</summary>
+                    <p>
+                        It lets a class control how its objects are represented as text. That is
+                        especially helpful for printing objects and debugging.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why does StringIndexOutOfBoundsException happen?</summary>
+                    <p>
+                        It happens when code tries to use a character index that does not exist.
+                        Since Strings are indexed from <code>0</code> to <code>length() - 1</code>,
+                        going outside that range causes the exception.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"Strings are primitive types"</h3>
+
+            <p>
+                They are not. Strings are objects, which is why they belong to the
+                <code>java.lang</code> package and have methods available to call on them.
+            </p>
+
+            <h3>"String methods change the original String"</h3>
+
+            <p>
+                They do not. Strings are immutable, so methods that seem to modify a String
+                actually return a new one instead.
+            </p>
+
+            <h3>"Concatenation only works on Strings"</h3>
+
+            <p>
+                Java can concatenate Strings with other values too. If one side of the
+                <code>+</code> operator is a String, the other side will be converted as needed.
+            </p>
+
+            <h3>"toString() is only for printing"</h3>
+
+            <p>
+                It is often used when printing, but its broader purpose is to provide a
+                String representation of an object.
+            </p>
+
+            <h3>"StringIndexOutOfBoundsException means the String is broken"</h3>
+
+            <p>
+                The String itself is fine. The problem is that the code tried to access an
+                invalid index or invalid substring boundaries.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                String manipulation shows up constantly in AP CSA, especially when working
+                with input, output, and object descriptions. Ask Starr to quiz you on
+                String methods, concatenation, or valid substring boundaries.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking: "Show me how to determine whether a substring call will
+                    cause a StringIndexOutOfBoundsException."
+                </p>
+            </div>
+
+        </section>
+    `
+
 
 };
