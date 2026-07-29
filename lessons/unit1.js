@@ -4101,9 +4101,9 @@ lessonContentData["Unit 1"] = {
             </p>
 
             <div style="background:#0F172A; border-radius:14px; padding:24px 32px; margin:22px 0; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
-            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> first = <span style="color:#9CA3AF;">"Ada"</span>;
-            <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> last = <span style="color:#9CA3AF;">"Lovelace"</span>;
-            <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> fullName = first + <span style="color:#9CA3AF;">" "</span> + last;</pre>
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> first = <span style="color:#9CA3AF;">"Ada"</span>;
+<span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> last = <span style="color:#9CA3AF;">"Lovelace"</span>;
+<span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> fullName = first + <span style="color:#9CA3AF;">" "</span> + last;</pre>
             </div>
 
             <p>
@@ -4164,8 +4164,8 @@ lessonContentData["Unit 1"] = {
 
             <div style="background:#0F172A; border-radius:14px; padding:24px 32px; margin:22px 0; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
                 <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2.1; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">toString</span><span style="color:#9CA3AF;">() {</span>
-                <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> <span style="color:#9CA3AF;">"Student{name='"</span> + name + <span style="color:#9CA3AF;">"', grade="</span> + grade + <span style="color:#9CA3AF;">"}"</span>;
-            <span style="color:#9CA3AF;">}</span></pre>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> <span style="color:#9CA3AF;">"Student{name='"</span> + name + <span style="color:#9CA3AF;">"', grade="</span> + grade + <span style="color:#9CA3AF;">"}"</span>;
+<span style="color:#9CA3AF;">}</span></pre>
             </div>
 
             <p>
