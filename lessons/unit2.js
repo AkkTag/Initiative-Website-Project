@@ -1891,4 +1891,1542 @@ lessonContentData["Unit 2"] = {
 
     `
 
+    ,
+
+    "2.6 Comparing Boolean Expressions": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Comparing Boolean Expressions</h2>
+
+            <p>
+                With <code>!</code>, <code>&amp;&amp;</code>, and <code>||</code> from
+                2.5 in hand, Boolean expressions can start to get genuinely complex —
+                complex enough that two expressions which look completely different on
+                the page might actually behave identically every time they're evaluated.
+                This lesson covers how to prove that formally using truth tables, a
+                specific shortcut for rewriting certain expressions called De Morgan's
+                law, and a separate but related topic: how object references are compared
+                using <code>==</code> and <code>!=</code>.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Equivalent Boolean expressions:</span> two Boolean expressions are equivalent if they evaluate to the same value in all cases. Truth tables can be used to prove Boolean expressions are equivalent.</p>
+            </div>
+
+            <h3>Truth Tables</h3>
+
+            <p>
+                A <strong>truth table</strong> lists every possible combination of
+                <code>true</code>/<code>false</code> values for the variables involved in
+                an expression, alongside what that expression evaluates to for each
+                combination. Since a Boolean variable only ever has two possible values,
+                a truth table for an expression with <code>n</code> variables needs
+                exactly <code>2<sup>n</sup></code> rows to cover every case.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Number of Variables</th>
+                        <th>Rows Needed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1 (e.g. just <code>a</code>)</td>
+                        <td><code>2</code> rows</td>
+                    </tr>
+                    <tr>
+                        <td>2 (e.g. <code>a</code> and <code>b</code>)</td>
+                        <td><code>4</code> rows</td>
+                    </tr>
+                    <tr>
+                        <td>3 (e.g. <code>a</code>, <code>b</code>, and <code>c</code>)</td>
+                        <td><code>8</code> rows</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                To prove two Boolean expressions are equivalent, build a truth table that
+                includes both expressions as columns, fill in every row, and check whether
+                the two columns match on every single row. If even one row differs, the
+                two expressions are <em>not</em> equivalent — they only happen to agree
+                some of the time, which isn't enough.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    "Equivalent" is a strong word here — it doesn't mean two expressions
+                    <em>usually</em> agree, or agree for the values you happened to test.
+                    It means they agree for <em>every</em> possible combination of values,
+                    with no exceptions. That's exactly why a full truth table, not just a
+                    few spot checks, is required to prove it.
+                </p>
+            </div>
+
+            <h3>De Morgan's Law</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">De Morgan's law:</span> can be applied to Boolean expressions to create equivalent Boolean expressions. Under De Morgan's law, the Boolean expression <code>!(a &amp;&amp; b)</code> is equivalent to <code>!a || !b</code>, and the Boolean expression <code>!(a || b)</code> is equivalent to <code>!a &amp;&amp; !b</code>.</p>
+            </div>
+
+            <p>
+                De Morgan's law gives a reliable way to rewrite a negated compound
+                expression by "distributing" the <code>!</code> across each side, while
+                flipping <code>&amp;&amp;</code> to <code>||</code> (or <code>||</code> to
+                <code>&amp;&amp;</code>) in the process.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Original Expression</th>
+                        <th>Equivalent Expression (De Morgan's Law)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>!(a &amp;&amp; b)</code></td>
+                        <td><code>!a || !b</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>!(a || b)</code></td>
+                        <td><code>!a &amp;&amp; !b</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Here's a full truth table proving the first version of De Morgan's law —
+                notice the two rightmost columns, <code>!(a &amp;&amp; b)</code> and
+                <code>!a || !b</code>, match on every single row:
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th><code>a</code></th>
+                        <th><code>b</code></th>
+                        <th><code>a &amp;&amp; b</code></th>
+                        <th><code>!(a &amp;&amp; b)</code></th>
+                        <th><code>!a</code></th>
+                        <th><code>!b</code></th>
+                        <th><code>!a || !b</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>📘 Example</h3>
+                <p>
+                    Given <code>!(isRaining &amp;&amp; isWindy)</code>, De Morgan's law
+                    rewrites this as <code>!isRaining || !isWindy</code> — "not raining and
+                    windy" becomes "not raining, or not windy," and both expressions are
+                    guaranteed to evaluate identically for any combination of
+                    <code>isRaining</code> and <code>isWindy</code>.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A quick way to remember De Morgan's law: negating a compound
+                    expression always flips the operator in the middle — <code>&amp;&amp;</code>
+                    becomes <code>||</code>, and <code>||</code> becomes <code>&amp;&amp;</code>
+                    — while distributing the <code>!</code> onto each individual piece.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    A very common mistake is negating a compound expression by only
+                    negating the pieces, without flipping the operator —
+                    <code>!(a &amp;&amp; b)</code> is <strong>not</strong> equivalent to
+                    <code>!a &amp;&amp; !b</code>. Build a truth table if you're ever
+                    unsure, since it will immediately reveal a row where the two
+                    expressions disagree.
+                </p>
+            </div>
+
+            <h3>Comparing Object References with == and !=</h3>
+
+            <p>
+                2.2 introduced the idea that <code>==</code> behaves differently for
+                reference types than for primitive types, and this lesson goes a level
+                deeper. Two different variables can hold references to the same object.
+                Object references can be compared using <code>==</code> and <code>!=</code>
+                — and doing so checks whether both variables are pointing at that exact
+                same object in memory, not whether the objects they point to happen to
+                look alike.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">String s1 = new String("cat");
+String s2 = new String("cat");
+String s3 = s1;
+
+System.out.println(s1 == s2);  <span style="color:#6B7280;">// false — two separate objects</span>
+System.out.println(s1 == s3);  <span style="color:#6B7280;">// true — s3 references the same object as s1</span></pre>
+            </div>
+
+            <p>
+                <code>s1</code> and <code>s2</code> are built using two separate calls to
+                <code>new String(...)</code>, so even though both objects store the
+                identical text <code>"cat"</code>, they live at two different locations in
+                memory — <code>s1 == s2</code> is <code>false</code>. <code>s3</code>,
+                however, is assigned directly from <code>s1</code>, meaning
+                <code>s3</code> doesn't get its own new object at all — it simply points
+                to the exact same object <code>s1</code> already references, so
+                <code>s1 == s3</code> is <code>true</code>.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Comparison</th>
+                        <th>Result</th>
+                        <th>Why</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>s1 == s2</code></td>
+                        <td><code>false</code></td>
+                        <td>Two distinct objects, even with identical content</td>
+                    </tr>
+                    <tr>
+                        <td><code>s1 == s3</code></td>
+                        <td><code>true</code></td>
+                        <td>Both variables reference the exact same object</td>
+                    </tr>
+                    <tr>
+                        <td><code>s1 != s2</code></td>
+                        <td><code>true</code></td>
+                        <td>The objects are not the same, so <code>!=</code> is <code>true</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Comparing a Reference to null</h3>
+
+            <p>
+                An object reference can also be compared with <code>null</code>, using
+                <code>==</code> or <code>!=</code>, to determine if the reference actually
+                references an object. This is exactly the kind of safety check introduced
+                back in 2.5 as a common short-circuit evaluation pattern.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Expression</th>
+                        <th>What It Checks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>name == null</code></td>
+                        <td><code>true</code> if <code>name</code> isn't pointing to any object at all</td>
+                    </tr>
+                    <tr>
+                        <td><code>name != null</code></td>
+                        <td><code>true</code> if <code>name</code> is currently pointing to an actual object</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>The equals() Method: Comparing Content, Not References</h3>
+
+            <p>
+                <code>==</code> and <code>!=</code> only ever answer one question for
+                reference types: are these two variables pointing at the exact same
+                object? Often, that's not actually the question a program needs answered
+                — usually what matters is whether two objects represent the same
+                <em>value</em>, even if they're stored as two separate objects in memory.
+                That's what the <code>equals()</code> method is for.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">equals() method:</span> classes often define their own <code>equals</code> method, which can be used to specify the criteria for equivalency for two objects of the class. The equivalency of two objects is most often determined using attributes from the two objects.</p>
+            </div>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">String s1 = new String("cat");
+String s2 = new String("cat");
+
+System.out.println(s1 == s2);       <span style="color:#6B7280;">// false — different objects in memory</span>
+System.out.println(s1.equals(s2));  <span style="color:#6B7280;">// true — same content: "cat" and "cat"</span></pre>
+            </div>
+
+            <p>
+                This is exactly the distinction the AP CSA framework draws: <code>==</code>
+                asks "are these the same object?" while <code>equals()</code> asks "do
+                these two objects count as equal, based on their content?" For
+                <code>String</code>, that content is the sequence of characters being
+                stored — two different <code>String</code> objects holding the same text
+                will always return <code>true</code> from <code>equals()</code>, even
+                though <code>==</code> returns <code>false</code>.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th><code>==</code> / <code>!=</code></th>
+                        <th><code>equals()</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>What it compares</td>
+                        <td>Whether two references point to the exact same object</td>
+                        <td>Whether two objects count as equivalent, based on their content</td>
+                    </tr>
+                    <tr>
+                        <td>Who defines the comparison</td>
+                        <td>Built into Java for all reference types</td>
+                        <td>Defined individually by each class, based on its own attributes</td>
+                    </tr>
+                    <tr>
+                        <td>Two objects with identical content, stored separately</td>
+                        <td><code>false</code></td>
+                        <td><code>true</code>, assuming the class defines <code>equals()</code> to compare content this way</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>🚫 Exclusion Statement</h3>
+                <p>
+                    Overriding the <code>equals</code> method — that is, writing your own
+                    version of <code>equals()</code> inside a class you design yourself —
+                    is outside the scope of the AP Computer Science A course and exam. You
+                    are expected to understand what <code>equals()</code> does and how to
+                    call it correctly on existing classes like <code>String</code>, but
+                    you won't be asked to implement it yourself.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Using <code>==</code> when you meant to check content equality is a
+                    very common source of bugs, especially with <code>String</code>
+                    objects. When comparing whether two objects represent the same value,
+                    <code>equals()</code> is almost always the correct choice —
+                    <code>==</code> should be reserved for cases where you specifically
+                    need to know whether two references point to the exact same object.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about truth tables,
+                De Morgan's law, and comparing objects.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>How many rows does a truth table need?</summary>
+                    <p>
+                        A truth table needs <code>2<sup>n</sup></code> rows, where
+                        <code>n</code> is the number of Boolean variables involved — every
+                        possible combination of <code>true</code>/<code>false</code> values
+                        for those variables has to be represented.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What exactly does De Morgan's law let me do?</summary>
+                    <p>
+                        It lets you rewrite a negated compound expression into an
+                        equivalent form by distributing the <code>!</code> and flipping
+                        <code>&amp;&amp;</code> to <code>||</code> (or vice versa) —
+                        <code>!(a &amp;&amp; b)</code> becomes <code>!a || !b</code>, and
+                        <code>!(a || b)</code> becomes <code>!a &amp;&amp; !b</code>.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why does s1 == s2 return false even when both Strings hold "cat"?</summary>
+                    <p>
+                        Because <code>new String("cat")</code> creates a brand-new object
+                        each time it's called. <code>==</code> checks whether two
+                        references point to the exact same object, not whether their
+                        content matches — two separately created objects are never the
+                        same object, no matter what they contain.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>When should I use equals() instead of ==?</summary>
+                    <p>
+                        Use <code>equals()</code> whenever you want to know if two objects
+                        represent the same value or content. Reserve <code>==</code> for
+                        situations where you specifically need to check whether two
+                        variables reference the exact same object in memory.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do I need to know how to write my own equals() method?</summary>
+                    <p>
+                        No. Overriding the <code>equals</code> method is explicitly outside
+                        the scope of the AP CSA course and exam. You just need to
+                        understand what it does and be able to call it correctly.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"!(a && b) is the same as !a && !b"</h3>
+
+            <p>
+                It isn't — this is one of the most common De Morgan's law mistakes.
+                Negating a compound expression flips the operator in the middle, so
+                <code>!(a &amp;&amp; b)</code> is actually equivalent to
+                <code>!a || !b</code>, not <code>!a &amp;&amp; !b</code>.
+            </p>
+
+            <h3>"== always tells you if two objects are equal"</h3>
+
+            <p>
+                For reference types, <code>==</code> only tells you whether two variables
+                point to the exact same object — not whether the objects contain equal or
+                equivalent data. Two separately created objects with identical content
+                will still return <code>false</code> from <code>==</code>.
+            </p>
+
+            <h3>"Checking a few example values is enough to prove two expressions are equivalent"</h3>
+
+            <p>
+                Equivalence requires matching results in <em>every</em> case, not just the
+                ones you happened to check. A full truth table, covering every possible
+                combination of values, is the only reliable way to prove two Boolean
+                expressions are truly equivalent.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Truth tables, De Morgan's law, and the difference between <code>==</code>
+                and <code>equals()</code> are all common sources of tricky FRQ and MCQ
+                questions. Ask Starr to build out a truth table with you, or to trace
+                through a reference comparison step by step.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Build a truth table proving that !(a || b) is
+                    equivalent to !a && !b."
+                </p>
+            </div>
+
+        </section>
+
+    `,
+
+    "2.7 while Loops": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>while Loops</h2>
+
+            <p>
+                So far, every algorithm in this course has run through its steps once,
+                possibly branching with selection along the way. This lesson introduces
+                <strong>iteration</strong> — the third building block from Lesson 2.1 — and
+                the first Java statement that actually implements it: the
+                <strong>while loop</strong>.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Iteration:</span> a form of repetition. Iteration statements change the flow of control by repeating a segment of code zero or more times as long as the Boolean expression controlling the loop evaluates to <code>true</code>.</p>
+            </div>
+
+            <p>
+                Notice the phrase "zero or more times." Iteration doesn't guarantee a loop
+                body runs at all — it only guarantees that the loop body keeps running
+                <em>as long as</em> its controlling Boolean expression is <code>true</code>.
+                If that expression is <code>false</code> the very first time it's checked,
+                the loop body never executes.
+            </p>
+
+            <h3>Infinite Loops</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Infinite loop:</span> occurs when the Boolean expression in an iterative statement always evaluates to <code>true</code>.</p>
+            </div>
+
+            <p>
+                An infinite loop happens when nothing inside the loop body ever causes the
+                controlling Boolean expression to become <code>false</code>. Since the loop
+                only stops when its condition evaluates to <code>false</code>, a condition
+                that can never change — or a loop body that never updates the variables the
+                condition depends on — will keep repeating forever, at least until the
+                program is forcibly stopped.
+            </p>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Every loop needs some piece of code, usually inside the loop body, that
+                    moves the controlling condition closer to becoming <code>false</code>.
+                    Forgetting to update a counter or a controlling variable is the most
+                    common way an infinite loop gets created by accident.
+                </p>
+            </div>
+
+            <h3>Off-by-One Errors</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Off-by-one error:</span> occurs when the iteration statement loops one time too many or one time too few.</p>
+            </div>
+
+            <p>
+                Off-by-one errors happen at the boundary of a loop's condition — usually
+                because a comparison operator is slightly wrong, or because a starting or
+                ending value is set incorrectly. A loop that should run 10 times but
+                actually runs 9 or 11 is still a working loop; it's just counting to the
+                wrong place, which makes these errors easy to write and surprisingly easy
+                to miss.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    When a loop's iteration count seems suspicious, trace through the exact
+                    values of the controlling variable on the first and last few passes.
+                    Off-by-one errors almost always reveal themselves at the very start or
+                    the very end of a loop, not in the middle.
+                </p>
+            </div>
+
+            <h3>The while Loop</h3>
+
+            <p>
+                A <strong>while loop</strong> is a type of iterative statement. In
+                <code>while</code> loops, the Boolean expression is evaluated
+                <em>before</em> each iteration of the loop body, including the first. When
+                the expression evaluates to <code>true</code>, the loop body is executed.
+                This continues until the Boolean expression evaluates to
+                <code>false</code>, whereupon the iteration terminates.
+            </p>
+
+            <p>
+                Because the condition is checked before the body ever runs, a
+                <code>while</code> loop is sometimes called a <strong>pre-test loop</strong>.
+                If the condition is <code>false</code> on that very first check, the loop
+                body is skipped entirely — this is exactly what "zero or more times" means
+                in practice.
+            </p>
+
+            <h3>Constructing a while Loop</h3>
+
+            <p>
+                The general form of a <code>while</code> loop is:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">while</span> <span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">booleanExpression</span><span style="color:#9CA3AF;">) {</span>
+    <span style="color:#6B7280;">// loop body</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                The keyword <code>while</code> is followed by a Boolean expression in
+                parentheses, and then a block of statements enclosed in curly braces. Each
+                time control reaches the top of the loop, Java evaluates the Boolean
+                expression. If it's <code>true</code>, every statement inside the braces
+                runs once, and control returns to the top to check the expression again. If
+                it's <code>false</code>, control skips past the closing brace entirely and
+                the program continues with whatever comes after the loop.
+            </p>
+
+            <p>
+                A typical <code>while</code> loop that counts from 1 to 5 looks like this:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int count = 1;
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">while</span> <span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">count &lt;= 5</span><span style="color:#9CA3AF;">) {</span>
+    System.out.println(count);
+    count++;
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                Three pieces work together to make this loop behave correctly:
+                <strong>initialization</strong> (<code>count</code> is set to 1 before the
+                loop begins), the <strong>condition</strong> (<code>count &lt;= 5</code>,
+                checked before every iteration), and the <strong>update</strong>
+                (<code>count++</code>, which moves the condition closer to becoming
+                <code>false</code>). Removing any one of these three pieces is a common way
+                to accidentally create an infinite loop or an off-by-one error.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Piece</th>
+                        <th>Role</th>
+                        <th>In the example above</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Initialization</td>
+                        <td>Sets up the variable the condition depends on</td>
+                        <td><code>int count = 1;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Condition</td>
+                        <td>Checked before every iteration, including the first</td>
+                        <td><code>count &lt;= 5</code></td>
+                    </tr>
+                    <tr>
+                        <td>Update</td>
+                        <td>Moves the condition toward becoming false</td>
+                        <td><code>count++;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Trace a <code>while</code> loop the same way every time: check the
+                    condition, run the body if it's <code>true</code>, then check the
+                    condition again. Writing out the value of the controlling variable at
+                    each pass is the most reliable way to predict a loop's output on paper.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about iteration and
+                <code>while</code> loops.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Can a while loop run zero times?</summary>
+                    <p>
+                        Yes. Since the condition is checked before the loop body ever runs,
+                        a <code>while</code> loop whose condition is <code>false</code> on
+                        the very first check will skip its body entirely.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>What's the difference between an infinite loop and a loop that just runs a lot of times?</summary>
+                    <p>
+                        A loop that runs many times still eventually makes its condition
+                        <code>false</code>. An infinite loop's condition never becomes
+                        <code>false</code> at all, usually because the loop body never
+                        updates whatever variable the condition depends on.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>How do I know if I have an off-by-one error?</summary>
+                    <p>
+                        Trace through the controlling variable's value on the first and
+                        last iterations by hand. If the loop executes one more or one fewer
+                        time than intended, the issue is almost always in the starting
+                        value, the ending value, or the comparison operator used in the
+                        condition.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does the update always have to be inside the loop body?</summary>
+                    <p>
+                        The update doesn't have to be a single simple statement like
+                        <code>count++</code>, but something inside the loop body has to
+                        change a value the condition depends on, or the condition will
+                        never become <code>false</code>.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"The condition of a while loop is only checked once, at the start"</h3>
+
+            <p>
+                The condition is actually rechecked before <em>every</em> iteration, not
+                just the first. A <code>while</code> loop keeps evaluating its Boolean
+                expression at the top of each pass, and only stops once that check comes
+                back <code>false</code>.
+            </p>
+
+            <h3>"A while loop always runs at least once"</h3>
+
+            <p>
+                Because the condition is checked before the body runs, a
+                <code>while</code> loop can execute zero times if its condition is already
+                <code>false</code> the first time it's evaluated.
+            </p>
+
+            <h3>"Forgetting the update statement just makes the loop run longer"</h3>
+
+            <p>
+                Forgetting to update the variable a condition depends on doesn't make a
+                loop run longer — it can make it run forever. Without something inside the
+                loop body moving the condition toward <code>false</code>, the loop has no
+                way to ever stop on its own.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Tracing <code>while</code> loops by hand is one of the best ways to catch
+                infinite loops and off-by-one errors before they happen. Ask Starr to trace
+                through a loop step by step, or to explain why a specific loop runs the
+                number of times it does.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Trace this while loop line by line and tell me
+                    exactly what it prints."
+                </p>
+            </div>
+
+        </section>
+
+    `,
+
+    "2.8 for Loops": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>for Loops</h2>
+
+            <p>
+                The <code>while</code> loop from Lesson 2.7 is one type of iterative
+                statement. This lesson introduces the second: the <strong>for
+                loop</strong>. A <code>for</code> loop packages the same three ideas every
+                loop needs — initialization, condition, and update — directly into its
+                header, which makes counting loops especially compact to read and write.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">for loop:</span> a type of iterative statement. There are three parts in a <code>for</code> loop header: the initialization, the Boolean expression, and the update.</p>
+            </div>
+
+            <h3>The Three Parts of a for Loop Header</h3>
+
+            <p>
+                In a <code>for</code> loop, the initialization statement is executed only
+                once, before the first Boolean expression evaluation. The variable being
+                initialized is referred to as a <strong>loop control variable</strong>. The
+                Boolean expression is evaluated immediately after the loop control variable
+                is initialized, and then following each execution of the increment
+                statement, until it is <code>false</code>. In each iteration, the update is
+                executed after the entire loop body is executed and before the Boolean
+                expression is evaluated again.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span><span style="color:#FBBF77;">initialization</span><span style="color:#9CA3AF;">; </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">booleanExpression</span><span style="color:#9CA3AF;">; </span><span style="color:#FBBF77;">update</span><span style="color:#9CA3AF;">) {</span>
+    <span style="color:#6B7280;">// loop body</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                Each of the three parts is separated by a semicolon inside the parentheses.
+                Together, they control exactly how the loop control variable starts,
+                when the loop stops, and how that variable changes on every pass.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Part</th>
+                        <th>When it runs</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Initialization</td>
+                        <td>Once, before the first condition check</td>
+                        <td>Declares and sets the starting value of the loop control variable</td>
+                    </tr>
+                    <tr>
+                        <td>Boolean expression</td>
+                        <td>Before every iteration, including the first</td>
+                        <td>Decides whether the loop body runs again</td>
+                    </tr>
+                    <tr>
+                        <td>Update</td>
+                        <td>After the loop body, before the next condition check</td>
+                        <td>Changes the loop control variable, moving the condition toward false</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Here is a <code>for</code> loop that counts from 1 to 5, printing each
+                value:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span><span style="color:#FBBF77;">int count = 1</span><span style="color:#9CA3AF;">; </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">count &lt;= 5</span><span style="color:#9CA3AF;">; </span><span style="color:#FBBF77;">count++</span><span style="color:#9CA3AF;">) {</span>
+    System.out.println(count);
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                This behaves exactly like the <code>while</code> loop version from Lesson
+                2.7 — but instead of scattering the initialization, condition, and update
+                across three separate lines, all three live together in the loop header,
+                right where the loop begins.
+            </p>
+
+            <p>
+                A <code>for</code> loop doesn't have to count upward by one each time.
+                Skipping values or counting downward just changes the update, while the
+                initialization and condition adjust to match:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span><span style="color:#FBBF77;">int i = 10</span><span style="color:#9CA3AF;">; </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">i &gt; 0</span><span style="color:#9CA3AF;">; </span><span style="color:#FBBF77;">i -= 2</span><span style="color:#9CA3AF;">) {</span>
+    System.out.println(i);
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                This loop starts its control variable <code>i</code> at 10, keeps going as
+                long as <code>i</code> is greater than 0, and subtracts 2 from
+                <code>i</code> after every pass — printing 10, 8, 6, 4, then 2 before the
+                condition finally evaluates to <code>false</code>.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A <code>for</code> loop's condition is checked before every iteration,
+                    just like a <code>while</code> loop's — so a <code>for</code> loop can
+                    also run zero times if its condition is already <code>false</code> on
+                    the first check.
+                </p>
+            </div>
+
+            <h3>Rewriting Between for and while Loops</h3>
+
+            <p>
+                A <code>for</code> loop can be rewritten into an equivalent
+                <code>while</code> loop (and vice versa). Since both loop types are built
+                from the same three pieces — initialization, condition, and update — the
+                only real difference is where those pieces are written. A
+                <code>for</code> loop groups all three together in its header; a
+                <code>while</code> loop spreads them out, with the initialization placed
+                before the loop and the update placed inside the loop body.
+            </p>
+
+            <p>
+                The counting loop from earlier in this lesson, rewritten as a
+                <code>while</code> loop, looks like this:
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#FBBF77;">int count = 1;</span>
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">while</span> <span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">count &lt;= 5</span><span style="color:#9CA3AF;">) {</span>
+    System.out.println(count);
+    <span style="color:#FBBF77;">count++;</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                Both versions initialize <code>count</code> to 1 exactly once, check
+                <code>count &lt;= 5</code> before every iteration, and increment
+                <code>count</code> after the loop body runs — they're two different ways of
+                writing the exact same iteration.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Piece</th>
+                        <th>Location in a for loop</th>
+                        <th>Location in an equivalent while loop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Initialization</td>
+                        <td>First segment of the loop header</td>
+                        <td>A separate statement, immediately before the loop</td>
+                    </tr>
+                    <tr>
+                        <td>Boolean expression</td>
+                        <td>Second segment of the loop header</td>
+                        <td>The condition inside the while loop's parentheses</td>
+                    </tr>
+                    <tr>
+                        <td>Update</td>
+                        <td>Third segment of the loop header</td>
+                        <td>The last statement inside the loop body</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    When rewriting a <code>for</code> loop as a <code>while</code> loop, the
+                    update statement has to move inside the loop body — and specifically to
+                    the very end of it. Placing it anywhere else, or forgetting it
+                    entirely, changes how many times the loop runs or turns it into an
+                    infinite loop.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about
+                <code>for</code> loops and rewriting between loop types.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Is a for loop faster than a while loop?</summary>
+                    <p>
+                        No. A <code>for</code> loop and its equivalent <code>while</code>
+                        loop perform exactly the same steps in exactly the same order —
+                        <code>for</code> just groups those steps together in the header
+                        instead of spreading them across separate lines.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can a for loop count downward or skip values?</summary>
+                    <p>
+                        Yes. The initialization, condition, and update in a
+                        <code>for</code> loop header can be written however the loop
+                        control variable needs to change — decreasing it, changing it by
+                        more than one, or updating it in any consistent way.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>When I rewrite a for loop as a while loop, where does the update go?</summary>
+                    <p>
+                        The update statement moves to the very end of the
+                        <code>while</code> loop's body, so it still runs after the rest of
+                        the loop body but before the condition is checked again — matching
+                        exactly when the update happens in the original <code>for</code>
+                        loop.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can a for loop run zero times, just like a while loop?</summary>
+                    <p>
+                        Yes. Since the Boolean expression is checked before the first
+                        iteration, a <code>for</code> loop whose condition starts out
+                        <code>false</code> will skip its body entirely, just like a
+                        <code>while</code> loop would.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"The initialization in a for loop runs before every iteration"</h3>
+
+            <p>
+                The initialization only runs <em>once</em>, before the very first Boolean
+                expression check. After that, only the condition and the update run on
+                each pass — the initialization statement is never repeated.
+            </p>
+
+            <h3>"The update in a for loop happens before the loop body"</h3>
+
+            <p>
+                The update actually happens <em>after</em> the loop body finishes
+                executing, and before the Boolean expression is checked again. The order on
+                every iteration after the first is: run the loop body, then run the update,
+                then check the condition.
+            </p>
+
+            <h3>"for loops and while loops can do different things"</h3>
+
+            <p>
+                Any <code>for</code> loop can be rewritten as an equivalent
+                <code>while</code> loop, and vice versa. The two are different ways of
+                writing the same iteration — the choice between them is about readability,
+                not capability.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Rewriting a loop from one form to the other is a great way to check that
+                you really understand what each part of it is doing. Ask Starr to convert a
+                <code>for</code> loop into a <code>while</code> loop, or to trace through a
+                loop with an unusual update statement.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Rewrite this for loop as an equivalent while loop,
+                    step by step."
+                </p>
+            </div>
+
+        </section>
+
+    `,
+
+    "2.9 Implementing Selection and Iteration Algorithms": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Implementing Selection and Iteration Algorithms</h2>
+
+            <p>
+                Lessons 2.1 through 2.8 built up the individual tools of selection and
+                iteration — <code>if</code> statements, compound Boolean expressions,
+                <code>while</code> loops, and <code>for</code> loops. This lesson combines
+                those tools into five <strong>standard algorithms</strong> that show up
+                constantly throughout the rest of this course, and on the AP Exam itself.
+                Rather than introducing new syntax, this lesson is about recognizing these
+                patterns and understanding exactly why each one works.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    These five patterns aren't just exam content — they're building blocks
+                    you'll reuse, combine, and adapt for the rest of your programming life.
+                    Focus less on memorizing the exact code and more on understanding the
+                    <em>role</em> each variable plays.
+                </p>
+            </div>
+
+            <h3 id="algo-divisible">Algorithm 1 — Checking Divisibility</h3>
+
+            <p>
+                Determining whether one integer is evenly divisible by another comes down
+                to a single relational check on the remainder produced by the
+                <strong>modulus operator</strong>, <code>%</code>. If dividing
+                <code>a</code> by <code>b</code> leaves no remainder, <code>a</code> is
+                evenly divisible by <code>b</code>.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">if</span> <span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">num % divisor == 0</span><span style="color:#9CA3AF;">) {</span>
+    System.out.println(num + " is divisible by " + divisor);
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                This single line is the foundation for a whole family of related checks.
+                Testing whether a number is <strong>even</strong> is just this pattern with
+                <code>divisor</code> fixed at 2; testing whether it's <strong>odd</strong>
+                flips the comparison to <code>!= 0</code>.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>num is divisible by 3</td>
+                        <td><code>num % 3 == 0</code></td>
+                    </tr>
+                    <tr>
+                        <td>num is even</td>
+                        <td><code>num % 2 == 0</code></td>
+                    </tr>
+                    <tr>
+                        <td>num is odd</td>
+                        <td><code>num % 2 != 0</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="algo-digits">Algorithm 2 — Identifying the Individual Digits in an Integer</h3>
+
+            <p>
+                Pulling the digits out of an integer relies on the same two operators
+                working as a pair: <code>%&nbsp;10</code> isolates the rightmost digit,
+                and integer division by <code>10</code> (<code>/&nbsp;10</code>) removes
+                that digit from the number. Repeating both steps inside a
+                <code>while</code> loop peels off one digit per iteration, from right to
+                left, until nothing is left.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int num = 4restore;
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">while</span> <span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">num &gt; 0</span><span style="color:#9CA3AF;">) {</span>
+    int digit = num % 10;
+    System.out.println(digit);
+    num = num / 10;
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                Tracing this loop with <code>num</code> starting at <code>473</code> makes
+                the pattern concrete:
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Iteration</th>
+                        <th>num before</th>
+                        <th>digit (num % 10)</th>
+                        <th>num after (num / 10)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>473</td>
+                        <td>3</td>
+                        <td>47</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>47</td>
+                        <td>7</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>4</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Once <code>num</code> reaches <code>0</code>, the loop's condition becomes
+                <code>false</code> and iteration stops — the digits were printed in
+                reverse order, <code>3</code>, then <code>7</code>, then <code>4</code>,
+                which is a direct consequence of always peeling off the rightmost digit
+                first.
+            </p>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Integer division truncates any decimal portion, which is exactly what
+                    makes <code>num / 10</code> "remove" a digit. If <code>num</code> were
+                    a <code>double</code> instead of an <code>int</code>, this pattern
+                    would produce very different results.
+                </p>
+            </div>
+
+            <h3 id="algo-frequency">Algorithm 3 — Determining a Frequency</h3>
+
+            <p>
+                Determining how often a specific criterion is met across a repeated
+                process combines a <strong>counter variable</strong> with selection inside
+                a loop. The counter starts at <code>0</code> before the loop begins, and is
+                incremented only when the criterion inside the loop body evaluates to
+                <code>true</code>.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int count = 0;
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span><span style="color:#FBBF77;">int i = 1</span><span style="color:#9CA3AF;">; </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">i &lt;= 50</span><span style="color:#9CA3AF;">; </span><span style="color:#FBBF77;">i++</span><span style="color:#9CA3AF;">) {</span>
+    if (i % 7 == 0) {
+        count++;
+    }
+<span style="color:#9CA3AF;">}</span>
+
+System.out.println(count);  <span style="color:#6B7280;">// 7</span></pre>
+            </div>
+
+            <p>
+                This loop checks every integer from 1 to 50 and increments
+                <code>count</code> only for the multiples of 7 — 7, 14, 21, 28, 35, 42, and
+                49 — leaving <code>count</code> at <code>7</code> once the loop finishes.
+                The counter variable never resets mid-loop; it simply accumulates every
+                time the condition is met.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Any frequency algorithm follows the same shape: initialize a counter to
+                    <code>0</code> before the loop, test a condition inside the loop, and
+                    increment the counter only when that condition is <code>true</code>.
+                </p>
+            </div>
+
+            <h3 id="algo-minmax">Algorithm 4 — Determining a Minimum or Maximum Value</h3>
+
+            <p>
+                Finding the largest or smallest value produced by a repeated process uses
+                a <strong>tracking variable</strong> that gets compared against — and
+                potentially replaced by — each new value the loop produces. The tracking
+                variable is typically initialized to the first value in the process, and
+                then updated inside the loop whenever a "better" value is found.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int[] scores = {68, 91, 77, 84, 59, 96, 73};
+
+int max = scores[0];
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span><span style="color:#FBBF77;">int i = 1</span><span style="color:#9CA3AF;">; </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">i &lt; scores.length</span><span style="color:#9CA3AF;">; </span><span style="color:#FBBF77;">i++</span><span style="color:#9CA3AF;">) {</span>
+    if (scores[i] &gt; max) {
+        max = scores[i];
+    }
+<span style="color:#9CA3AF;">}</span>
+
+System.out.println(max);  <span style="color:#6B7280;">// 96</span></pre>
+            </div>
+
+            <p>
+                Every value after the first is compared against the current
+                <code>max</code>; only when a value is strictly greater does
+                <code>max</code> get replaced. Finding a <strong>minimum</strong> uses the
+                exact same shape, just with the comparison flipped to <code>&lt;</code>.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Initial value</th>
+                        <th>Comparison inside the loop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Maximum</td>
+                        <td>The first value in the process</td>
+                        <td><code>if (current &gt; max) max = current;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Minimum</td>
+                        <td>The first value in the process</td>
+                        <td><code>if (current &lt; min) min = current;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Initializing <code>max</code> to <code>0</code> instead of the first
+                    actual value is a common bug — it silently breaks whenever every value
+                    in the data happens to be negative, since none of them would ever be
+                    greater than <code>0</code>.
+                </p>
+            </div>
+
+            <h3 id="algo-sum">Algorithm 5 — Computing a Sum or Average</h3>
+
+            <p>
+                Computing a running total uses an <strong>accumulator variable</strong>,
+                initialized to <code>0</code> before the loop and increased by each new
+                value as the loop runs. An average is simply that same sum, divided by the
+                number of values added to it.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int[] scores = {68, 91, 77, 84, 59, 96, 73};
+
+int sum = 0;
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span><span style="color:#FBBF77;">int i = 0</span><span style="color:#9CA3AF;">; </span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">i &lt; scores.length</span><span style="color:#9CA3AF;">; </span><span style="color:#FBBF77;">i++</span><span style="color:#9CA3AF;">) {</span>
+    sum = sum + scores[i];
+<span style="color:#9CA3AF;">}</span>
+
+double average = sum / (double) scores.length;
+
+System.out.println(sum);      <span style="color:#6B7280;">// 548</span>
+System.out.println(average);  <span style="color:#6B7280;">// 78.28571428571429</span></pre>
+            </div>
+
+            <p>
+                The accumulator, <code>sum</code>, starts at <code>0</code> and grows by
+                exactly one array element per iteration — never skipping a value and never
+                double-counting one. Casting to <code>(double)</code> before dividing
+                matters here too: without it, <code>sum / scores.length</code> would
+                perform integer division and truncate the result.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A sum starts at <code>0</code>; a product (if you ever need a running
+                    multiplication instead) starts at <code>1</code>. Starting an
+                    accumulator at the wrong "do-nothing" value is a quiet but common
+                    source of bugs.
+                </p>
+            </div>
+
+            <h3>Putting the Patterns Side by Side</h3>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Key variable</th>
+                        <th>Starting value</th>
+                        <th>What changes it</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Divisibility</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><code>% == 0</code> check, no loop needed</td>
+                    </tr>
+                    <tr>
+                        <td>Digit extraction</td>
+                        <td>num</td>
+                        <td>the original integer</td>
+                        <td><code>num % 10</code> then <code>num / 10</code>, each pass</td>
+                    </tr>
+                    <tr>
+                        <td>Frequency</td>
+                        <td>count</td>
+                        <td><code>0</code></td>
+                        <td>incremented when a condition is true</td>
+                    </tr>
+                    <tr>
+                        <td>Min / Max</td>
+                        <td>min / max</td>
+                        <td>the first value</td>
+                        <td>replaced when a "better" value is found</td>
+                    </tr>
+                    <tr>
+                        <td>Sum / Average</td>
+                        <td>sum</td>
+                        <td><code>0</code></td>
+                        <td>increased by every value in the process</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about these five
+                standard algorithms.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Why does digit extraction print digits in reverse order?</summary>
+                    <p>
+                        Because <code>num % 10</code> always isolates the rightmost digit
+                        first. Without storing the digits somewhere and reversing them
+                        afterward, they naturally come out from right to left instead of
+                        left to right.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Do I always have to initialize max to the first element?</summary>
+                    <p>
+                        It's the safest choice, since it guarantees the tracking variable
+                        starts as a real value that actually appeared in the data —
+                        avoiding bugs when every value happens to be unusually small or
+                        negative.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why cast to (double) when computing an average?</summary>
+                    <p>
+                        Dividing two <code>int</code> values in Java performs integer
+                        division and truncates any decimal portion. Casting one operand to
+                        <code>(double)</code> forces the division to produce a decimal
+                        result instead.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can the frequency algorithm count something other than divisibility?</summary>
+                    <p>
+                        Yes — the counter pattern works with any Boolean condition. Only
+                        the condition inside the <code>if</code> statement needs to change;
+                        the surrounding counter and loop structure stay exactly the same.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"Initializing max or min to 0 always works"</h3>
+
+            <p>
+                It only works when <code>0</code> is guaranteed to be a valid starting
+                bound for the data. If every value being compared is negative, a
+                <code>max</code> initialized to <code>0</code> will incorrectly stay at
+                <code>0</code> forever, since nothing in the data ever exceeds it.
+            </p>
+
+            <h3>"A counter and an accumulator are the same thing"</h3>
+
+            <p>
+                A counter increases by a fixed amount — usually 1 — only when a condition
+                is met. An accumulator increases by a variable amount, adding in an actual
+                value on every single iteration, regardless of any condition.
+            </p>
+
+            <h3>"num / 10 and num % 10 do the same thing"</h3>
+
+            <p>
+                They're complementary, not identical. <code>num % 10</code> keeps only the
+                rightmost digit and discards the rest of the number; <code>num / 10</code>
+                does the opposite — it discards the rightmost digit and keeps everything
+                else.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                These five standard algorithms are some of the most heavily tested
+                patterns on the AP CSA Exam. Ask Starr to trace through one of them with a
+                different data set, or to combine two of these patterns into a single
+                loop.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Combine the sum and maximum algorithms into a
+                    single loop over the same array."
+                </p>
+            </div>
+
+        </section>
+
+    `
+
 };
