@@ -2022,7 +2022,7 @@ lessonContentData["Unit 2"] = {
                 <tbody>
                     <tr>
                         <td><code>true</code></td>
-                        <td><code>true</code></td>
+                        <td style="font-weight:600; color:#1F2937;"><code>true</code></td>
                         <td><code>true</code></td>
                         <td><code>false</code></td>
                         <td><code>false</code></td>
@@ -2031,7 +2031,7 @@ lessonContentData["Unit 2"] = {
                     </tr>
                     <tr>
                         <td><code>true</code></td>
-                        <td><code>false</code></td>
+                        <td style="font-weight:600; color:#1F2937;"><code>false</code></td>
                         <td><code>false</code></td>
                         <td><code>true</code></td>
                         <td><code>false</code></td>
@@ -2040,7 +2040,7 @@ lessonContentData["Unit 2"] = {
                     </tr>
                     <tr>
                         <td><code>false</code></td>
-                        <td><code>true</code></td>
+                        <td style="font-weight:600; color:#1F2937;"><code>true</code></td>
                         <td><code>false</code></td>
                         <td><code>true</code></td>
                         <td><code>true</code></td>
@@ -2049,7 +2049,7 @@ lessonContentData["Unit 2"] = {
                     </tr>
                     <tr>
                         <td><code>false</code></td>
-                        <td><code>false</code></td>
+                        <td style="font-weight:600; color:#1F2937;"><code>false</code></td>
                         <td><code>false</code></td>
                         <td><code>true</code></td>
                         <td><code>true</code></td>
@@ -2241,7 +2241,7 @@ System.out.println(s1.equals(s2));  <span style="color:#6B7280;">// true — sam
             </table>
 
             <div class="tip-box">
-                <h3>🚫 Exclusion Statement</h3>
+                <h3>❌ Exclusion Statement</h3>
                 <p>
                     Overriding the <code>equals</code> method — that is, writing your own
                     version of <code>equals()</code> inside a class you design yourself —
@@ -2386,8 +2386,10 @@ System.out.println(s1.equals(s2));  <span style="color:#6B7280;">// true — sam
 
         </section>
 
-    `,
+    `
+    ,
 
+    
     "2.7 while Loops": `
 
         <section id="content" class="lesson-section">
@@ -3428,5 +3430,1266 @@ System.out.println(average);  <span style="color:#6B7280;">// 78.28571428571429<
         </section>
 
     `
+    ,
+
+    "2.10 Implementing String Algorithms": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Implementing String Algorithms</h2>
+
+            <p>
+                Strings are one of the most commonly manipulated types of data in any
+                program. Java's <code>String</code> class provides a set of methods —
+                covered in 1.15 and listed in the JQR — that act as the building blocks
+                for a wide range of algorithms. This lesson focuses on three standard
+                string algorithms that the AP CSA course expects you to understand and
+                implement: checking whether one or more substrings have a particular
+                property, counting the number of substrings that meet specific criteria,
+                and creating a new string with its characters reversed.
+            </p>
+
+            <p>
+                All three algorithms share the same underlying approach: traverse the
+                string character by character using a loop, inspect each character or
+                substring at each position, and either check a condition, keep a running
+                count, or build a new string depending on what the algorithm needs to do.
+            </p>
+
+            <div class="tip-box">
+                <h3>📘 Traversing a String</h3>
+                <p>
+                    Since <code>charAt()</code> is not included in the AP CSA JQR, individual
+                    characters in a <code>String</code> are accessed using
+                    <code>substring(i, i + 1)</code>, which extracts the one-character
+                    substring starting at index <code>i</code>. A loop variable
+                    <code>i</code> starts at <code>0</code> and runs up to (but not
+                    including) <code>str.length()</code>, visiting every valid index exactly
+                    once.
+                </p>
+            </div>
+
+            <h3>Algorithm 1: Finding if One or More Substrings Have a Particular Property</h3>
+
+            <p>
+                The first algorithm answers a yes-or-no question about the string: does
+                any character (or substring) inside it satisfy some condition? The
+                strategy is to walk through the string position by position, check the
+                condition at each position, and stop as soon as one match is found — or
+                report that none exist after the entire string has been examined.
+            </p>
+
+            <p>
+                A <code>boolean</code> flag variable is typically used to track the
+                answer. It starts as <code>false</code> (no match found yet) and gets
+                set to <code>true</code> the moment a position satisfies the property.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#6B7280;">// Does the String contain any lowercase vowel?</span>
+String word = "Rhythm";
+boolean found = false;  <span style="color:#6B7280;">// assume no match to start</span>
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span>int i = 0; i &lt; word.length(); i++<span style="color:#9CA3AF;">) {</span>
+    String ch = word.substring(i, i + 1);  <span style="color:#6B7280;">// one character at index i</span>
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">if</span> <span style="color:#9CA3AF;">(</span>ch.equals("a") || ch.equals("e") || ch.equals("i") ||
+        ch.equals("o") || ch.equals("u")<span style="color:#9CA3AF;">) {</span>
+        found = true;  <span style="color:#6B7280;">// condition met — update the flag</span>
+    <span style="color:#9CA3AF;">}</span>
+<span style="color:#9CA3AF;">}</span>
+
+System.out.println(found);  <span style="color:#6B7280;">// false — "Rhythm" has no lowercase vowels</span></pre>
+            </div>
+
+            <p>
+                Stepping through this carefully: <code>word.length()</code> is
+                <code>6</code>, so the loop runs for indices <code>0</code> through
+                <code>5</code>. At each step, <code>word.substring(i, i + 1)</code>
+                extracts the single character at position <code>i</code>. The
+                <code>if</code> statement checks whether that character is one of the five
+                lowercase vowels using <code>equals()</code> — never <code>==</code>, since
+                these are <code>String</code> objects. If the loop finishes without ever
+                setting <code>found</code> to <code>true</code>, the answer is
+                <code>false</code>.
+            </p>
+
+            <div class="tip-box">
+                <h3>📘 Another Example</h3>
+                <p>
+                    The same pattern works for any property — checking if the string
+                    contains a digit, a space, or a specific substring at any position.
+                    The only part that changes is the condition inside the <code>if</code>
+                    statement; the loop structure stays the same.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Once <code>found</code> is set to <code>true</code>, continuing the
+                    loop still produces the correct answer — <code>found</code> stays
+                    <code>true</code> and can't go back to <code>false</code>. If
+                    stopping early is a priority for efficiency, a <code>while</code> loop
+                    with <code>!found</code> as its condition is a natural fit, since it
+                    exits the loop the moment a match is found.
+                </p>
+            </div>
+
+            <h3>Algorithm 2: Counting the Number of Substrings That Meet Specific Criteria</h3>
+
+            <p>
+                Where Algorithm 1 is a yes-or-no check, Algorithm 2 counts — rather than
+                stopping at the first match, the loop runs all the way to the end of the
+                string and increments a counter every time the condition is satisfied. The
+                final value of the counter is the answer.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#6B7280;">// How many times does the letter "s" appear?</span>
+String sentence = "she sells seashells";
+int count = 0;  <span style="color:#6B7280;">// start at zero</span>
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span>int i = 0; i &lt; sentence.length(); i++<span style="color:#9CA3AF;">) {</span>
+    String ch = sentence.substring(i, i + 1);
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">if</span> <span style="color:#9CA3AF;">(</span>ch.equals("s")<span style="color:#9CA3AF;">) {</span>
+        count++;  <span style="color:#6B7280;">// condition met — increment the counter</span>
+    <span style="color:#9CA3AF;">}</span>
+<span style="color:#9CA3AF;">}</span>
+
+System.out.println(count);  <span style="color:#6B7280;">// 6 — "s" appears six times</span></pre>
+            </div>
+
+            <p>
+                The structure is almost identical to Algorithm 1 — same loop, same
+                character-by-character extraction. The only meaningful difference is what
+                happens when the condition is true: instead of updating a
+                <code>boolean</code> flag, the algorithm increments a running counter.
+                When the loop finishes, <code>count</code> holds the total number of
+                positions in the string where the condition was satisfied.
+            </p>
+
+            <p>
+                The same counting approach scales to longer substrings too — instead of
+                extracting one character, the loop extracts a substring of the desired
+                length at each position, and checks whether it matches the target. The
+                loop's upper bound adjusts accordingly to avoid going out of range.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#6B7280;">// How many times does the two-character substring "ea" appear?</span>
+String sentence = "she sells seashells";
+int count = 0;
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span>int i = 0; i &lt;= sentence.length() - 2; i++<span style="color:#9CA3AF;">) {</span>  <span style="color:#6B7280;">// stop at length - 2 to avoid going out of range</span>
+    String sub = sentence.substring(i, i + 2);
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">if</span> <span style="color:#9CA3AF;">(</span>sub.equals("ea")<span style="color:#9CA3AF;">) {</span>
+        count++;
+    <span style="color:#9CA3AF;">}</span>
+<span style="color:#9CA3AF;">}</span>
+
+System.out.println(count);  <span style="color:#6B7280;">// 1 — "ea" appears once, in "seashells"</span></pre>
+            </div>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    When extracting a substring of length <code>k</code> at position
+                    <code>i</code>, the loop must stop at <code>length() - k</code> rather
+                    than <code>length() - 1</code>. Running <code>substring(i, i + k)</code>
+                    beyond that point would ask Java for characters past the end of the
+                    string, causing a <code>StringIndexOutOfBoundsException</code>.
+                </p>
+            </div>
+
+            <h3>Algorithm 3: Creating a New String with Characters Reversed</h3>
+
+            <p>
+                The third algorithm produces a brand-new string — the reverse of the
+                original. Strings in Java are <strong>immutable</strong>, meaning they
+                can never be changed in place — every time a string appears to be
+                modified, what's actually happening is that a new <code>String</code>
+                object is being created. Reversing a string makes direct use of this fact:
+                a new empty string is built up one character at a time by prepending each
+                character from the original onto the front of the result.
+            </p>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#6B7280;">// Reverse the string "hello"</span>
+String original = "hello";
+String reversed = "";  <span style="color:#6B7280;">// start with an empty string</span>
+
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(</span>int i = 0; i &lt; original.length(); i++<span style="color:#9CA3AF;">) {</span>
+    String ch = original.substring(i, i + 1);
+    reversed = ch + reversed;  <span style="color:#6B7280;">// prepend: each new character goes to the front</span>
+<span style="color:#9CA3AF;">}</span>
+
+System.out.println(reversed);  <span style="color:#6B7280;">// "olleh"</span></pre>
+            </div>
+
+            <p>
+                The key line is <code>reversed = ch + reversed</code> — it prepends the
+                current character onto whatever has been built so far, rather than
+                appending it to the end. Tracing through the loop with
+                <code>"hello"</code> makes the mechanics clear:
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th><code>i</code></th>
+                        <th><code>ch</code> (character at index <code>i</code>)</th>
+                        <th><code>reversed</code> after this iteration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>0</code></td>
+                        <td><code>"h"</code></td>
+                        <td><code>"h"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>1</code></td>
+                        <td><code>"e"</code></td>
+                        <td><code>"eh"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>2</code></td>
+                        <td><code>"l"</code></td>
+                        <td><code>"leh"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>3</code></td>
+                        <td><code>"l"</code></td>
+                        <td><code>"lleh"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>4</code></td>
+                        <td><code>"o"</code></td>
+                        <td><code>"olleh"</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Each character from the original is placed at the front of
+                <code>reversed</code>, so by the time the loop finishes, the last
+                character of the original (<code>"o"</code>) ends up at the front of
+                the result, and the first character (<code>"h"</code>) ends up at the
+                back — a perfect reversal.
+            </p>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    If <code>reversed = ch + reversed</code> were accidentally written as
+                    <code>reversed = reversed + ch</code> instead — appending to the end
+                    rather than prepending to the front — the loop would just rebuild an
+                    exact copy of the original string. Getting that one operator order
+                    right is the entire difference between the algorithm working correctly
+                    and silently failing.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Strings in Java are immutable — the assignment <code>reversed =
+                    ch + reversed</code> doesn't modify <code>reversed</code> in place.
+                    It creates a brand-new <code>String</code> object by concatenating
+                    <code>ch</code> and the old value of <code>reversed</code>, then
+                    stores a reference to that new object back in <code>reversed</code>.
+                    The old object is discarded.
+                </p>
+            </div>
+
+            <h3>The Common Thread</h3>
+
+            <p>
+                All three algorithms follow the same skeleton: a loop from index
+                <code>0</code> to <code>length() - 1</code>, extracting one character
+                (or substring) per iteration using <code>substring(i, i + k)</code>, and
+                then doing something with it. What differs between them is only the action
+                taken inside the loop — flipping a flag, incrementing a counter, or
+                prepending to a growing string. Recognizing that shared skeleton makes it
+                far easier to adapt any of the three to a new problem on the fly.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Variable Needed</th>
+                        <th>Action Inside the Loop</th>
+                        <th>Final Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Property check</td>
+                        <td><code>boolean found = false;</code></td>
+                        <td>Set <code>found = true</code> when the condition is met</td>
+                        <td>Value of <code>found</code> after the loop</td>
+                    </tr>
+                    <tr>
+                        <td>Counting</td>
+                        <td><code>int count = 0;</code></td>
+                        <td>Increment <code>count++</code> when the condition is met</td>
+                        <td>Value of <code>count</code> after the loop</td>
+                    </tr>
+                    <tr>
+                        <td>Reversing</td>
+                        <td><code>String reversed = "";</code></td>
+                        <td>Prepend: <code>reversed = ch + reversed;</code></td>
+                        <td>Value of <code>reversed</code> after the loop</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about implementing
+                string algorithms.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Why is substring(i, i + 1) used instead of charAt(i)?</summary>
+                    <p>
+                        <code>charAt()</code> isn't included in the AP CSA Java Quick
+                        Reference, so the exam only expects you to use methods from the
+                        JQR. <code>substring(i, i + 1)</code> produces the same
+                        one-character result and is the standard way to access individual
+                        characters within the scope of this course.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why must I use equals() to compare substrings instead of ==?</summary>
+                    <p>
+                        Each call to <code>substring()</code> produces a new
+                        <code>String</code> object, and <code>==</code> on reference types
+                        checks whether two variables point to the exact same object in
+                        memory — not whether they contain the same characters.
+                        <code>equals()</code> compares content, which is what's needed
+                        here.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why does the loop stop at length() - 2 when extracting two-character substrings?</summary>
+                    <p>
+                        <code>substring(i, i + 2)</code> reads characters at positions
+                        <code>i</code> and <code>i + 1</code>. At the last valid starting
+                        index, <code>i + 1</code> must still be a valid index — which
+                        means <code>i</code> can go no higher than
+                        <code>length() - 2</code>. Going further would cause a
+                        <code>StringIndexOutOfBoundsException</code>.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why does reversed = ch + reversed reverse the string, while reversed = reversed + ch doesn't?</summary>
+                    <p>
+                        Prepending puts each new character at the front of whatever has
+                        been built so far — so the first character processed ends up at
+                        the very back of the final result, and the last character processed
+                        ends up at the very front. Appending instead would just add each
+                        character to the end, recreating the original order.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Can these three algorithms be adapted to different types of conditions or properties?</summary>
+                    <p>
+                        Yes — the loop structure and variable setup stay the same across
+                        all three. The only thing that changes from problem to problem is
+                        the condition inside the <code>if</code> statement, or the exact
+                        action taken when that condition is met.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"Strings can be modified in place"</h3>
+
+            <p>
+                Strings in Java are immutable — there's no way to change the characters
+                inside an existing <code>String</code> object. Every operation that
+                appears to "build" or "modify" a string is actually creating a brand-new
+                <code>String</code> object and storing it back into the variable.
+            </p>
+
+            <h3>"The loop should go up to length() when extracting multi-character substrings"</h3>
+
+            <p>
+                The loop's upper bound must be adjusted based on how many characters are
+                being extracted at each step. For substrings of length <code>k</code>,
+                the loop should stop at <code>length() - k</code> — not
+                <code>length() - 1</code> — to prevent going out of range.
+            </p>
+
+            <h3>"reversed = ch + reversed and reversed = reversed + ch do the same thing"</h3>
+
+            <p>
+                The order of operands in string concatenation matters. Prepending
+                (<code>ch + reversed</code>) places each new character at the front,
+                which is what produces a reversal. Appending (<code>reversed + ch</code>)
+                places it at the end, which just rebuilds the original string.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                String algorithms appear frequently on AP CSA FRQs — especially the
+                property-check and counting patterns. Ask Starr to trace through one of
+                these algorithms step by step with a specific string, or to adapt the
+                skeleton to a new condition you want to test.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Trace through the reversal algorithm for the string
+                    'java' and show me what reversed holds after each iteration."
+                </p>
+            </div>
+
+        </section>
+    `
+    ,
+
+    "2.11 Nested Iteration": `
+ 
+        <section id="content" class="lesson-section">
+ 
+            <h2>Nested Iteration</h2>
+ 
+            <p>
+                Loops from 2.7 and 2.8 are each powerful on their own — they repeat a
+                set of statements until some condition is no longer true. But just as
+                <code>if</code> statements can be nested inside one another to handle
+                more layered decisions, loops can also be placed inside other loops.
+                The result is a <strong>nested iteration statement</strong>, and
+                understanding exactly how execution flows through one is the core skill
+                this lesson builds.
+            </p>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Nested iteration statement:</span> an iteration statement that appears in the body of another iteration statement. When a loop is nested inside another loop, the inner loop must complete all its iterations before the outer loop can continue to its next iteration.</p>
+            </div>
+ 
+            <h3>The Fundamental Rule</h3>
+ 
+            <p>
+                Everything about nested iteration comes down to one governing rule:
+                <strong>the inner loop must complete all its iterations before the outer
+                loop can continue to its next iteration.</strong> That means for every
+                single step the outer loop takes, the inner loop runs its entire cycle
+                from start to finish, before the outer loop is allowed to take its
+                next step.
+            </p>
+ 
+            <p>
+                Think of an analogy: the hours and minutes on a clock. The minute hand
+                (the inner loop) completes a full rotation of 60 ticks before the hour
+                hand (the outer loop) advances even one position. The hour hand doesn't
+                move at all until the minute hand has fully finished its cycle — and then
+                the minute hand starts all over again from the top.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    To trace nested iteration, always follow the inner loop completely
+                    first. Don't let the outer loop advance until the inner loop has
+                    exhausted every one of its iterations for that outer step.
+                </p>
+            </div>
+ 
+            <h3>A Simple Nested Loop</h3>
+ 
+            <p>
+                Here's the most basic form of a nested loop — an outer <code>for</code>
+                loop that runs 3 times, with an inner <code>for</code> loop inside it
+                that also runs 3 times:
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(int i = 1; i &lt;= 3; i++) {</span>  <span style="color:#6B7280;">// outer loop</span>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">for</span><span style="color:#9CA3AF;"> (int j = 1; j &lt;= 3; j++) {</span>  <span style="color:#6B7280;">// inner loop — nested</span>
+        System.out.println("i=" + i + ", j=" + j);
+    <span style="color:#9CA3AF;">}</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <p>
+                To understand what this prints, trace through it step by step, following
+                the fundamental rule: the inner loop runs to completion every time the
+                outer loop takes a step.
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Outer loop step (<code>i</code>)</th>
+                        <th>Inner loop runs (<code>j</code>)</th>
+                        <th>What Prints</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>i = 1</code></td>
+                        <td><code>j = 1</code>, <code>j = 2</code>, <code>j = 3</code> — inner loop finishes</td>
+                        <td><code>i=1, j=1</code> &rarr; <code>i=1, j=2</code> &rarr; <code>i=1, j=3</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 2</code></td>
+                        <td><code>j = 1</code>, <code>j = 2</code>, <code>j = 3</code> — inner loop finishes</td>
+                        <td><code>i=2, j=1</code> &rarr; <code>i=2, j=2</code> &rarr; <code>i=2, j=3</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 3</code></td>
+                        <td><code>j = 1</code>, <code>j = 2</code>, <code>j = 3</code> — inner loop finishes</td>
+                        <td><code>i=3, j=1</code> &rarr; <code>i=3, j=2</code> &rarr; <code>i=3, j=3</code></td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <p>
+                The total number of times the body of the inner loop runs is
+                <strong>3 &times; 3 = 9</strong> — outer iterations multiplied by inner
+                iterations. In general, if the outer loop runs <code>m</code> times and
+                the inner loop runs <code>n</code> times per outer iteration, the inner
+                body executes exactly <code>m &times; n</code> times in total.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    The total number of inner-body executions is always the product of
+                    the two loop counts. A nested loop where the outer runs 5 times and
+                    the inner runs 4 times will execute the inner body exactly
+                    5 &times; 4 = 20 times, no matter what those loops are doing.
+                </p>
+            </div>
+ 
+            <h3>Practical Example: Printing a Grid</h3>
+ 
+            <p>
+                A very common application of nested iteration is printing a rectangular
+                grid of values, where one loop controls which row you're on and the other
+                controls which column. The example below prints a 4-row by 5-column grid
+                of asterisks:
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(int row = 1; row &lt;= 4; row++) {</span>  <span style="color:#6B7280;">// outer loop — controls rows</span>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">for</span><span style="color:#9CA3AF;"> (int col = 1; col &lt;= 5; col++) {</span>  <span style="color:#6B7280;">// inner loop — controls columns</span>
+        System.out.print("* ");
+    <span style="color:#9CA3AF;">}</span>
+    System.out.println();  <span style="color:#6B7280;">// move to next line after each full row</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <p>
+                Notice the <code>System.out.println()</code> sitting inside the
+                <em>outer</em> loop body but <em>outside</em> the inner loop — it only
+                runs once per row, after the inner loop has finished printing all five
+                asterisks for that row, which is exactly what pushes the cursor down to
+                a fresh line before the next row begins. The output is:
+            </p>
+ 
+            <div style="background:#F5F7FB; border:1px solid #E5E7EB; border-radius:12px; padding:20px 26px; margin:16px 0 22px; max-width:900px; font-family:'Courier New', monospace; font-size:15px; line-height:2; color:#1F2937;">
+                * * * * * <br>
+                * * * * * <br>
+                * * * * * <br>
+                * * * * *
+            </div>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    The placement of <code>System.out.println()</code> matters a great
+                    deal in nested loops. Inside the inner loop it would print a newline
+                    after every single asterisk. Inside the outer loop but outside the
+                    inner loop, as shown, it prints a newline only after each full row is
+                    done — exactly the difference between printing a grid and printing
+                    everything down a single column.
+                </p>
+            </div>
+ 
+            <h3>Practical Example: Multiplication Table</h3>
+ 
+            <p>
+                Nested loops are also ideal when the value of the outer loop variable
+                actually needs to be combined with the value of the inner loop variable
+                — like building a multiplication table, where each cell is the product
+                of its row number and its column number:
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(int i = 1; i &lt;= 4; i++) {</span>  <span style="color:#6B7280;">// outer loop</span>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">for</span><span style="color:#9CA3AF;"> (int j = 1; j &lt;= 4; j++) {</span>  <span style="color:#6B7280;">// inner loop — nested</span>
+        System.out.print((i * j) + "\t");  <span style="color:#6B7280;">// \t adds a tab for alignment</span>
+    <span style="color:#9CA3AF;">}</span>
+    System.out.println();
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <p>
+                The inner loop variable <code>j</code> is visible to the inner loop body,
+                but so is the outer loop variable <code>i</code> — both are in scope
+                inside the inner loop. For each fixed value of <code>i</code>, the inner
+                loop steps through every value of <code>j</code>, computing and printing
+                <code>i * j</code> for each one before the outer loop increments
+                <code>i</code>. The output is:
+            </p>
+ 
+            <div style="background:#F5F7FB; border:1px solid #E5E7EB; border-radius:12px; padding:20px 26px; margin:16px 0 22px; max-width:900px; font-family:'Courier New', monospace; font-size:15px; line-height:2; color:#1F2937;">
+                1 &nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp; 4 <br>
+                2 &nbsp;&nbsp;&nbsp; 4 &nbsp;&nbsp;&nbsp; 6 &nbsp;&nbsp;&nbsp; 8 <br>
+                3 &nbsp;&nbsp;&nbsp; 6 &nbsp;&nbsp;&nbsp; 9 &nbsp;&nbsp;&nbsp; 12 <br>
+                4 &nbsp;&nbsp;&nbsp; 8 &nbsp;&nbsp;&nbsp; 12 &nbsp;&nbsp; 16
+            </div>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Both the outer loop variable and the inner loop variable are in scope
+                    inside the inner loop body — that's what makes nested iteration so
+                    powerful for problems that involve combining two independent counters,
+                    like rows and columns, into a single computed value.
+                </p>
+            </div>
+ 
+            <h3>Tracking Total Iterations</h3>
+ 
+            <p>
+                A common question in nested iteration problems is: how many times total
+                does the inner loop body execute? The answer is always the product of
+                the number of outer iterations and the number of inner iterations per
+                outer step. But when the inner loop's range depends on the outer loop
+                variable, the count needs more care.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8x 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(int i = 1; i &lt;= 4; i++) {</span>  <span style="color:#6B7280;">// outer loop runs 4 times</span>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">for</span><span style="color:#9CA3AF;"> (int j = 1; j &lt;= i; j++) {</span>  <span style="color:#6B7280;">// inner loop runs i times — depends on outer</span>
+        System.out.print("* ");
+    <span style="color:#9CA3AF;">}</span>
+    System.out.println();
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Outer step (<code>i</code>)</th>
+                        <th>Inner loop runs (<code>j</code> up to <code>i</code>)</th>
+                        <th>Asterisks Printed This Row</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>i = 1</code></td>
+                        <td><code>j = 1</code> — 1 iteration</td>
+                        <td><code>*</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 2</code></td>
+                        <td><code>j = 1, 2</code> — 2 iterations</td>
+                        <td><code>* *</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 3</code></td>
+                        <td><code>j = 1, 2, 3</code> — 3 iterations</td>
+                        <td><code>* * *</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 4</code></td>
+                        <td><code>j = 1, 2, 3, 4</code> — 4 iterations</td>
+                        <td><code>* * * *</code></td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <p>
+                The total inner-body executions here are 1 + 2 + 3 + 4 = <strong>10</strong>,
+                not 4 &times; 4 = 16 — because the inner loop's upper bound changes with
+                each outer step. The output is a triangle, not a rectangle.
+            </p>
+ 
+            <div style="background:#F5F7FB; border:1px solid #E5E7EB; border-radius:12px; padding:20px 26px; margin:16px 0 22px; max-width:900px; font-family:'Courier New', monospace; font-size:15px; line-height:2; color:#1F2937;">
+                * <br>
+                * * <br>
+                * * * <br>
+                * * * *
+            </div>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    When the inner loop's range depends on the outer loop variable, the
+                    "multiply the two counts" shortcut no longer applies. You have to
+                    trace through each outer step individually and add up the inner
+                    iterations one by one to get the true total.
+                </p>
+            </div>
+ 
+        </section>
+ 
+        <section id="questions" class="lesson-section">
+ 
+            <h2>Frequently Starred Questions</h2>
+ 
+            <p>
+                Here are some of the questions Starr hears most often about nested
+                iteration.
+            </p>
+ 
+            <div class="faq-list">
+ 
+                <details class="faq-item">
+                    <summary>What does "nested" mean for a loop?</summary>
+                    <p>
+                        A nested loop is simply an iteration statement that appears inside
+                        the body of another iteration statement — the same plain language
+                        as nesting for <code>if</code> statements. The inner loop runs
+                        inside the outer loop's body, just like any other statement.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>How many times does the inner loop body run in total?</summary>
+                    <p>
+                        When the inner loop's range is fixed, the total is outer
+                        iterations &times; inner iterations per outer step. When the inner
+                        loop's range depends on the outer variable, you have to add up the
+                        inner iterations for each outer step individually.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Can the inner loop see the outer loop's variable?</summary>
+                    <p>
+                        Yes. The outer loop variable is in scope throughout the entire
+                        body of the outer loop, which includes the inner loop's body.
+                        This is what makes it possible to write a loop like
+                        <code>for (int j = 1; j &lt;= i; j++)</code>, where
+                        <code>i</code> belongs to the outer loop.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Can I use the same variable name for both loops?</summary>
+                    <p>
+                        No. The outer and inner loops must use different variable names —
+                        declaring a variable with the same name in the inner loop while
+                        the outer loop's variable of the same name is still in scope
+                        causes a compiler error.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Do nested loops have to be for loops?</summary>
+                    <p>
+                        No — any combination works. The outer loop could be a
+                        <code>while</code> loop with a <code>for</code> loop nested
+                        inside, or vice versa. The fundamental rule — the inner loop
+                        must complete all its iterations before the outer loop advances —
+                        applies regardless of which loop types are used.
+                    </p>
+                </details>
+ 
+            </div>
+ 
+        </section>
+ 
+        <section id="misconceptions" class="lesson-section">
+ 
+            <h2>Common Starrfalls</h2>
+ 
+            <h3>"The outer loop and inner loop advance at the same time"</h3>
+ 
+            <p>
+                They don't — the outer loop is frozen at its current step while the inner
+                loop runs all the way through. The outer loop only gets to take its next
+                step once the inner loop has finished its entire cycle for this iteration.
+            </p>
+ 
+            <h3>"The total iterations are always outer × inner"</h3>
+ 
+            <p>
+                Only when the inner loop's range is fixed. If the inner loop's range
+                depends on the outer loop variable, the total changes each outer step and
+                has to be added up across all outer steps, not just multiplied.
+            </p>
+ 
+            <h3>"println() inside the inner loop ends each row"</h3>
+ 
+            <p>
+                A <code>println()</code> inside the inner loop runs after every single
+                inner iteration — every cell, not every row. To end a row after all its
+                columns are printed, the <code>println()</code> needs to be in the outer
+                loop body, after the inner loop has closed.
+            </p>
+ 
+        </section>
+ 
+        <section id="ask-online" class="lesson-section">
+ 
+            <h2>Starr Online</h2>
+ 
+            <p>
+                Tracing nested loops step by step is one of the most tested skills in AP
+                CSA — it shows up in both MCQ output-tracing questions and FRQs involving
+                two-dimensional arrays, which rely entirely on nested iteration. Ask Starr
+                to trace through a nested loop with you, or to help you figure out why
+                your output doesn't match what you expected.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Trace through my nested for loop and tell me
+                    exactly what gets printed for each value of i and j."
+                </p>
+            </div>
+ 
+        </section>
+    `
+    ,
+
+    "2.12 Informal Run-Time Analysis": `
+ 
+        <section id="content" class="lesson-section">
+ 
+            <h2>Informal Run-Time Analysis</h2>
+ 
+            <p>
+                Any time a loop runs, it's worth asking: how many times does the body
+                actually execute? Sometimes the answer is obvious, but as loops grow more
+                complex — especially when they're nested, or when their range depends on
+                the size of some input — counting carefully becomes a useful debugging
+                and design skill. This lesson introduces a straightforward, informal
+                way to do that counting.
+            </p>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Statement execution count:</span> the number of times a statement is executed by the program. Statement execution counts are often calculated informally through tracing and analysis of the iterative statements.</p>
+            </div>
+ 
+            <p>
+                The word "informal" here is intentional — this course isn't asking for
+                formal mathematical proofs or Big-O notation. The goal is simply to trace
+                through a loop carefully and count how many times a specific statement
+                runs, which is exactly the kind of analysis that comes up on AP CSA
+                tracing questions.
+            </p>
+ 
+            <h3>Counting Executions in a Single Loop</h3>
+ 
+            <p>
+                The simplest case is a single <code>for</code> loop with a fixed range.
+                The execution count of the body is exactly the number of times the loop
+                condition is satisfied — how many values the loop variable takes before
+                the condition becomes <code>false</code>.
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Loop</th>
+                        <th>Variable Values</th>
+                        <th>Execution Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>for (int i = 0; i &lt; 5; i++)</code></td>
+                        <td><code>0, 1, 2, 3, 4</code></td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><code>for (int i = 1; i &lt;= 5; i++)</code></td>
+                        <td><code>1, 2, 3, 4, 5</code></td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><code>for (int i = 1; i &lt;= 10; i += 2)</code></td>
+                        <td><code>1, 3, 5, 7, 9</code></td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><code>for (int i = 10; i &gt; 0; i--)</code></td>
+                        <td><code>10, 9, 8, ..., 1</code></td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A reliable formula for a standard <code>for</code> loop:
+                    <strong>(last value − first value) ÷ step size + 1</strong>.
+                    For <code>i = 1; i &lt;= 10; i += 2</code>, that's
+                    (9 − 1) ÷ 2 + 1 = 5. When in doubt, listing out the variable's
+                    actual values and counting them is always valid too.
+                </p>
+            </div>
+ 
+            <h3>Counting Executions with a while Loop</h3>
+ 
+            <p>
+                With a <code>while</code> loop, the execution count depends entirely on
+                how the condition and update interact — there's no built-in range to read
+                off directly. The reliable method is to trace through, tracking the
+                variable's value at each step until the condition becomes
+                <code>false</code>.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int n = 1;
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">while</span> <span style="color:#9CA3AF;">(n &lt; 100) {</span>
+    n *= 2;  <span style="color:#6B7280;">// how many times does this line execute?</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Before iteration</th>
+                        <th>Condition <code>n &lt; 100</code></th>
+                        <th>After <code>n *= 2</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>n = 1</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 2</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 4</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 4</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 8</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 16</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 16</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 32</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 32</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 64</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 64</code></td>
+                        <td><code>true</code> — body runs</td>
+                        <td><code>n = 128</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>n = 128</code></td>
+                        <td><code>false</code> — loop ends</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <p>
+                The statement <code>n *= 2</code> executes exactly <strong>7 times</strong>.
+                That's the statement execution count for that line. Notice this loop
+                doubles <code>n</code> each time — the execution count grows much more
+                slowly than the values themselves, because each step doubles the progress
+                made toward the stopping condition. Contrast that with a loop that
+                increments by 1 each step: reaching 100 from 1 that way would take 99
+                iterations instead of 7.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A loop that doubles (or halves) its variable each iteration reaches
+                    its stopping condition far faster than one that adds or subtracts a
+                    fixed amount. This is the informal version of what formal computer
+                    science calls logarithmic vs. linear growth — you don't need to
+                    calculate it formally, but recognizing the pattern when you trace it
+                    is useful.
+                </p>
+            </div>
+ 
+            <h3>Counting Executions in Nested Loops</h3>
+ 
+            <p>
+                For nested loops, the execution count of the innermost statement is
+                the number of times the outer loop runs multiplied by the number of
+                times the inner loop runs per outer step — or, when the inner loop's
+                range depends on the outer variable, the sum of all inner iteration
+                counts across each outer step.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(int i = 1; i &lt;= 5; i++) {</span>  <span style="color:#6B7280;">// outer: 5 iterations</span>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">for</span><span style="color:#9CA3AF;"> (int j = 1; j &lt;= 3; j++) {</span>  <span style="color:#6B7280;">// inner: 3 iterations per outer step</span>
+        System.out.println(i + ", " + j);  <span style="color:#6B7280;">// execution count?</span>
+    <span style="color:#9CA3AF;">}</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <p>
+                The inner body runs 3 times for each of the 5 outer iterations:
+                5 &times; 3 = <strong>15</strong> total executions of the
+                <code>println</code> statement.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> <span style="color:#9CA3AF;">(int i = 1; i &lt;= 5; i++) {</span>  <span style="color:#6B7280;">// outer: 5 iterations</span>
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">for</span><span style="color:#9CA3AF;"> (int j = i; j &lt;= 5; j++) {</span>  <span style="color:#6B7280;">// inner: range depends on i</span>
+        System.out.println(i + ", " + j);  <span style="color:#6B7280;">// execution count?</span>
+    <span style="color:#9CA3AF;">}</span>
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Outer step (<code>i</code>)</th>
+                        <th>Inner loop runs (<code>j</code> from <code>i</code> to <code>5</code>)</th>
+                        <th>Inner body executions this step</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>i = 1</code></td>
+                        <td><code>j = 1, 2, 3, 4, 5</code></td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 2</code></td>
+                        <td><code>j = 2, 3, 4, 5</code></td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 3</code></td>
+                        <td><code>j = 3, 4, 5</code></td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 4</code></td>
+                        <td><code>j = 4, 5</code></td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td><code>i = 5</code></td>
+                        <td><code>j = 5</code></td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <p>
+                Total: 5 + 4 + 3 + 2 + 1 = <strong>15</strong> executions — the same
+                count as the fixed-range version above, but arrived at by adding each
+                row rather than multiplying. This is a good reminder that two loops with
+                very different-looking structures can end up with the same statement
+                execution count.
+            </p>
+ 
+            <h3>Comparing Two Approaches to the Same Problem</h3>
+ 
+            <p>
+                One reason statement execution counts matter is that two programs can
+                solve the same problem with very different numbers of operations — and
+                understanding that difference informally is a step toward writing more
+                efficient code. Consider two ways to check whether a number
+                <code>n</code> is a perfect square:
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Strategy</th>
+                        <th>Approx. executions for <code>n = 100</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Loop from 1 to <code>n</code>, check if <code>i * i == n</code></td>
+                        <td>Try every value of <code>i</code> up to <code>n</code></td>
+                        <td>100 iterations</td>
+                    </tr>
+                    <tr>
+                        <td>Loop from 1 to <code>n/2</code>, stop early if <code>i * i &gt; n</code></td>
+                        <td>Stop as soon as overshooting is detected</td>
+                        <td>10 iterations</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <p>
+                Both produce the correct answer — but the second approach does far less
+                work to get there. Informally, you can see this just by tracing a few
+                steps of each: the first loop keeps running long after the answer is
+                findable, while the second stops much earlier. Counting statements
+                executed is the tool that makes that gap visible.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    When comparing two approaches, don't just ask "does it give the right
+                    answer?" — also ask "how many statements does it execute to get
+                    there?" A correct but slow approach might not be acceptable when
+                    inputs get large.
+                </p>
+            </div>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Statement execution counts don't have to be exact to be useful. The
+                    word "informal" in this lesson's name means that estimating or
+                    tracing a few steps to identify a pattern is completely valid —
+                    you're not expected to derive a precise formula for every loop.
+                </p>
+            </div>
+ 
+        </section>
+ 
+        <section id="questions" class="lesson-section">
+ 
+            <h2>Frequently Starred Questions</h2>
+ 
+            <div class="faq-list">
+ 
+                <details class="faq-item">
+                    <summary>What exactly is a statement execution count?</summary>
+                    <p>
+                        It's simply the number of times a specific statement in a program
+                        is executed when the program runs. For a statement inside a loop,
+                        that count is greater than 1 — it depends on how many times the
+                        loop iterates.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>How precise do my execution counts need to be?</summary>
+                    <p>
+                        This lesson is explicitly informal — tracing through iterations
+                        and counting them directly is the expected method. You're not
+                        required to derive a closed-form formula, just to correctly
+                        determine the count through careful analysis of the loop.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Why might two loops with the same output have different execution counts?</summary>
+                    <p>
+                        Because they take different paths to get there — one might check
+                        more values, loop more times, or stop earlier depending on the
+                        structure of its condition and update. Same result, different
+                        amount of work done to produce it.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Does the execution count of the loop header count the same as the body?</summary>
+                    <p>
+                        Not exactly — the loop condition is checked one more time than
+                        the body executes, since the final check is what terminates the
+                        loop. For most AP CSA questions, the focus is on the body's
+                        execution count, not the condition's.
+                    </p>
+                </details>
+ 
+            </div>
+ 
+        </section>
+ 
+        <section id="misconceptions" class="lesson-section">
+ 
+            <h2>Common Starrfalls</h2>
+ 
+            <h3>"A loop that runs fewer iterations is always better"</h3>
+ 
+            <p>
+                Fewer iterations is generally better, but not always. What matters is
+                whether the reduced count still produces the correct result — a loop that
+                exits too early because its condition was written incorrectly isn't an
+                efficient solution, it's a buggy one.
+            </p>
+ 
+            <h3>"I only need to count the outermost loop's iterations"</h3>
+ 
+            <p>
+                For a statement inside a nested loop, the relevant execution count is for
+                that specific statement — meaning the outer loop's count has to be
+                multiplied by (or combined with) the inner loop's count to get the true
+                total.
+            </p>
+ 
+            <h3>"Informal means approximate — I can be off by a few"</h3>
+ 
+            <p>
+                Informal means calculated by tracing rather than by formal proof — the
+                count itself still needs to be exact. Tracing carefully enough to get
+                the right number is the whole point of the exercise.
+            </p>
+ 
+        </section>
+ 
+        <section id="ask-online" class="lesson-section">
+ 
+            <h2>Starr Online</h2>
+ 
+            <p>
+                Statement execution counts show up in MCQ questions asking you to predict
+                how many times a specific line runs, and in FRQ analysis questions asking
+                you to compare two implementations. Ask Starr to trace through a loop
+                with you and count together.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "How many times does the inner println execute in
+                    this nested loop — and walk me through counting it step by step."
+                </p>
+            </div>
+ 
+        </section>
+    `
+    ,
 
 };
