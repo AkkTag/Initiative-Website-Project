@@ -1411,4 +1411,484 @@ lessonContentData["Unit 2"] = {
 
     `
 
+    ,
+
+    "2.5 Compound Boolean Expressions": `
+
+        <section id="content" class="lesson-section">
+
+            <h2>Compound Boolean Expressions</h2>
+
+            <p>
+                Relational operators from 2.2 can only ask one question at a time —
+                is this value greater than that one, are these two values equal, and so
+                on. Many real conditions need to combine several of these questions
+                together: "it's raining <em>and</em> I don't have an umbrella," or "the
+                light is red <em>or</em> a pedestrian is crossing." <strong>Logical
+                operators</strong> are what let Boolean expressions be combined this way
+                into a single, larger Boolean expression.
+            </p>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Logical operator:</span> an operator used with Boolean expressions to form a compound Boolean expression. Java's logical operators are <code>!</code> (not), <code>&amp;&amp;</code> (and), and <code>||</code> (or).</p>
+            </div>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Compound Boolean expression:</span> an expression formed by combining one or more Boolean expressions using logical operators. Like any Boolean expression, a compound Boolean expression involving logical operators always evaluates to a Boolean value.</p>
+            </div>
+
+            <h3>The ! (not) Operator</h3>
+
+            <p>
+                The <code>!</code> operator is the simplest of the three — it takes a
+                single Boolean expression and flips it. The expression <code>!a</code>
+                evaluates to <code>true</code> if <code>a</code> is <code>false</code>,
+                and evaluates to <code>false</code> otherwise.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th><code>a</code></th>
+                        <th><code>!a</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>📘 Example</h3>
+                <p>
+                    <code>boolean isRaining = false; !isRaining</code> evaluates to
+                    <code>true</code>. If <code>hasTicket</code> is <code>true</code>, then
+                    <code>!hasTicket</code> evaluates to <code>false</code> — the exact
+                    opposite of whatever <code>hasTicket</code> itself holds.
+                </p>
+            </div>
+
+            <h3>The &amp;&amp; (and) Operator</h3>
+
+            <p>
+                The <code>&amp;&amp;</code> operator combines two Boolean expressions and
+                only evaluates to <code>true</code> when <em>both</em> are <code>true</code>.
+                The expression <code>a &amp;&amp; b</code> evaluates to <code>true</code>
+                if both <code>a</code> and <code>b</code> are <code>true</code>, and
+                evaluates to <code>false</code> otherwise.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th><code>a</code></th>
+                        <th><code>b</code></th>
+                        <th><code>a &amp;&amp; b</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>📘 Example</h3>
+                <p>
+                    <code>age &gt;= 16 &amp;&amp; hasLicense</code> only evaluates to
+                    <code>true</code> when the person is at least <code>16</code>
+                    <em>and</em> <code>hasLicense</code> is <code>true</code> — falling
+                    short on either requirement makes the whole expression
+                    <code>false</code>.
+                </p>
+            </div>
+
+            <h3>The || (or) Operator</h3>
+
+            <p>
+                The <code>||</code> operator also combines two Boolean expressions, but
+                it only requires <em>one</em> of them to be <code>true</code>. The
+                expression <code>a || b</code> evaluates to <code>true</code> if
+                <code>a</code> is <code>true</code>, <code>b</code> is <code>true</code>,
+                or both, and evaluates to <code>false</code> otherwise.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th><code>a</code></th>
+                        <th><code>b</code></th>
+                        <th><code>a || b</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>📘 Example</h3>
+                <p>
+                    <code>isWeekend || isHoliday</code> evaluates to <code>true</code> if
+                    it's a weekend, a holiday, or somehow both — the only way this
+                    expression is <code>false</code> is if neither condition holds.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Java's <code>||</code> is an <strong>inclusive or</strong> — it's still
+                    <code>true</code> even when both sides are <code>true</code>. Don't
+                    confuse it with the everyday "either/or" sense of the word, where
+                    picking both isn't allowed.
+                </p>
+            </div>
+
+            <h3>Order of Precedence</h3>
+
+            <p>
+                When a compound Boolean expression uses more than one logical operator,
+                Java needs a consistent rule for which operator gets applied first. The
+                order of precedence for evaluating logical operators is <code>!</code>
+                (not) first, then <code>&amp;&amp;</code> (and), then <code>||</code> (or)
+                — the exact same idea as precedence among arithmetic operators back in 1.3,
+                just with a different set of operators.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Precedence</th>
+                        <th>Operator</th>
+                        <th>Evaluated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1st (highest)</td>
+                        <td><code>!</code></td>
+                        <td>First</td>
+                    </tr>
+                    <tr>
+                        <td>2nd</td>
+                        <td><code>&amp;&amp;</code></td>
+                        <td>Second</td>
+                    </tr>
+                    <tr>
+                        <td>3rd (lowest)</td>
+                        <td><code>||</code></td>
+                        <td>Last</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Consider the expression <code>a || b &amp;&amp; !c</code>. Following
+                precedence, <code>!c</code> is evaluated first, then
+                <code>b &amp;&amp; !c</code> is evaluated, and only then is the result
+                combined with <code>a</code> using <code>||</code> — effectively, Java
+                reads it as <code>a || (b &amp;&amp; (!c))</code>, even though no
+                parentheses were written.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th><code>a</code></th>
+                        <th><code>b</code></th>
+                        <th><code>c</code></th>
+                        <th>Step 1: <code>!c</code></th>
+                        <th>Step 2: <code>b &amp;&amp; !c</code></th>
+                        <th>Step 3: <code>a || (b &amp;&amp; !c)</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>false</code></td>
+                        <td><code>true</code></td>
+                        <td><code>true</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                        <td><code>false</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Just like with arithmetic, parentheses can always be added to a
+                    compound Boolean expression to make the intended order explicit — and
+                    doing so is often good practice, since relying purely on precedence
+                    can make an expression harder to read at a glance.
+                </p>
+            </div>
+
+            <h3>Short-Circuit Evaluation</h3>
+
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Short-circuit evaluation:</span> occurs when the result of a logical operation using <code>&amp;&amp;</code> or <code>||</code> can be determined by evaluating only the first Boolean expression. In this case, the second Boolean expression is not evaluated.</p>
+            </div>
+
+            <p>
+                Java doesn't always bother evaluating both sides of <code>&amp;&amp;</code>
+                or <code>||</code> — sometimes the first expression alone is enough to
+                already know the final answer, and Java skips evaluating the second
+                expression entirely.
+            </p>
+
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>When Short-Circuiting Happens</th>
+                        <th>Why</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&amp;&amp;</code></td>
+                        <td>The first expression is <code>false</code></td>
+                        <td>Both sides must be <code>true</code> for the result to be <code>true</code> — if the first is already <code>false</code>, the whole expression is guaranteed to be <code>false</code> no matter what the second side evaluates to</td>
+                    </tr>
+                    <tr>
+                        <td><code>||</code></td>
+                        <td>The first expression is <code>true</code></td>
+                        <td>Only one side needs to be <code>true</code> for the result to be <code>true</code> — if the first is already <code>true</code>, the whole expression is guaranteed to be <code>true</code> no matter what the second side evaluates to</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int x = 0;
+<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">if</span> <span style="color:#9CA3AF;">(</span><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">x != 0</span> <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">&amp;&amp;</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">10 / x &gt; 1</span><span style="color:#9CA3AF;">) {</span>  <span style="color:#6B7280;">// x != 0 is false, so 10 / x is never evaluated</span>
+    System.out.println("Big ratio");
+<span style="color:#9CA3AF;">}</span></pre>
+            </div>
+
+            <p>
+                This example shows exactly why short-circuit evaluation matters beyond
+                just efficiency. If Java evaluated both sides of <code>&amp;&amp;</code>
+                every time, <code>10 / x</code> would throw an
+                <code>ArithmeticException</code> when <code>x</code> is <code>0</code>,
+                since dividing by zero isn't allowed. Because <code>x != 0</code> is
+                <code>false</code>, short-circuit evaluation guarantees
+                <code>10 / x</code> is never reached at all, and the program safely moves
+                on without crashing.
+            </p>
+
+            <div class="tip-box">
+                <h3>📘 Another Example</h3>
+                <p>
+                    <code>String name = null; if (name != null &amp;&amp;
+                    name.length() &gt; 0) { ... }</code> — if <code>name</code> is
+                    <code>null</code>, <code>name != null</code> is <code>false</code>,
+                    and short-circuit evaluation prevents <code>name.length()</code> from
+                    ever running. Without short-circuiting, calling
+                    <code>.length()</code> on a <code>null</code> reference would cause a
+                    run-time error.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A useful pattern to recognize: placing a "safety check" first in an
+                    <code>&amp;&amp;</code> expression — like checking a reference isn't
+                    <code>null</code>, or a divisor isn't <code>0</code> — relies entirely
+                    on short-circuit evaluation to protect the second expression from
+                    ever running under unsafe conditions.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Short-circuit evaluation only applies to <code>&amp;&amp;</code> and
+                    <code>||</code> — the order the two expressions are written in
+                    matters. Swapping <code>x != 0 &amp;&amp; 10 / x &gt; 1</code> to
+                    <code>10 / x &gt; 1 &amp;&amp; x != 0</code> would evaluate
+                    <code>10 / x</code> first, defeating the entire purpose of the safety
+                    check.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="questions" class="lesson-section">
+
+            <h2>Frequently Starred Questions</h2>
+
+            <p>
+                Here are some of the questions Starr hears most often about logical
+                operators, precedence, and short-circuit evaluation.
+            </p>
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>What's the difference between && and ||?</summary>
+                    <p>
+                        <code>&amp;&amp;</code> requires both Boolean expressions to be
+                        <code>true</code> for the compound expression to be
+                        <code>true</code>. <code>||</code> only requires at least one of
+                        them to be <code>true</code>.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does || require exactly one side to be true?</summary>
+                    <p>
+                        No — it requires <em>at least</em> one side to be <code>true</code>.
+                        If both sides happen to be <code>true</code>, <code>a || b</code>
+                        still evaluates to <code>true</code>, since Java's <code>||</code>
+                        is an inclusive or.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Which logical operator is evaluated first if I use more than one?</summary>
+                    <p>
+                        <code>!</code> is evaluated first, then <code>&amp;&amp;</code>,
+                        then <code>||</code>. Parentheses can always be added to override
+                        this default order and make the intended grouping explicit.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Why does short-circuit evaluation matter beyond saving time?</summary>
+                    <p>
+                        It can prevent a run-time error. Placing a safety check — like
+                        <code>x != 0</code> — before a risky operation in an
+                        <code>&amp;&amp;</code> expression guarantees that risky operation
+                        never runs if the safety check already failed.
+                    </p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Does short-circuit evaluation apply to !?</summary>
+                    <p>
+                        No — <code>!</code> only ever works on a single Boolean expression,
+                        so there's no second expression to potentially skip. Short-circuit
+                        evaluation specifically applies to <code>&amp;&amp;</code> and
+                        <code>||</code>, which each combine two expressions.
+                    </p>
+                </details>
+
+            </div>
+
+        </section>
+
+        <section id="misconceptions" class="lesson-section">
+
+            <h2>Common Starrfalls</h2>
+
+            <h3>"|| means exactly one side has to be true, not both"</h3>
+
+            <p>
+                Java's <code>||</code> is an inclusive or — it's <code>true</code> whenever
+                at least one side is <code>true</code>, including the case where both
+                sides are <code>true</code>. It never requires exactly one side and no
+                more.
+            </p>
+
+            <h3>"Both sides of && and || always get evaluated"</h3>
+            
+            <p>
+                Not necessarily. Short-circuit evaluation occurs when the result can
+                already be determined from the first Boolean expression alone — in that
+                case, the second Boolean expression is never evaluated at all.
+            </p>
+
+            <h3>"The order of expressions in && or || doesn't matter"</h3>
+
+            <p>
+                It can matter a great deal, especially when the second expression depends
+                on the first one being true — like checking a reference isn't
+                <code>null</code> before calling a method on it. Writing the safety check
+                second instead of first defeats the protection short-circuit evaluation
+                would otherwise provide.
+            </p>
+
+        </section>
+
+        <section id="ask-online" class="lesson-section">
+
+            <h2>Starr Online</h2>
+
+            <p>
+                Compound Boolean expressions and short-circuit evaluation are common
+                sources of tricky FRQ tracing questions. Ask Starr to evaluate a compound
+                expression with you step by step, respecting precedence, or to explain why
+                a specific short-circuit pattern prevents a run-time error.
+            </p>
+
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Walk me through why list != null &amp;&amp;
+                    list.size() &gt; 0 is written in that order and not the reverse."
+                </p>
+            </div>
+
+        </section>
+
+    `
+
 };
