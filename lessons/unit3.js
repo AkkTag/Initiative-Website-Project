@@ -478,5 +478,887 @@ printStudent(<span style="background:rgba(255,224,122,.22); color:#FFE7A0; paddi
         </section>
 
     `
+    ,
+
+    "3.2 Impact of Program Design": `
+
+    <section id="content" class="lesson-section">
+
+        <h2>Impact of Program Design</h2>
+
+        <p>
+            Writing a program is never just a technical exercise — every design decision
+            a programmer makes ripples outward into how reliably the program runs, who it
+            affects, and whose work it depends on. This lesson looks at three of those
+            ripples: <strong>system reliability</strong>, the broader
+            <strong>social, economic, and cultural impact</strong> of a program, and the
+            <strong>legal and intellectual property issues</strong> that come with reusing
+            other people's code.
+        </p>
+
+        <h3>System Reliability</h3>
+
+        <div class="vocab-box">
+            <span class="vocab-label">Vocabulary</span>
+            <p><span class="vocab-term">System reliability:</span> the program being able to perform its tasks as expected under stated conditions without failure.</p>
+        </div>
+
+        <p>
+            A reliable program doesn't just work once, under ideal circumstances — it
+            keeps working correctly across the full range of conditions it's actually
+            likely to encounter. Programmers should make an effort to maximize system
+            reliability by testing the program with a variety of conditions, rather than
+            only the handful of cases that happened to come to mind first.
+        </p>
+
+        <p>
+            In practice, this means deliberately testing beyond the "happy path": typical
+            expected inputs, unusual or extreme inputs, empty or missing data, and edge
+            cases at the very boundaries of what the program is designed to handle. A
+            program that only ever gets tested with clean, well-behaved input can seem
+            perfectly reliable right up until it meets real-world data.
+        </p>
+
+        <div class="tip-box">
+            <h3>⭐ Starr Tip</h3>
+            <p>
+                When testing your own code, deliberately try to break it. Feed it the
+                largest and smallest values you can think of, empty input, and anything
+                else a real user might type that you didn't originally plan for.
+            </p>
+        </div>
+
+        <h3>Social, Economic, and Cultural Impact</h3>
+
+        <p>
+            The creation of programs has impacts on society, the economy, and culture.
+            These impacts can be both <strong>beneficial and harmful</strong>, often at
+            the same time, depending on who is using the program and how. A program that
+            makes one group of people's lives easier can simultaneously create new
+            problems for another group — sometimes problems the original programmers
+            never anticipated.
+        </p>
+
+        <p>
+            Programs meant to fill a need or solve a problem can have unintended harmful
+            effects beyond their intended use. A scheduling tool built to save time, for
+            example, might unintentionally make it harder for people without reliable
+            internet access to participate at all. Considering these downstream effects
+            during design — not just after a program is released — is part of
+            responsible programming.
+        </p>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                "The program works as intended" and "the program has no harmful effects"
+                are not the same claim. A program can function exactly as designed and
+                still create real, unintended harm for some group of people.
+            </p>
+        </div>
+
+        <h3>Legal Issues and Intellectual Property</h3>
+
+        <p>
+            Legal issues and intellectual property concerns arise when creating programs.
+            Programmers often reuse code written by others, and a huge amount of that
+            code is published as <strong>open source</strong> and free to use — but not
+            all of it is, and treating every piece of code found online as free to reuse
+            is a legal risk, not just a technical shortcut.
+        </p>
+
+        <p>
+            Incorporation of code that is <em>not</em> published as open source requires
+            the programmer to obtain permission and often purchase the code before
+            integrating it into their program. Skipping that step doesn't just risk legal
+            consequences for the programmer — it can also expose an entire project or
+            company to liability.
+        </p>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Code source</th>
+                    <th>What's required before reuse</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Published as open source</td>
+                    <td>Generally free to use, though often still subject to a license's specific terms</td>
+                </tr>
+                <tr>
+                    <td>Not published as open source</td>
+                    <td>Obtaining permission from the owner, and often purchasing a license, before integrating it</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>📘 Starr Idea</h3>
+            <p>
+                "Publicly visible" and "free to reuse" are not the same thing. Code that
+                anyone can see — on a website, in an app, or in a public repository — is
+                not automatically open source or free to copy into another program.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="questions" class="lesson-section">
+
+        <h2>Frequently Starred Questions</h2>
+
+        <p>
+            Here are some of the questions Starr hears most often about program design's
+            wider impact.
+        </p>
+
+        <div class="faq-list">
+
+            <details class="faq-item">
+                <summary>Does more testing automatically make a program reliable?</summary>
+                <p>
+                    Not by itself — reliability comes from testing a genuinely varied
+                    range of conditions, including edge cases and unexpected input, not
+                    just from running a large number of tests that all resemble each
+                    other.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can a program be harmful even if it works perfectly?</summary>
+                <p>
+                    Yes. A program can perform exactly as designed and still have
+                    unintended harmful effects on some group of people, especially if
+                    those effects weren't considered during the design process.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is all code found online safe to reuse?</summary>
+                <p>
+                    No. Only code that's actually published as open source is generally
+                    free to use. Code that isn't published as open source requires
+                    obtaining permission from its owner, and often purchasing it, before
+                    it can be legally incorporated into another program.
+                </p>
+            </details>
+
+        </div>
+
+    </section>
+
+    <section id="misconceptions" class="lesson-section">
+
+        <h2>Common Starrfalls</h2>
+
+        <h3>"If code is publicly visible online, it's free to use"</h3>
+
+        <p>
+            Being able to see or copy code doesn't make it legal to reuse. Only code that
+            is actually published as open source is generally free to use — everything
+            else still belongs to whoever wrote it.
+        </p>
+
+        <h3>"Testing normal, expected input is enough to prove reliability"</h3>
+
+        <p>
+            Real reliability comes from testing a program under a variety of conditions,
+            including unusual and extreme input — not just the cases a programmer expects
+            a user to try.
+        </p>
+
+        <h3>"A program's impact is either entirely good or entirely bad"</h3>
+
+        <p>
+            The impact of a program on society, the economy, and culture is often mixed —
+            the same feature that benefits one group of people can create unintended
+            harm for another.
+        </p>
+
+    </section>
+
+    <section id="ask-online" class="lesson-section">
+
+        <h2>Starr Online</h2>
+
+        <p>
+            Thinking through reliability, unintended impact, and licensing takes practice.
+            Ask Starr to help brainstorm edge cases for a program you're designing, or to
+            explain the difference between common open-source license types.
+        </p>
+
+        <div class="tip-box">
+            <h3>🤖 Ask Starr</h3>
+            <p>
+                Try asking Starr: "What edge cases should I test for a program that takes
+                a user's age as input?"
+            </p>
+        </div>
+
+    </section>
+    `
+    ,
+
+    "3.3 Anatomy of a Class": `
+
+    <section id="content" class="lesson-section">
+
+        <h2>Anatomy of a Class</h2>
+
+        <p>
+            Every object used so far in this course — <code>String</code>,
+            <code>Scanner</code>, <code>ArrayList</code> — was built from a
+            <strong>class</strong>, a blueprint that defines what data an object holds and
+            what it can do. This lesson looks inside that blueprint: how a class is
+            declared, what its pieces are called, and how the keywords <code>public</code>
+            and <code>private</code> control who is allowed to reach in and use them.
+        </p>
+
+        <h3>Data Encapsulation</h3>
+
+        <div class="vocab-box">
+            <span class="vocab-label">Vocabulary</span>
+            <p><span class="vocab-term">Data encapsulation:</span> a technique in which the implementation details of a class are kept hidden from external classes.</p>
+        </div>
+
+        <p>
+            Encapsulation is the idea that a class should protect its own data, exposing
+            only what other classes actually need and hiding the rest. A well-encapsulated
+            class can change how it stores or calculates something internally without
+            breaking any other code that uses it — as long as the public-facing parts stay
+            the same.
+        </p>
+
+        <p>
+            The keywords <code>public</code> and <code>private</code> affect the access of
+            classes, data, constructors, and methods. The keyword <code>private</code>
+            restricts access to the declaring class, while the keyword <code>public</code>
+            allows access from classes outside the declaring class.
+        </p>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Keyword</th>
+                    <th>Who can access it</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>public</code></td>
+                    <td>The declaring class, and any other class outside of it</td>
+                </tr>
+                <tr>
+                    <td><code>private</code></td>
+                    <td>Only the declaring class itself</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>⭐ Starr Tip</h3>
+            <p>
+                Think of <code>private</code> as a locked door with the key kept inside
+                the class, and <code>public</code> as an open doorway anyone can walk
+                through. Encapsulation is largely a matter of deciding which doors in a
+                class should be locked.
+            </p>
+        </div>
+
+        <h3>The Class Declaration</h3>
+
+        <p>
+            In this course, classes are always designated <code>public</code> and are
+            declared with the keyword <code>class</code>. Similarly, in this course,
+            constructors are always designated <code>public</code>, since a class that
+            can't be instantiated from outside itself would be of little use to anything
+            beyond its own file.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Student {
+
+    <span style="color:#6B7280;">// instance variables</span>
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> String name;
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> int grade;
+
+    <span style="color:#6B7280;">// constructor</span>
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> Student(String name, int grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+
+    <span style="color:#6B7280;">// methods</span>
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> String getName() {
+        <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> name;
+    }
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> boolean isPassing() {
+        <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> grade &gt;= 60;
+    }
+}</pre>
+        </div>
+
+        <p>
+            This one class declaration already contains every piece this lesson covers:
+            a <code>public class</code> header, <code>private</code> instance variables,
+            a <code>public</code> constructor, and a mix of <code>public</code> and
+            <code>private</code> methods.
+        </p>
+
+        <h3>Instance Variables</h3>
+
+        <div class="vocab-box">
+            <span class="vocab-label">Vocabulary</span>
+            <p><span class="vocab-term">Instance variable:</span> a variable that belongs to the object, where each object has its own copy of the variable.</p>
+        </div>
+
+        <p>
+            Every <code>Student</code> object created from the class above gets its own
+            independent <code>name</code> and <code>grade</code> — changing one
+            <code>Student</code>'s <code>grade</code> has no effect whatsoever on any
+            other <code>Student</code> object, because each object stores its own separate
+            copy of every instance variable.
+        </p>
+
+        <p>
+            Access to attributes should be kept internal to the class in order to
+            accomplish encapsulation. Therefore, it is good programming practice to
+            designate the instance variables for these attributes as <code>private</code>
+            unless the class specification states otherwise. This is exactly why
+            <code>name</code> and <code>grade</code> above are marked
+            <code>private</code> — nothing outside the <code>Student</code> class should
+            be able to reach in and change them directly.
+        </p>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                Marking every instance variable <code>public</code> defeats the purpose of
+                encapsulation entirely, since any external class could then change an
+                object's data directly, without going through any of the class's own
+                methods.
+            </p>
+        </div>
+
+        <h3>Access to Behaviors</h3>
+
+        <p>
+            Access to behaviors can be internal or external to the class. Methods
+            designated as <code>public</code> can be accessed internally or externally to
+            a class, whereas methods designated as <code>private</code> can only be
+            accessed internally to the class.
+        </p>
+
+        <p>
+            In the <code>Student</code> example, <code>getName</code> is
+            <code>public</code> because other classes need a safe way to read a student's
+            name. <code>isPassing</code>, on the other hand, is marked
+            <code>private</code> — it's a helper method that only the
+            <code>Student</code> class itself needs to use internally, so there's no
+            reason to expose it beyond the class.
+        </p>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Class member</th>
+                    <th>Typical access</th>
+                    <th>Why</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>The class itself</td>
+                    <td><code>public</code></td>
+                    <td>So other classes can create and use objects of this type</td>
+                </tr>
+                <tr>
+                    <td>Constructors</td>
+                    <td><code>public</code></td>
+                    <td>So other classes can instantiate the class</td>
+                </tr>
+                <tr>
+                    <td>Instance variables</td>
+                    <td><code>private</code> (unless stated otherwise)</td>
+                    <td>To keep data protected and accomplish encapsulation</td>
+                </tr>
+                <tr>
+                    <td>Methods</td>
+                    <td><code>public</code> or <code>private</code></td>
+                    <td>Depends on whether outside classes need to call the method directly</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>📘 Starr Idea</h3>
+            <p>
+                A well-designed class exposes a small, deliberate set of
+                <code>public</code> methods as its interface to the outside world, while
+                keeping its instance variables — and any internal helper methods —
+                <code>private</code>.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="questions" class="lesson-section">
+
+        <h2>Frequently Starred Questions</h2>
+
+        <p>
+            Here are some of the questions Starr hears most often about class anatomy and
+            access control.
+        </p>
+
+        <div class="faq-list">
+
+            <details class="faq-item">
+                <summary>Why are constructors always public in this course?</summary>
+                <p>
+                    A constructor's entire purpose is to let other classes create new
+                    objects of this type. Making it <code>private</code> would prevent any
+                    outside class from ever instantiating the class at all.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can two objects of the same class share an instance variable?</summary>
+                <p>
+                    No. Instance variables belong to the object, and every object has its
+                    own separate copy — changing one object's instance variable never
+                    affects any other object's copy of that same variable.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is it ever okay to make an instance variable public?</summary>
+                <p>
+                    It's discouraged. Good practice is to designate instance variables as
+                    <code>private</code> unless a class specification explicitly states
+                    otherwise, since exposing them directly breaks encapsulation.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>How do I decide if a method should be public or private?</summary>
+                <p>
+                    Ask whether classes outside this one genuinely need to call the method
+                    directly. If it's an internal helper that only supports the class's own
+                    other methods, it should be <code>private</code>; if it's part of what
+                    the class offers to the outside world, it should be <code>public</code>.
+                </p>
+            </details>
+
+        </div>
+
+    </section>
+
+    <section id="misconceptions" class="lesson-section">
+
+        <h2>Common Starrfalls</h2>
+
+        <h3>"private means no one can ever access that data"</h3>
+
+        <p>
+            <code>private</code> only restricts access to <em>outside</em> the declaring
+            class — the class itself can always access its own <code>private</code>
+            members freely. Encapsulation is about controlling access from other classes,
+            not preventing access entirely.
+        </p>
+
+        <h3>"All methods in a class should be public"</h3>
+
+        <p>
+            Methods designated as <code>private</code> can only be accessed internally to
+            the class, which is exactly what's wanted for internal helper methods that
+            outside classes have no legitimate reason to call directly.
+        </p>
+
+        <h3>"Instance variables are shared across every object of a class"</h3>
+
+        <p>
+            The opposite is true — each object has its own copy of every instance
+            variable. Changing an instance variable on one object never changes that same
+            variable on any other object of the class.
+        </p>
+
+    </section>
+
+    <section id="ask-online" class="lesson-section">
+
+        <h2>Starr Online</h2>
+
+        <p>
+            Deciding what should be <code>public</code> versus <code>private</code> gets
+            easier with practice. Ask Starr to review a class you've written and suggest
+            which members should be marked <code>private</code> to better encapsulate its
+            data.
+        </p>
+
+        <div class="tip-box">
+            <h3>🤖 Ask Starr</h3>
+            <p>
+                Try asking Starr: "Look at this class and tell me which instance
+                variables or methods should probably be private."
+            </p>
+        </div>
+
+    </section>
+    `
+    ,
+
+    "3.4 Constructors": `
+
+    <section id="content" class="lesson-section">
+
+        <h2>Constructors</h2>
+
+        <p>
+            Lesson 3.3 established that a class's instance variables should be kept
+            <code>private</code>, and that a class needs a <code>public</code> constructor
+            so other classes can actually create objects from it. This lesson looks at
+            constructors in much more depth — what a constructor is really responsible
+            for, how it relates to an object's <em>state</em>, and what Java does
+            automatically when a class doesn't define one at all.
+        </p>
+
+        <h3>Object State and the Has-A Relationship</h3>
+
+        <div class="vocab-box">
+            <span class="vocab-label">Vocabulary</span>
+            <p><span class="vocab-term">State:</span> an object's attributes and their values at a given time, defined by the instance variables belonging to the object.</p>
+        </div>
+
+        <p>
+            Every object has a state — a snapshot of exactly what its instance variables
+            hold at a particular moment. A <code>Student</code> object's state might be
+            its <code>name</code> currently set to <code>"Amara"</code> and its
+            <code>grade</code> currently set to <code>92</code>. As a program runs and
+            methods are called, an object's state can change, but its identity as that
+            same object doesn't.
+        </p>
+
+        <p>
+            The relationship between an object and its instance variables is called a
+            <strong>has-a relationship</strong>. A <code>Car</code> object <em>has a</em>
+            <code>Engine</code> object; a <code>Student</code> object <em>has a</em>
+            <code>name</code>. This is a different kind of relationship than the
+            <strong>is-a relationship</strong> you may have encountered when comparing
+            general and more specific classes — a has-a relationship describes
+            <em>composition</em>, while an is-a relationship describes
+            <em>classification</em>.
+        </p>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Relationship</th>
+                    <th>Describes</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Has-a</td>
+                    <td>An object contains another object as one of its instance variables</td>
+                    <td>A <code>Car</code> has a <code>Engine</code>; a <code>Student</code> has a <code>name</code></td>
+                </tr>
+                <tr>
+                    <td>Is-a</td>
+                    <td>An object is a more specific kind of another type</td>
+                    <td>A <code>Car</code> is a <code>Vehicle</code>; a <code>Student</code> is a <code>Person</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>⭐ Starr Tip</h3>
+            <p>
+                A quick way to tell the two apart: if the relationship reads naturally as
+                "X has a Y," it's composition. If it reads naturally as "X is a Y," it's
+                classification. A <code>Car</code> has an <code>Engine</code>, but a
+                <code>Car</code> is not an <code>Engine</code>.
+            </p>
+        </div>
+
+        <h3>What a Constructor Actually Does</h3>
+
+        <p>
+            A constructor is used to set the initial state of an object, which should
+            include initial values for all instance variables. When a constructor is
+            called, memory is allocated for the object and the associated object
+            reference is returned. Constructor parameters, if specified, provide data to
+            initialize instance variables.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Student {
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> String name;
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> int grade;
+
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> Student(String name, int grade) {
+        this.name = name;
+        this.grade = grade;
+    }
+}</pre>
+        </div>
+
+        <p>
+            When code elsewhere calls <code>new Student("Amara", 92)</code>, three things
+            happen in order: Java allocates memory for a brand-new <code>Student</code>
+            object, the constructor body runs using the arguments
+            <code>"Amara"</code> and <code>92</code> to set <code>name</code> and
+            <code>grade</code>, and finally a reference to that newly created object is
+            returned — which is what gets stored in whatever variable receives the result
+            of <code>new</code>.
+        </p>
+
+        <div class="tip-box">
+            <h3>📘 Starr Idea</h3>
+            <p>
+                A constructor never explicitly uses the <code>return</code> keyword, yet
+                it still "returns" something — a reference to the object it just built.
+                This happens automatically as part of what <code>new</code> does.
+            </p>
+        </div>
+
+        <h3>Constructors and Mutable Parameters</h3>
+
+        <p>
+            When a mutable object is a constructor parameter, the instance variable
+            should be initialized with a <strong>copy</strong> of the referenced object.
+            In this way, the instance variable does not hold a reference to the original
+            object, and methods are prevented from modifying the state of the original
+            object.
+        </p>
+
+        <p>
+            This matters because object variables in Java store references, not the
+            objects themselves. If a constructor simply assigned a mutable parameter
+            directly to an instance variable, both the original object outside the class
+            and the new object's instance variable would point to the exact same
+            underlying object — meaning a method that changes the instance variable's
+            data would also silently change the original object that was passed in.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> Roster(ArrayList&lt;String&gt; names) {
+    <span style="color:#6B7280;">// copy the list, rather than storing the same reference</span>
+    this.names = <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">new</span> ArrayList&lt;String&gt;(names);
+}</pre>
+        </div>
+
+        <p>
+            With this defensive copy in place, changes made later to the original
+            <code>names</code> list outside the class have no effect on the
+            <code>Roster</code> object's own copy, and vice versa — each object's state
+            stays fully independent, exactly as encapsulation intends.
+        </p>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                This copying rule only applies to <strong>mutable</strong> objects, like
+                <code>ArrayList</code>. Immutable types, such as <code>String</code> and
+                the wrapper classes, don't need this treatment — their values can never be
+                changed after creation, so there's no risk of an outside change leaking
+                into the object's state.
+            </p>
+        </div>
+
+        <h3>The Default Constructor</h3>
+
+        <p>
+            When no constructor is written, Java provides a no-parameter constructor, and
+            the instance variables are set to default values according to the data type
+            of the attribute. This constructor is called the <strong>default
+            constructor</strong>.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Score {
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> int points;
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> boolean passed;
+
+    <span style="color:#6B7280;">// no constructor written here at all</span>
+}</pre>
+        </div>
+
+        <p>
+            Because <code>Score</code> declares no constructor of its own, calling
+            <code>new Score()</code> is still perfectly valid — Java supplies the
+            no-parameter default constructor automatically, and <code>points</code> ends
+            up at <code>0</code> while <code>passed</code> ends up at <code>false</code>,
+            following the default values for their respective types.
+        </p>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                The moment a class defines <em>any</em> constructor of its own, Java stops
+                providing the automatic default constructor. If a no-parameter constructor
+                is still needed alongside a parameterized one, it has to be written
+                explicitly.
+            </p>
+        </div>
+
+        <h3>Default Values by Data Type</h3>
+
+        <p>
+            The specific default value an instance variable receives from the default
+            constructor depends entirely on its declared type.
+        </p>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Data type</th>
+                    <th>Default value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>int</code></td>
+                    <td><code>0</code></td>
+                </tr>
+                <tr>
+                    <td><code>double</code></td>
+                    <td><code>0.0</code></td>
+                </tr>
+                <tr>
+                    <td><code>boolean</code></td>
+                    <td><code>false</code></td>
+                </tr>
+                <tr>
+                    <td>Any reference type (e.g. <code>String</code>, <code>ArrayList</code>)</td>
+                    <td><code>null</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>⭐ Starr Tip</h3>
+            <p>
+                Every primitive type defaults to its own "zero-like" value — <code>0</code>
+                for numbers, <code>false</code> for booleans — while every reference type
+                defaults to <code>null</code>, meaning it doesn't point to any object at
+                all yet.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="questions" class="lesson-section">
+
+        <h2>Frequently Starred Questions</h2>
+
+        <p>
+            Here are some of the questions Starr hears most often about constructors and
+            object state.
+        </p>
+
+        <div class="faq-list">
+
+            <details class="faq-item">
+                <summary>Does a constructor need a return type?</summary>
+                <p>
+                    No. Constructors never declare a return type, not even
+                    <code>void</code> — Java automatically handles returning the reference
+                    to the newly created object once the constructor body finishes.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>What happens if I write a parameterized constructor but still call new ClassName()?</summary>
+                <p>
+                    It won't compile. Once a class defines its own constructor, Java no
+                    longer supplies the automatic no-parameter default constructor, so a
+                    matching no-parameter constructor must be written explicitly if one is
+                    still needed.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Why copy a mutable parameter instead of just storing it directly?</summary>
+                <p>
+                    Storing the reference directly means the object's instance variable
+                    and the original object outside the class point to the exact same
+                    data — changing one would silently change the other. Copying the
+                    object keeps the two independent.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is has-a the same thing as is-a?</summary>
+                <p>
+                    No. Has-a describes composition — an object containing another object
+                    as one of its instance variables. Is-a describes classification — one
+                    type being a more specific version of another type.
+                </p>
+            </details>
+
+        </div>
+
+    </section>
+
+    <section id="misconceptions" class="lesson-section">
+
+        <h2>Common Starrfalls</h2>
+
+        <h3>"Every class automatically gets a default constructor, no matter what"</h3>
+
+        <p>
+            A default constructor is only supplied when a class writes <em>no</em>
+            constructor at all. As soon as any constructor is written, Java stops
+            generating that automatic no-parameter version.
+        </p>
+
+        <h3>"Assigning a mutable parameter to an instance variable is always fine"</h3>
+
+        <p>
+            For mutable objects, this creates two variables pointing to the same
+            underlying data, which breaks encapsulation. The instance variable should be
+            initialized with a copy of the referenced object instead, so the two stay
+            independent.
+        </p>
+
+        <h3>"Uninitialized reference-type variables default to 0"</h3>
+
+        <p>
+            Only primitive numeric types default to <code>0</code>. Reference types like
+            <code>String</code> or <code>ArrayList</code> default to <code>null</code>,
+            representing the absence of any object at all rather than a numeric value.
+        </p>
+
+    </section>
+
+    <section id="ask-online" class="lesson-section">
+
+        <h2>Starr Online</h2>
+
+        <p>
+            Constructors have a lot of small, easy-to-miss rules. Ask Starr to check
+            whether a constructor you've written correctly initializes every instance
+            variable, or to explain what a class's default constructor would set each
+            field to.
+        </p>
+
+        <div class="tip-box">
+            <h3>🤖 Ask Starr</h3>
+            <p>
+                Try asking Starr: "What would the default values be for this class's
+                instance variables if I removed its constructor?"
+            </p>
+        </div>
+
+    </section>
+    `
+    ,
 
 };
