@@ -1361,4 +1361,1866 @@ printStudent(<span style="background:rgba(255,224,122,.22); color:#FFE7A0; paddi
     `
     ,
 
+    "3.5 Methods: How to Write Them": `
+ 
+        <section id="content" class="lesson-section">
+ 
+            <h2>Methods: How to Write Them</h2>
+ 
+            <p>
+                Lesson 1.9 introduced the anatomy of a method header — return type,
+                method name, parameter list — and lessons 1.10 through 1.14 focused
+                on calling methods that already existed. This lesson goes further:
+                it covers how to actually write a method from scratch inside a class,
+                what it means to return a value, how the <code>return</code> keyword
+                changes flow of control, and how two specific kinds of methods —
+                accessors and mutators — each serve a distinct role in class design.
+            </p>
+ 
+            <h3>void Methods</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">void method:</span> a method that does not return a value. Its header contains the keyword <code>void</code> before the method name in place of a return type.</p>
+            </div>
+ 
+            <p>
+                A void method performs an action — printing output, updating a variable,
+                triggering some behavior — but doesn't hand anything back to the code
+                that called it. When the method finishes, control returns to the caller,
+                but no value comes with it. That's why void methods are never called
+                as part of an expression: there's no value to use in one.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">void</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">printWelcome</span>() {
+    System.out.println("Welcome to the course!");
+}
+ 
+<span style="color:#6B7280;">// Called on its own — no value is produced</span>
+printWelcome();</pre>
+            </div>
+ 
+            <h3>Non-void Methods</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Non-void method:</span> a method that returns a single value. Its header includes the return type in place of the keyword <code>void</code>. In non-void methods, a return expression compatible with the return type is evaluated, and the value is returned. This is referred to as <em>return by value</em>.</p>
+            </div>
+ 
+            <p>
+                A non-void method promises to hand a value back to whatever called it —
+                and that promise is encoded directly in the header. The return type
+                written before the method name tells both the compiler and the reader
+                exactly what type of value will come back. The method body must always
+                produce and return a value of that type.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">double</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">calculateTax</span>(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">double price</span>) {
+    return price * 0.13;  <span style="color:#6B7280;">// evaluates to a double — compatible with return type</span>
+}
+ 
+<span style="color:#6B7280;">// Called as part of an expression — the returned value is used directly</span>
+double total = <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">calculateTax</span>(49.99) + 49.99;</pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>void Method</th>
+                        <th>Non-void Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Return type in header</td>
+                        <td><code>void</code></td>
+                        <td>An actual type: <code>int</code>, <code>double</code>, <code>boolean</code>, <code>String</code>, etc.</td>
+                    </tr>
+                    <tr>
+                        <td>Produces a value?</td>
+                        <td>No</td>
+                        <td>Yes — exactly one value of the declared return type</td>
+                    </tr>
+                    <tr>
+                        <td>Can be used in an expression?</td>
+                        <td>No</td>
+                        <td>Yes — the returned value can be stored, printed, or used directly</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <h3>The return Keyword and Flow of Control</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">return keyword:</span> used to return the flow of control to the point where the method or constructor was called. Any code that is sequentially after a <code>return</code> statement will never be executed. Executing a <code>return</code> statement inside a selection or iteration statement will halt that statement and exit the method or constructor immediately.</p>
+            </div>
+ 
+            <p>
+                The <code>return</code> keyword does two things at once: it sends a value
+                back to the caller (in a non-void method), and it immediately ends the
+                method's execution. Flow of control jumps back to wherever the method
+                was called from, and no further code in the method body runs — not even
+                code on the very next line.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">int max(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">int a</span>, <span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">int b</span>) {
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">if</span> (a &gt; b) {
+        <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> a;  <span style="color:#6B7280;">// exits immediately if a > b — the line below never runs</span>
+    }
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> b;  <span style="color:#6B7280;">// only reached when a > b is false</span>
+}</pre>
+            </div>
+ 
+            <p>
+                When <code>a > b</code> is <code>true</code>, the first
+                <code>return a</code> executes — the method exits immediately, and the
+                second <code>return b</code> is never reached. When
+                <code>a > b</code> is <code>false</code>, the
+                <code>if</code> body is skipped and <code>return b</code> is what runs.
+                Either way, exactly one <code>return</code> executes, and the method
+                ends at that point.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Any statement written after a <code>return</code> in the same block
+                    is <strong>unreachable code</strong> — the compiler will flag it as
+                    an error. And a <code>return</code> inside a loop or
+                    <code>if</code> statement halts the entire method immediately, not
+                    just the current iteration or branch.
+                </p>
+            </div>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#6B7280;">// return inside a loop exits the entire method, not just the loop</span>
+boolean containsNegative(int[] nums) {
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">for</span> (int n : nums) {
+        <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-px:700;">if</span> (n &lt; 0) {
+            <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> true;  <span style="color:#6B7280;">// exits the method the instant a negative is found</span>
+        }
+    }
+    <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> false;  <span style="color:#6B7280;">// only reached if no negative was found</span>
+}</pre>
+            </div>
+ 
+            <h3>Accessor Methods</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Accessor method:</span> allows objects of other classes to obtain a copy of the value of instance variables or class variables. An accessor method is a non-void method — it returns the value being accessed. Accessor methods are also commonly called <em>getters</em>.</p>
+            </div>
+ 
+            <p>
+                Instance variables in a well-designed class are usually kept private —
+                other classes can't read them directly. An accessor method is the
+                controlled way to let outside code read that value: the method returns
+                a copy of the variable, while the original stays protected inside the
+                class. Because it returns a value, an accessor is always a non-void
+                method.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">public class Student {
+    private String name;  <span style="color:#6B7280;">// private — not directly accessible outside the class</span>
+    private int grade;
+ 
+    <span style="color:#6B7280;">// Accessor for name</span>
+    public <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">String</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">getName</span>() {
+        return name;
+    }
+ 
+    <span style="color:#6B7280;">// Accessor for grade</span>
+    public <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">int</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">getGrade</span>() {
+        return grade;
+    }
+}</pre>
+            </div>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Accessor methods almost always follow the naming convention
+                    <code>get</code> + the variable name in title case:
+                    <code>getName()</code>, <code>getGrade()</code>,
+                    <code>getBalance()</code>. The return type should always match the
+                    type of the variable being accessed.
+                </p>
+            </div>
+ 
+            <h3>Mutator Methods</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Mutator method:</span> a method that changes the values of instance variables or class variables. A mutator method is often a void method, since its purpose is to update state rather than compute and return a value. Mutator methods are also commonly called <em>setters</em>.</p>
+            </div>
+ 
+            <p>
+                If an accessor reads a private variable, a mutator is what updates it.
+                Rather than allowing outside code to set a variable directly — which
+                would bypass any validation logic the class needs to enforce — a mutator
+                method takes the new value as a parameter and applies it in a controlled
+                way. Because the goal is to update state, not produce a value for the
+                caller, mutators are typically void.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">public class Student {
+    private String name;
+    private int grade;
+ 
+    <span style="color:#6B7280;">// Mutator for grade — validates before updating</span>
+    public <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">void</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">setGrade</span>(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">int newGrade</span>) {
+        if (newGrade &gt;= 0 &amp;&amp; newGrade &lt;= 100) {
+            grade = newGrade;  <span style="color:#6B7280;">// only updates if the value is valid</span>
+        }
+    }
+ 
+    <span style="color:#6B7280;">// Mutator for name</span>
+    public <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">void</span> <span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">setName</span>(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">String newName</span>) {
+        name = newName;
+    }
+}</pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Accessor (Getter)</th>
+                        <th>Mutator (Setter)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>Reads and returns a copy of a variable's value</td>
+                        <td>Updates the value of a variable</td>
+                    </tr>
+                    <tr>
+                        <td>Void or non-void?</td>
+                        <td>Always non-void — it must return the value</td>
+                        <td>Usually void — updating state, not producing a value</td>
+                    </tr>
+                    <tr>
+                        <td>Naming convention</td>
+                        <td><code>get</code> + variable name: <code>getName()</code></td>
+                        <td><code>set</code> + variable name: <code>setName()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Takes a parameter?</td>
+                        <td>Typically no — nothing needed to read a value</td>
+                        <td>Yes — the new value to assign</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    Accessors and mutators together form a class's public interface for
+                    its private data. Keeping the variables private while exposing
+                    controlled access through these methods is one of the core
+                    principles of encapsulation — the idea that a class manages its own
+                    data, rather than letting outside code manipulate it directly.
+                </p>
+            </div>
+ 
+            <h3>Parameters: Receiving and Using Values</h3>
+ 
+            <p>
+                Methods with parameters receive values through those parameters and use
+                those values in accomplishing the method's task. The parameter is
+                declared in the method header, and it behaves as a local variable
+                inside the method body — it exists only for the duration of that method
+                call and holds whatever value was passed in as the argument.
+            </p>
+ 
+            <h3>Primitive Parameters and Pass-by-Value</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Pass-by-value:</span> when an argument is a primitive value, the parameter is initialized with a copy of that value. Changes to the parameter inside the method have no effect on the corresponding argument — the original variable in the calling code is unchanged.</p>
+            </div>
+ 
+            <p>
+                This is one of the most important things to understand about how
+                primitive arguments work. When you pass a primitive value into a method,
+                Java copies that value into the parameter variable. The method then
+                works with that copy — the original variable in the calling code is
+                completely separate and can never be modified by the method.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">void doubleIt(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">int num</span>) {
+    num = num * 2;  <span style="color:#6B7280;">// modifies the copy — has no effect on the original</span>
+    System.out.println("Inside method: " + num);
+}
+ 
+int score = 50;
+doubleIt(score);
+System.out.println("After method: " + score);  <span style="color:#6B7280;">// still 50</span></pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th><code>score</code> (caller)</th>
+                        <th><code>num</code> (parameter — a separate copy)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Before <code>doubleIt(score)</code> is called</td>
+                        <td><code>50</code></td>
+                        <td>Does not yet exist</td>
+                    </tr>
+                    <tr>
+                        <td>Method starts — <code>num</code> is initialized</td>
+                        <td><code>50</code></td>
+                        <td><code>50</code> (a copy of <code>score</code>)</td>
+                    </tr>
+                    <tr>
+                        <td>Inside method: <code>num = num * 2</code></td>
+                        <td><code>50</code> — unchanged</td>
+                        <td><code>100</code></td>
+                    </tr>
+                    <tr>
+                        <td>Method ends — <code>num</code> goes out of scope</td>
+                        <td><code>50</code> — unchanged</td>
+                        <td>No longer exists</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <p>
+                The output is <code>"Inside method: 100"</code> then
+                <code>"After method: 50"</code> — <code>score</code> was never
+                touched. The copy given to the parameter changed, but the original
+                variable in the calling code didn't.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    Pass-by-value means a method can never change the value of a
+                    primitive variable in the calling code, no matter what it does to
+                    the parameter. If the goal is to produce an updated value, the
+                    method needs to <code>return</code> it, and the caller needs to
+                    store that returned value.
+                </p>
+            </div>
+ 
+            <div class="tip-box">
+                <h3>📘 Example</h3>
+                <p>
+                    To actually double <code>score</code>, write a non-void method
+                    instead: <code>int doubleIt(int num) { return num * 2; }</code>,
+                    and store the result back: <code>score = doubleIt(score);</code>.
+                    Now <code>score</code> is <code>100</code>, because the caller used
+                    the returned value to overwrite the original.
+                </p>
+            </div>
+ 
+        </section>
+ 
+        <section id="questions" class="lesson-section">
+ 
+            <h2>Frequently Starred Questions</h2>
+ 
+            <div class="faq-list">
+ 
+                <details class="faq-item">
+                    <summary>Can a void method use the return keyword?</summary>
+                    <p>
+                        Yes, but only a bare <code>return;</code> with no value — it
+                        exits the method early without returning anything, the same way a
+                        return with a value exits a non-void method. It's optional in a
+                        void method if you just want to let the method run to its natural
+                        end.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Can a non-void method have more than one return statement?</summary>
+                    <p>
+                        Yes — the <code>max</code> example above has two. Only one of
+                        them will ever execute per call, since the first <code>return</code>
+                        reached immediately exits the method.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Does an accessor have to return the exact variable, or can it compute something first?</summary>
+                    <p>
+                        Accessors most commonly just return the stored value directly, but
+                        they're non-void methods like any other — they can apply
+                        formatting, compute a derived value, or add a defensive copy as
+                        long as what they return is compatible with the declared return
+                        type.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Why can't a method change a primitive argument in the calling code?</summary>
+                    <p>
+                        Because primitive arguments are passed by value — Java copies the
+                        value into a new parameter variable, and the method works with that
+                        copy. The original variable in the calling code and the parameter
+                        are entirely separate; modifying one has no effect on the other.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Is a mutator always void?</summary>
+                    <p>
+                        Usually, but not required to be. The framework says "often a void
+                        method" — a mutator could return a value (like a success flag or
+                        the old value before the update), but the most common design is
+                        void since the purpose is to update state, not produce a result.
+                    </p>
+                </details>
+ 
+            </div>
+ 
+        </section>
+ 
+        <section id="misconceptions" class="lesson-section">
+ 
+            <h2>Common Starrfalls</h2>
+ 
+            <h3>"Code after a return statement still runs"</h3>
+ 
+            <p>
+                It doesn't — a <code>return</code> immediately exits the method, and
+                any statements sequentially after it in the same block will never
+                execute. The compiler flags this as unreachable code.
+            </p>
+ 
+            <h3>"Changing a parameter changes the original argument"</h3>
+ 
+            <p>
+                For primitive types, changes to a parameter have no effect whatsoever
+                on the original argument in the calling code. The parameter is a copy —
+                an entirely separate variable that only lives for the duration of the
+                method call.
+            </p>
+ 
+            <h3>"Accessor and mutator are just fancy names for any method"</h3>
+ 
+            <p>
+                They refer to specific roles. An accessor specifically reads and returns
+                a copy of an instance or class variable. A mutator specifically updates
+                one. A method that does something else entirely — like printing a report
+                or computing a result from multiple inputs — is neither.
+            </p>
+ 
+            <h3>"A return inside a loop just exits the loop"</h3>
+ 
+            <p>
+                It exits the entire method — not just the loop. Flow of control jumps
+                immediately back to wherever the method was called from, and nothing
+                else in the method body runs, regardless of how many loop iterations
+                were still remaining.
+            </p>
+ 
+        </section>
+ 
+        <section id="ask-online" class="lesson-section">
+ 
+            <h2>Starr Online</h2>
+ 
+            <p>
+                Writing correct method headers, understanding return flow, and tracing
+                pass-by-value are all skills tested heavily on AP CSA FRQs. Ask Starr
+                to walk through a method call with you and trace what each variable
+                holds at every step, or to explain why a parameter change didn't affect
+                the original.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Trace through this method call step by step and
+                    tell me why the original variable is still 50 after the method ends."
+                </p>
+            </div>
+ 
+        </section>
+    `
+    ,
+
+    "3.6 Methods: Passing and Returning References of an Object": `
+ 
+        <section id="content" class="lesson-section">
+ 
+            <h2>Methods: Passing and Returning References of an Object</h2>
+ 
+            <p>
+                Lesson 3.5 established that when a primitive value is passed to a method,
+                Java copies the value into the parameter — so the method can never change
+                the original variable in the calling code. This lesson introduces what
+                happens when the argument is an object reference instead of a primitive,
+                and the rules are meaningfully different.
+            </p>
+ 
+            <h3>Revisiting the Difference: Primitive vs. Reference</h3>
+ 
+            <p>
+                A primitive variable stores its value directly. A reference variable
+                stores an <em>address</em> — the location in memory where an object
+                actually lives. This distinction was introduced in 1.12, and it becomes
+                critical here: what gets copied when you pass an argument depends on
+                which kind of variable it is.
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Primitive argument (3.5)</th>
+                        <th>Object reference argument (3.6)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>What gets copied into the parameter</td>
+                        <td>A copy of the actual value</td>
+                        <td>A copy of the reference — pointing to the same object</td>
+                    </tr>
+                    <tr>
+                        <td>Is a new independent object created?</td>
+                        <td>N/A — primitives aren't objects</td>
+                        <td>No — both the original variable and the parameter point to the exact same object in memory</td>
+                    </tr>
+                    <tr>
+                        <td>Can the method affect the original?</td>
+                        <td>No — the original value is unchanged</td>
+                        <td>Yes — the method can mutate the object both variables are pointing to</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <h3>Passing an Object Reference: The Parameter Shares the Object</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Passing an object reference:</span> when an argument is an object reference, the parameter is initialized with a copy of that reference — it does not create a new independent copy of the object. If the parameter refers to a mutable object, the method or constructor can use this reference to alter the state of the object.</p>
+            </div>
+ 
+            <p>
+                The key phrase here is "a copy of that reference." The parameter doesn't
+                get its own private object — it gets another reference to the exact same
+                object. Both the original variable in the calling code and the parameter
+                inside the method are now pointing at the same location in memory.
+                Any change made to the object through the parameter is a change to
+                the one shared object, and the caller will see it immediately after the
+                method returns.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">void applyBonus(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">Student s</span>, int bonus) {
+    s.setGrade(s.getGrade() + bonus);  <span style="color:#6B7280;">// mutates the object s points to</span>
+}
+ 
+Student alice = new Student("Alice", 80);
+applyBonus(<span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">alice</span>, 5);
+System.out.println(alice.getGrade());  <span style="color:#6B7280;">// prints 85 — alice's object was changed</span></pre>
+            </div>
+ 
+            <p>
+                When <code>applyBonus(alice, 5)</code> is called, Java copies
+                <code>alice</code>'s reference into the parameter <code>s</code>.
+                Now <code>alice</code> and <code>s</code> both point to the same
+                <code>Student</code> object in memory. When the method calls
+                <code>s.setGrade(...)</code>, it mutates that shared object — so
+                when the method ends and <code>s</code> disappears, the object
+                <code>alice</code> still points to has already been updated.
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Step</th>
+                        <th><code>alice</code> (caller)</th>
+                        <th><code>s</code> (parameter)</th>
+                        <th>Object in memory</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Before method call</td>
+                        <td>→ Student object</td>
+                        <td>Does not exist</td>
+                        <td>grade = 80</td>
+                    </tr>
+                    <tr>
+                        <td>Method starts — <code>s</code> initialized</td>
+                        <td>→ Student object</td>
+                        <td>→ same Student object</td>
+                        <td>grade = 80</td>
+                    </tr>
+                    <tr>
+                        <td>Inside method: <code>s.setGrade(85)</code></td>
+                        <td>→ Student object</td>
+                        <td>→ same Student object</td>
+                        <td>grade = 85 ← mutated</td>
+                    </tr>
+                    <tr>
+                        <td>Method ends — <code>s</code> goes out of scope</td>
+                        <td>→ Student object</td>
+                        <td>No longer exists</td>
+                        <td>grade = 85 — change persists</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    The contrast with primitives is worth locking in clearly: passing a
+                    primitive copies the value, so the original is safe. Passing an
+                    object reference copies the address, so the original <em>object</em>
+                    is reachable — and mutable — through the parameter.
+                </p>
+            </div>
+ 
+            <h3>Good Practice: Don't Mutate Unless Required</h3>
+ 
+            <p>
+                Just because a method <em>can</em> mutate an object passed to it doesn't
+                mean it <em>should</em>. It is good programming practice to not modify
+                mutable objects that are passed as parameters unless it is required in
+                the specification. Mutating an argument unexpectedly can introduce hard-
+                to-find bugs, because the caller may not realize the object's state was
+                changed inside a method it passed the object into.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    If a method mutates a parameter object without it being clear or
+                    documented, the caller's object silently changes — and the bug may
+                    not surface until much later in the program. Unless the method is
+                    explicitly supposed to update the object (like a mutator method), it
+                    should read from it, not write to it.
+                </p>
+            </div>
+ 
+            <h3>Returning an Object Reference</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Returning an object reference:</span> when the return expression evaluates to an object reference, the reference is returned — not a reference to a new copy of the object. The caller receives a reference pointing to the same object the method was working with.</p>
+            </div>
+ 
+            <p>
+                Returning a reference works the same way as passing one: the caller
+                receives the reference itself, not a freshly made copy of the object.
+                This means the variable on the caller's side that stores the return
+                value ends up pointing to the exact same object the method returned.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">Student</span> getTopStudent(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">Student a</span>, <span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">Student b</span>) {
+    if (a.getGrade() &gt;= b.getGrade()) {
+        return a;  <span style="color:#6B7280;">// returns the reference to a's object — not a copy</span>
+    }
+    return b;
+}
+ 
+Student alice = new Student("Alice", 91);
+Student ben   = new Student("Ben", 87);
+Student top   = getTopStudent(alice, ben);
+ 
+System.out.println(top.getName());  <span style="color:#6B7280;">// "Alice"</span>
+System.out.println(top == alice);   <span style="color:#6B7280;">// true — top and alice point to the same object</span></pre>
+            </div>
+ 
+            <p>
+                After the call, <code>top</code> and <code>alice</code> are two different
+                variable names, but they're both pointing at the same
+                <code>Student</code> object in memory — which means
+                <code>top == alice</code> is <code>true</code>. No copy of the object
+                was made during the return. Mutating the object through <code>top</code>
+                would change what <code>alice</code> sees too.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    If you receive an object reference back from a method and then mutate
+                    it, you're mutating the original object — not a safe private copy.
+                    This can be surprising if you expected the method to hand you
+                    something independent.
+                </p>
+            </div>
+ 
+            <h3>Private Data Access and Type Restrictions</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Private data access restriction:</span> methods cannot access the private data and methods of a parameter that holds a reference to an object, unless the parameter is the same type as the method's enclosing class.</p>
+            </div>
+ 
+            <p>
+                Even though a parameter holds a reference to an object, that doesn't
+                grant the method access to the object's private fields. Private access
+                is controlled by the class, not the method — a method inside a
+                <code>BankAccount</code> class cannot reach directly into a
+                <code>Student</code> parameter's private variables, even with a
+                reference to it in hand.
+            </p>
+ 
+            <p>
+                The one exception is when the parameter is the <em>same type</em> as
+                the class the method belongs to. In that case, the method is "inside"
+                the class that owns those private fields, so it can access them directly —
+                even on a different instance of the same class passed in as a parameter.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">public class Student {
+    private int grade;
+ 
+    <span style="color:#6B7280;">// Works — this method is inside Student, so it can read</span>
+    <span style="color:#6B7280;">// the private grade of another Student passed in</span>
+    public boolean hasSameGrade(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">Student other</span>) {
+        return this.grade == <span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">other.grade</span>;  <span style="color:#6B7280;">// ✓ same class — direct access is allowed</span>
+    }
+}
+ 
+public class Gradebook {
+    public void compare(<span style="background:rgba(255,86,86,.22); color:#FCA5A5; padding:3px 7px; border-radius:5px; font-weight:700;">Student s</span>) {
+        System.out.println(<span style="background:rgba(255,86,86,.22); color:#FCA5A5; padding:3px 7px; border-radius:5px; font-weight:700;">s.grade</span>);  <span style="color:#6B7280;">// ✗ compile error — different class, can't access private field</span>
+    }
+}</pre>
+            </div>
+ 
+            <p>
+                In the first example, <code>hasSameGrade</code> lives inside the
+                <code>Student</code> class, so <code>other.grade</code> is perfectly
+                accessible — <code>other</code> is just another <code>Student</code>
+                object, and the class owns the privacy of that field, not the instance.
+                In the second example, <code>Gradebook</code> is a different class
+                entirely, so <code>s.grade</code> is off-limits and causes a compiler
+                error. The correct route is through an accessor: <code>s.getGrade()</code>.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    When you need to read data from an object of a different class, always
+                    go through that class's public accessor methods — that's exactly what
+                    they're designed for. Direct field access is only available to code
+                    inside the same class that declared the field private.
+                </p>
+            </div>
+ 
+        </section>
+ 
+        <section id="questions" class="lesson-section">
+ 
+            <h2>Frequently Starred Questions</h2>
+ 
+            <p>
+                Here are some of the questions Starr hears most often about passing and
+                returning object references.
+            </p>
+ 
+            <div class="faq-list">
+ 
+                <details class="faq-item">
+                    <summary>What's the key difference between passing a primitive and passing an object?</summary>
+                    <p>
+                        Passing a primitive copies the value — the method gets its own
+                        independent copy, and the original is untouched. Passing an object
+                        copies the reference — both the caller and the parameter point to
+                        the same object, so the method can mutate the original object's
+                        state.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>If I return an object from a method, does the caller get a copy?</summary>
+                    <p>
+                        No. The reference itself is returned — the caller's variable ends
+                        up pointing to the same object the method was working with, not a
+                        newly created copy of it.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Can a method always access the private fields of any object passed to it?</summary>
+                    <p>
+                        No. A method can only access the private fields of a parameter
+                        object if the parameter is the same type as the method's enclosing
+                        class. For objects of any other class, private fields are
+                        inaccessible and must be reached through public accessors.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Is it always bad to mutate an object that was passed in as a parameter?</summary>
+                    <p>
+                        Not always — sometimes that's explicitly the method's job. But
+                        it should be intentional, documented, and required by the
+                        specification. Mutating a parameter object as a side effect when
+                        the caller doesn't expect it is a design problem.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Can a method inside Student access private fields of a different Student object?</summary>
+                    <p>
+                        Yes — because the method is inside the <code>Student</code> class,
+                        it can access the private fields of any <code>Student</code>
+                        object, including ones passed in as parameters. The privacy
+                        restriction is class-level, not instance-level.
+                    </p>
+                </details>
+ 
+            </div>
+ 
+        </section>
+ 
+        <section id="misconceptions" class="lesson-section">
+ 
+            <h2>Common Starrfalls</h2>
+ 
+            <h3>"Passing an object to a method gives the method its own copy to work with"</h3>
+ 
+            <p>
+                It doesn't — the method receives a reference to the same object. There
+                is only one object, and changes made to it through the parameter are
+                visible to everyone who holds a reference to it, including the original
+                caller.
+            </p>
+ 
+            <h3>"A method that doesn't reassign the parameter can't affect the caller's object"</h3>
+ 
+            <p>
+                Reassigning the parameter (making it point at a different object) has no
+                effect on the caller — that part is true. But calling a mutator method
+                <em>on</em> the parameter, or changing any of its fields, still affects
+                the shared object the caller is holding a reference to.
+            </p>
+ 
+            <h3>"Private means no outside code can ever access the data"</h3>
+ 
+            <p>
+                Private means no code <em>outside the class</em> can access the field
+                directly — but a method inside the same class can access private fields
+                on any instance of that class, including instances passed in as
+                parameters. Access is controlled at the class level, not the instance
+                level.
+            </p>
+ 
+            <h3>"Returning an object makes a copy for the caller"</h3>
+ 
+            <p>
+                Returning an object reference hands back the reference itself, pointing
+                at the original object — not a fresh copy. If the caller modifies the
+                returned object, it is modifying the same object the method was
+                working with.
+            </p>
+ 
+        </section>
+ 
+        <section id="ask-online" class="lesson-section">
+ 
+            <h2>Starr Online</h2>
+ 
+            <p>
+                Passing references and shared mutation are the source of some of the
+                trickiest AP CSA FRQ tracing questions — the kind where the caller's
+                object changes unexpectedly, or where a returned reference is silently
+                shared. Ask Starr to trace through a method call that mutates a parameter
+                object, and see where the state ends up.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "Trace through this method that takes a Student
+                    as a parameter and updates its grade — and tell me what alice.getGrade()
+                    returns after the call."
+                </p>
+            </div>
+ 
+        </section>
+    `
+    ,
+
+    "3.7 Class Variables and Methods": `
+ 
+        <section id="content" class="lesson-section">
+ 
+            <h2>Class Variables and Methods</h2>
+ 
+            <p>
+                Every variable and method seen so far in Unit 3 has belonged to a
+                specific instance — each <code>Student</code> object has its own
+                <code>name</code>, its own <code>grade</code>, and calls to methods
+                like <code>getName()</code> operate on one particular object at a time.
+                But some data and behavior genuinely belongs to the class as a whole,
+                not to any individual instance. That's the role of
+                <strong>class variables</strong> and <strong>class methods</strong>,
+                both of which are marked with the <code>static</code> keyword.
+            </p>
+ 
+            <h3>Class Variables</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Class variable:</span> belongs to the class, with all objects of the class sharing a single copy of the variable. Class variables are designated with the <code>static</code> keyword before the variable type.</p>
+            </div>
+ 
+            <p>
+                While an instance variable gives each object its own independent copy
+                of a value, a class variable has exactly one copy shared across every
+                object ever created from the class. Changing it through one object
+                changes what every other object sees — because there is no "other copy"
+                to change separately. That single shared copy lives at the class level,
+                not inside any individual object.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">public class Student {
+    <span style="color:#6B7280;">// Instance variables — each object gets its own copy</span>
+    private String name;
+    private int grade;
+ 
+    <span style="color:#6B7280;">// Class variable — one shared copy across all Student objects</span>
+    private <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">static</span> int studentCount = 0;
+ 
+    public Student(String name, int grade) {
+        this.name  = name;
+        this.grade = grade;
+        studentCount++;  <span style="color:#6B7280;">// increments the shared counter every time a new Student is made</span>
+    }
+}</pre>
+            </div>
+ 
+            <p>
+                Every time a new <code>Student</code> object is constructed,
+                <code>studentCount</code> increases by one. Because it's
+                <code>static</code>, there is only one <code>studentCount</code> for
+                the entire class — not a separate counter inside each object. After
+                creating three students, every object in the program would see
+                <code>studentCount</code> as <code>3</code>.
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Instance Variable</th>
+                        <th>Class Variable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Keyword</td>
+                        <td>None</td>
+                        <td><code>static</code></td>
+                    </tr>
+                    <tr>
+                        <td>How many copies exist</td>
+                        <td>One per object</td>
+                        <td>One for the entire class, regardless of how many objects exist</td>
+                    </tr>
+                    <tr>
+                        <td>Changing the value</td>
+                        <td>Only affects the one object it belongs to</td>
+                        <td>Affects every object, since they all share the same copy</td>
+                    </tr>
+                    <tr>
+                        <td>Good for</td>
+                        <td>Data that varies per object: name, grade, balance</td>
+                        <td>Data that belongs to the class as a whole: count of instances, shared constants</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <h3>Accessing Class Variables with the Dot Operator</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Accessing a class variable:</span> class variables that are designated <code>public</code> are accessed outside of the class by using the class name and the dot operator, since they are associated with a class, not objects of a class.</p>
+            </div>
+ 
+            <p>
+                Instance variables are accessed through a specific object reference:
+                <code>alice.grade</code>. But a class variable doesn't belong to any
+                one object — it belongs to the class itself. This means the correct way
+                to access a public class variable from outside the class is through the
+                class name, not through an instance.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="color:#6B7280;">// Accessing a public class variable from outside the class</span>
+System.out.println(<span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">Student</span>.<span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">studentCount</span>);  <span style="color:#6B7280;">// correct — via class name</span>
+ 
+<span style="color:#6B7280;">// Accessing through an instance also works technically,</span>
+<span style="color:#6B7280;">// but is misleading — it looks like it belongs to that object</span>
+Student alice = new Student("Alice", 91);
+System.out.println(<span style="background:rgba(255,86,86,.22); color:#FCA5A5; padding:3px 7px; border-radius:5px; font-weight:700;">alice</span>.<span style="background:rgba(190,255,98,.22); color:#D4FF9E; padding:3px 7px; border-radius:5px; font-weight:700;">studentCount</span>);  <span style="color:#6B7280;">// works, but poor practice</span></pre>
+            </div>
+ 
+            <p>
+                The class name makes it immediately clear that the variable is shared
+                across the entire class. Accessing a class variable through an instance
+                reference is technically allowed by Java but considered poor practice —
+                it creates the false impression that the value is local to that object,
+                which can confuse anyone reading the code.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    You've already been using this pattern: <code>Math.random()</code>,
+                    <code>Integer.MAX_VALUE</code>, <code>Integer.parseInt()</code> —
+                    all accessed through the class name, not through an object. They're
+                    all class-level members, which is exactly why the class name is the
+                    correct way to reach them.
+                </p>
+            </div>
+ 
+            <h3>Class Methods</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">Class method:</span> a method associated with the class itself, marked with the <code>static</code> keyword. Class methods can access or change the values of class variables and can call other class methods. However, class methods cannot access or change the values of instance variables, or call instance methods, without being passed an instance of the class via a parameter.</p>
+            </div>
+ 
+            <p>
+                The reason a class method can't access instance variables is
+                architectural: when a class method is called, there may be no instance
+                at all — no individual object the method belongs to. An instance variable
+                only exists as part of a specific object, so a method that isn't
+                connected to any object has no way to know <em>which</em> object's
+                instance variable to look at.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">public class Student {
+    private String name;           <span style="color:#6B7280;">// instance variable</span>
+    private static int studentCount = 0;  <span style="color:#6B7280;">// class variable</span>
+ 
+    <span style="color:#6B7280;">// Class method — can access class variables</span>
+    public <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">static</span> int getStudentCount() {
+        return studentCount;  <span style="color:#6B7280;">// ✓ class variable — accessible</span>
+    }
+ 
+    <span style="color:#6B7280;">// Class method — cannot access instance variables</span>
+    public <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">static</span> void printName() {
+        System.out.println(name);  <span style="color:#6B7280;">// ✗ compile error — which object's name?</span>
+    }
+ 
+    <span style="color:#6B7280;">// Class method CAN access instance data if an instance is passed in</span>
+    public <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">static</span> void printName(<span style="background:rgba(12,194,103,.22); color:#6EE7A8; padding:3px 7px; border-radius:5px; font-weight:700;">Student s</span>) {
+        System.out.println(s.name);  <span style="color:#6B7280;">// ✓ instance is provided — access is valid</span>
+    }
+}</pre>
+            </div>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Instance Method</th>
+                        <th>Class Method (<code>static</code>)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Called via</td>
+                        <td>An object: <code>alice.getName()</code></td>
+                        <td>The class name: <code>Student.getStudentCount()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Can access instance variables?</td>
+                        <td>Yes — it knows which object it belongs to</td>
+                        <td>Only if an instance is passed in as a parameter</td>
+                    </tr>
+                    <tr>
+                        <td>Can access class variables?</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Can call instance methods?</td>
+                        <td>Yes</td>
+                        <td>Only if an instance is passed in as a parameter</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <div class="tip-box">
+                <h3>⭐ Starr Tip</h3>
+                <p>
+                    A useful mental check: if a method only needs class-level data and
+                    doesn't care about any particular object's state, it's a good
+                    candidate for <code>static</code>. If it needs to know something
+                    specific to one object — like a student's name or grade — it should
+                    be an instance method.
+                </p>
+            </div>
+ 
+            <h3>The final Keyword</h3>
+ 
+            <div class="vocab-box">
+                <span class="vocab-label">Vocabulary</span>
+                <p><span class="vocab-term">final keyword:</span> when a variable is declared <code>final</code>, its value cannot be modified after it is initialized. A <code>final</code> variable is a constant.</p>
+            </div>
+ 
+            <p>
+                The <code>final</code> keyword is what turns a variable into a true
+                constant — a value that is set once and cannot be changed afterward.
+                Any attempt to reassign a <code>final</code> variable after initialization
+                causes a compiler error. This is a deliberate protection: constants
+                represent values that should never change, and the compiler enforces
+                that guarantee.
+            </p>
+ 
+            <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+                <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;">public class MathConstants {
+    public static <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">final</span> double PI    = 3.14159;
+    public static <span style="background:rgba(255,224,122,.22); color:#FFE7A0; padding:3px 7px; border-radius:5px; font-weight:700;">final</span> int    MAX_SCORE = 100;
+}
+ 
+System.out.println(MathConstants.PI);        <span style="color:#6B7280;">// ✓ reading is fine</span>
+MathConstants.PI = 3.0;                      <span style="color:#6B7280;">// ✗ compile error — cannot reassign a final variable</span></pre>
+            </div>
+ 
+            <p>
+                In practice, constants are almost always declared both <code>static</code>
+                and <code>final</code> together — <code>static</code> because the value
+                belongs to the class and shouldn't be duplicated inside every object,
+                and <code>final</code> because it should never change. The naming
+                convention for constants in Java is all uppercase with underscores:
+                <code>MAX_SCORE</code>, <code>PI</code>, <code>SPEED_OF_LIGHT</code>.
+            </p>
+ 
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Declaration</th>
+                        <th>What it means</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>static int count</code></td>
+                        <td>One shared copy across all instances — can be changed</td>
+                    </tr>
+                    <tr>
+                        <td><code>final int LIMIT</code></td>
+                        <td>Value is set once and cannot be reassigned — instance-level constant</td>
+                    </tr>
+                    <tr>
+                        <td><code>static final int MAX = 100</code></td>
+                        <td>One shared copy that can never be changed — the classic class constant pattern</td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <div class="tip-box">
+                <h3>⚠️ Watch Out</h3>
+                <p>
+                    <code>final</code> prevents reassignment of the variable — but for
+                    reference type variables, it only prevents the reference from
+                    pointing to a different object. The object itself can still be
+                    mutated through its methods, unless the class is designed to be
+                    immutable. For primitive types, <code>final</code> makes the value
+                    truly unchangeable.
+                </p>
+            </div>
+ 
+        </section>
+ 
+        <section id="questions" class="lesson-section">
+ 
+            <h2>Frequently Starred Questions</h2>
+ 
+            <p>
+                Here are some of the questions Starr hears most often about class
+                variables, class methods, and the <code>final</code> keyword.
+            </p>
+ 
+            <div class="faq-list">
+ 
+                <details class="faq-item">
+                    <summary>Why can't a static method access instance variables?</summary>
+                    <p>
+                        A static method belongs to the class itself, not to any particular
+                        object. Instance variables exist inside specific objects — and
+                        without an object in context, the static method has no way to know
+                        which object's instance variable it should be looking at. If an
+                        instance is needed, it must be passed in as a parameter.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Should I access a class variable through an object or the class name?</summary>
+                    <p>
+                        Through the class name. Accessing it through an object reference
+                        works technically, but it's poor practice — it creates the false
+                        impression that the variable belongs to that one object, when in
+                        reality it's shared by the whole class.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>What happens if I try to reassign a final variable?</summary>
+                    <p>
+                        The compiler will flag it as an error and refuse to compile the
+                        program. <code>final</code> is a compile-time guarantee — the
+                        protection is enforced before the program ever runs.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Why are constants usually declared both static and final?</summary>
+                    <p>
+                        <code>static</code> means there's one shared copy for the whole
+                        class rather than a duplicate inside every object.
+                        <code>final</code> means that copy can never be changed. Together,
+                        they create the classic Java constant: a single, immutable,
+                        class-level value.
+                    </p>
+                </details>
+ 
+                <details class="faq-item">
+                    <summary>Can a class method call an instance method?</summary>
+                    <p>
+                        Only if an instance of the class is provided — passed in as a
+                        parameter, for example. Without an instance, the class method
+                        has no object to call the instance method on.
+                    </p>
+                </details>
+ 
+            </div>
+ 
+        </section>
+ 
+        <section id="misconceptions" class="lesson-section">
+ 
+            <h2>Common Starrfalls</h2>
+ 
+            <h3>"static and instance variables behave the same way"</h3>
+ 
+            <p>
+                They don't — the fundamental difference is ownership. An instance
+                variable belongs to one object; a static class variable belongs to the
+                class as a whole. Changing a static variable anywhere changes it for
+                every object, which can produce unexpected results if the static/instance
+                distinction isn't kept clear.
+            </p>
+ 
+            <h3>"A static method can use any variable in the class"</h3>
+ 
+            <p>
+                Static methods can only directly access other static members — class
+                variables and other class methods. Instance variables and instance
+                methods are off-limits unless an actual instance is passed in as a
+                parameter, since there's no associated object to pull them from.
+            </p>
+ 
+            <h3>"final means the object can't be changed"</h3>
+ 
+            <p>
+                For primitive types, <code>final</code> does make the value
+                unchangeable. For reference types, it only prevents the variable from
+                being reassigned to point at a different object — the existing object
+                can still have its state mutated through its own methods.
+            </p>
+ 
+            <h3>"Constants need the final keyword but not static"</h3>
+ 
+            <p>
+                A <code>final</code>-only variable without <code>static</code> would
+                create a separate constant inside every object — wasting memory and
+                defeating the purpose of a shared constant. Class constants should
+                almost always be both <code>static</code> and <code>final</code>.
+            </p>
+ 
+        </section>
+ 
+        <section id="ask-online" class="lesson-section">
+ 
+            <h2>Starr Online</h2>
+ 
+            <p>
+                Class variables, static methods, and final constants show up frequently
+                in FRQ class-writing questions. Ask Starr to explain why a specific
+                static method can't access an instance variable, or to help you decide
+                whether a new field in a class should be static, final, both, or neither.
+            </p>
+ 
+            <div class="tip-box">
+                <h3>🤖 Ask Starr</h3>
+                <p>
+                    Try asking Starr: "In my Student class, should studentCount be static,
+                    final, both, or neither — and why?"
+                </p>
+            </div>
+ 
+        </section>
+    `
+    ,
+
+    "3.8 Scope and Access": `
+
+    <section id="content" class="lesson-section">
+
+        <h2>Scope and Access</h2>
+
+        <p>
+            Every variable used in a class lives somewhere — as an instance variable
+            belonging to the object, or more narrowly, inside a single block of code.
+            This lesson focuses on that second kind, and on a naming collision that comes
+            up constantly once constructors and methods start taking parameters.
+        </p>
+
+        <h3>Local Variables</h3>
+
+        <div class="vocab-box">
+            <span class="vocab-label">Vocabulary</span>
+            <p><span class="vocab-term">Local variable:</span> a variable declared in the header or body of a block of code. Local variables can only be accessed in the block in which they are declared.</p>
+        </div>
+
+        <p>
+            A local variable's <strong>scope</strong> — the region of code where it can be
+            referenced — is limited to the block it was declared in. Once execution
+            leaves that block, the local variable no longer exists, and any attempt to
+            reference it elsewhere simply won't compile.
+        </p>
+
+        <p>
+            Since constructors and methods are blocks of code, parameters to constructors
+            or methods are also considered local variables. This means a constructor's or
+            method's parameters follow the exact same scope rule as a variable declared
+            inside its body — they may only be used within the constructor or method and
+            cannot be declared to be <code>public</code> or <code>private</code>.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">double</span> convertToGpa(int score) {
+    <span style="color:#6B7280;">// "score" is a parameter -- a local variable</span>
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">double</span> gpa = score / 25.0;
+    <span style="color:#6B7280;">// "gpa" is also a local variable, declared in the method body</span>
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> gpa;
+}
+
+<span style="color:#6B7280;">// score and gpa do not exist out here -- their scope ended</span>
+<span style="color:#6B7280;">// with the closing brace of convertToGpa</span></pre>
+            </div>
+
+        <p>
+            Neither <code>score</code> nor <code>gpa</code> can be referenced anywhere
+            outside <code>convertToGpa</code> — not in another method of the same class,
+            and not from any other class. Their scope begins where they're declared and
+            ends at the closing brace of the block that contains them.
+        </p>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                Because parameters and local variables can't be declared
+                <code>public</code> or <code>private</code>, those keywords should never
+                appear inside a method's parameter list or in front of a variable
+                declared inside a method body — only instance variables, constructors,
+                methods, and classes take those access modifiers.
+            </p>
+        </div>
+
+        <h3>When a Local Variable Shares a Name with an Instance Variable</h3>
+
+        <p>
+            It's common — and often intentional, for readability — for a constructor's
+            or method's parameter to share the exact same name as an instance variable it
+            is meant to initialize. But this naming choice creates a scope conflict that
+            has to be handled carefully.
+        </p>
+
+        <p>
+            When there is a local variable or parameter with the same name as an instance
+            variable, the variable name will refer to the local variable instead of the
+            instance variable within the body of the constructor or method. The local
+            variable is said to <strong>shadow</strong> the instance variable — inside
+            that block, the name simply stops referring to the instance variable at all.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Student {
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> String name;
+
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> Student(String name) {
+        name = name;  <span style="color:#EF4444;">// does NOT work as intended</span>
+    }
+}</pre>
+            </div>
+
+        <p>
+            Inside this constructor, the parameter <code>name</code> shadows the instance
+            variable <code>name</code>. Since a bare reference to <code>name</code> always
+            resolves to the local variable in this block, the line
+            <code>name = name;</code> just assigns the parameter to itself — the
+            instance variable is never touched, and it silently keeps whatever default
+            value it started with (<code>null</code>, for a <code>String</code>).
+        </p>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                This bug is especially dangerous because the code compiles without any
+                error or warning. The program runs, but every <code>Student</code> object
+                ends up with an instance variable that was never actually set from the
+                constructor's argument.
+            </p>
+        </div>
+
+        <h3>Resolving the Conflict with this</h3>
+
+        <p>
+            Java provides a way to explicitly refer to an object's own instance
+            variable even when a local variable of the same name is shadowing it: the
+            <code>this</code> keyword. Writing <code>this.name</code> unambiguously means
+            "the instance variable belonging to this object," regardless of what local
+            variables or parameters happen to share that name in the current block.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Student {
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> String name;
+
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> Student(String name) {
+        <span style="background:rgba(255,224,122,.25); color:#FFE07A; padding:3px 7px; border-radius:5px; font-weight:700;">this</span>.name = name;  <span style="color:#6EE7A8;">// works as intended</span>
+    }
+}</pre>
+            </div>
+
+        <p>
+            On the right side of this assignment, the bare name <code>name</code> still
+            refers to the parameter, exactly as scope rules require. But on the left
+            side, <code>this.name</code> reaches past the local variable entirely and
+            refers directly to the instance variable — so the object's state is
+            correctly initialized from the constructor's argument.
+        </p>
+
+        <div class="tip-box">
+            <h3>⭐ Starr Tip</h3>
+            <p>
+                A quick way to spot this bug when reading code: if a constructor
+                parameter and an instance variable share a name, and an assignment inside
+                the constructor doesn't use <code>this.</code> on the left-hand side,
+                that instance variable probably isn't actually being set.
+            </p>
+        </div>
+
+        <p>
+            This lesson only introduces <code>this</code> as a solution to the shadowing
+            problem. The next lesson explores the <code>this</code> keyword in much more
+            depth, including other situations where it's useful beyond resolving naming
+            conflicts.
+        </p>
+
+    </section>
+
+    <section id="questions" class="lesson-section">
+
+        <h2>Frequently Starred Questions</h2>
+
+        <p>
+            Here are some of the questions Starr hears most often about scope and local
+            variables.
+        </p>
+
+        <div class="faq-list">
+
+            <details class="faq-item">
+                <summary>Are constructor and method parameters really local variables?</summary>
+                <p>
+                    Yes. Since constructors and methods are blocks of code, their
+                    parameters are considered local variables, following the exact same
+                    scope rule — they can only be used within the constructor or method
+                    they belong to.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Why doesn't Java throw an error when a local variable shadows an instance variable?</summary>
+                <p>
+                    Shadowing is a deliberate feature of the language, not an error — Java
+                    consistently resolves a name to the closest matching local variable
+                    or parameter. The problem isn't that Java does something wrong; it's
+                    that the resulting behavior is easy to mistake for something else.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do I have to use this.name every single time I reference an instance variable?</summary>
+                <p>
+                    No — it's only strictly necessary when a local variable or parameter
+                    in the current block shares the instance variable's name. Some
+                    programmers use <code>this.</code> consistently anyway for clarity,
+                    but it isn't required when there's no naming conflict.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can a local variable be declared private?</summary>
+                <p>
+                    No. Local variables and parameters may only be used within the
+                    constructor or method where they're declared, and cannot be declared
+                    to be <code>public</code> or <code>private</code> — those modifiers
+                    only apply to classes, instance variables, constructors, and methods.
+                </p>
+            </details>
+
+        </div>
+
+    </section>
+
+    <section id="misconceptions" class="lesson-section">
+
+        <h2>Common Starrfalls</h2>
+
+        <h3>"name = name; inside a constructor sets the instance variable"</h3>
+
+        <p>
+            When a parameter shares a name with an instance variable, a bare reference to
+            that name always refers to the local parameter, not the instance variable.
+            <code>name = name;</code> just assigns the parameter to itself — it never
+            reaches the instance variable at all.
+        </p>
+
+        <h3>"A method's parameters can be accessed from other methods in the class"</h3>
+
+        <p>
+            Local variables — including parameters — can only be accessed in the block in
+            which they're declared. A parameter belonging to one method has no existence
+            or visibility inside any other method, even within the same class.
+        </p>
+
+        <h3>"this is only needed when there's a naming conflict"</h3>
+
+        <p>
+            That's the specific problem this lesson focuses on, but it's worth previewing
+            that <code>this</code> has other legitimate uses beyond resolving shadowed
+            variable names — a topic the next lesson explores in more depth.
+        </p>
+
+    </section>
+
+    <section id="ask-online" class="lesson-section">
+
+        <h2>Starr Online</h2>
+
+        <p>
+            Shadowed variables are one of the sneakiest bugs to catch by eye, since the
+            code always compiles. Ask Starr to check a constructor for shadowing issues,
+            or to explain exactly which variable a specific line of code refers to.
+        </p>
+
+        <div class="tip-box">
+            <h3>🤖 Ask Starr</h3>
+            <p>
+                Try asking Starr: "Does this constructor actually set all of its instance
+                variables correctly, or is anything being shadowed?"
+            </p>
+        </div>
+
+    </section>
+    `
+    ,
+
+    "3.9 this Keyword": `
+
+    <section id="content" class="lesson-section">
+
+        <h2>this Keyword</h2>
+
+        <p>
+            Lesson 3.8 introduced <code>this</code> as a way to resolve naming conflicts
+            between a local variable and an instance variable. That was only a first
+            glimpse. This lesson looks at what <code>this</code> actually is, what else
+            it's used for, and one important place it doesn't exist at all.
+        </p>
+
+        <h3>this as a Reference to the Current Object</h3>
+
+        <div class="vocab-box">
+            <span class="vocab-label">Vocabulary</span>
+            <p><span class="vocab-term">this:</span> within an instance method or a constructor, the keyword <code>this</code> acts as a special variable that holds a reference to the current object — the object whose method or constructor is being called.</p>
+        </div>
+
+        <p>
+            Every time an instance method or constructor runs, Java automatically makes
+            <code>this</code> available inside its body, already pointing at the exact
+            object the method or constructor was called on. No declaration is needed —
+            <code>this</code> is simply there, ready to use, the moment execution enters
+            an instance method or constructor.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Student {
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> String name;
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> int grade;
+
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> Student(String name, int grade) {
+        <span style="background:rgba(255,224,122,.25); color:#FFE07A; padding:3px 7px; border-radius:5px; font-weight:700;">this</span>.name = name;
+        <span style="background:rgba(255,224,122,.25); color:#FFE07A; padding:3px 7px; border-radius:5px; font-weight:700;">this</span>.grade = grade;
+    }
+
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">boolean</span> hasHigherGradeThan(Student other) {
+        <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> <span style="background:rgba(255,224,122,.25); color:#FFE07A; padding:3px 7px; border-radius:5px; font-weight:700;">this</span>.grade &gt; other.grade;
+    }
+}</pre>
+            </div>
+
+        <p>
+            If <code>amara</code> and <code>ben</code> are two different
+            <code>Student</code> objects, then calling
+            <code>amara.hasHigherGradeThan(ben)</code> runs the method with
+            <code>this</code> bound to <code>amara</code> — meaning
+            <code>this.grade</code> refers to Amara's grade, while <code>other.grade</code>
+            refers to Ben's. Call the same method the other way,
+            <code>ben.hasHigherGradeThan(amara)</code>, and <code>this</code> now refers
+            to Ben instead. The keyword itself never changes meaning; it's always bound to
+            whichever object the method is currently being called on.
+        </p>
+
+        <div class="tip-box">
+            <h3>⭐ Starr Tip</h3>
+            <p>
+                A useful way to think about it: <code>this</code> answers the question
+                "who am I?" from inside a method or constructor. It always refers back to
+                the specific object whose code is currently executing.
+            </p>
+        </div>
+
+        <h3>Passing this as an Argument</h3>
+
+        <p>
+            The keyword <code>this</code> can be used to pass the current object as an
+            argument in a method call. This comes up whenever one object needs to hand a
+            reference to <em>itself</em> over to another method — often so that method can
+            store the reference, or call something back on the original object later.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">class</span> Student {
+
+    <span style="background:rgba(190,255,98,.20); color:#BEFF62; padding:3px 7px; border-radius:5px; font-weight:700;">private</span> String name;
+
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">void</span> enroll(Roster roster) {
+        roster.add(<span style="background:rgba(255,224,122,.25); color:#FFE07A; padding:3px 7px; border-radius:5px; font-weight:700;">this</span>);  <span style="color:#6B7280;">// hands this exact Student object to the roster</span>
+    }
+}</pre>
+            </div>
+
+        <p>
+            Here, calling <code>roster.add(this)</code> passes a reference to the exact
+            <code>Student</code> object whose <code>enroll</code> method is running —
+            not a copy, and not some other <code>Student</code> — into the
+            <code>Roster</code> object's <code>add</code> method. Whatever
+            <code>Roster</code> does with that reference afterward, it's operating on the
+            very same object that called <code>enroll</code>.
+        </p>
+
+        <div class="tip-box">
+            <h3>📘 Key Idea</h3>
+            <p>
+                Passing <code>this</code> as an argument is just passing an object
+                reference, exactly like passing any other object — the only difference is
+                that the reference being passed happens to be a reference to the object
+                the code is currently running inside of.
+            </p>
+        </div>
+
+        <h3>Where this Does Not Exist: Class Methods</h3>
+
+        <p>
+            Class methods do not have a <code>this</code> reference. This makes sense once
+            you consider what <code>this</code> is actually built to represent: a
+            reference to a specific object. A class method — one declared with the
+            <code>static</code> keyword — belongs to the class as a whole rather than to
+            any individual object, so there's no particular object for <code>this</code>
+            to refer to when a class method runs.
+        </p>
+
+        <div style="background:#0F172A; border-radius:14px; padding:24px 30px; margin:22px 0 16px; max-width:900px; overflow-x:auto; box-shadow:0 8px 20px rgba(0,0,0,.18);">
+            <pre style="margin:0; font-family:'Courier New', monospace; font-size:16px; line-height:2; color:#E5E7EB; white-space:pre;"><span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">public</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">static</span> <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">int</span> square(int n) {
+    <span style="background:rgba(85,110,230,.25); color:#93A9FF; padding:3px 7px; border-radius:5px; font-weight:700;">return</span> <span style="background:rgba(255,224,122,.25); color:#FFE07A; padding:3px 7px; border-radius:5px; font-weight:700;">this</span>.compute(n);  <span style="color:#EF4444;">// does NOT compile -- no "this" in a static method</span>
+}</pre>
+            </div>
+
+        <p>
+            Since <code>square</code> is a class method, it can be called directly on the
+            class itself — <code>MathHelper.square(5)</code> — without any object ever
+            being instantiated. Because no specific <code>Student</code>, or any other
+            object, is necessarily involved when the method runs, there's simply nothing
+            for <code>this</code> to point to, and referencing it inside a
+            <code>static</code> method won't compile.
+        </p>
+
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Method type</th>
+                    <th>Declared with</th>
+                    <th>Has a this reference?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Instance method</td>
+                    <td>No <code>static</code> keyword</td>
+                    <td>Yes — refers to the object the method was called on</td>
+                </tr>
+                <tr>
+                    <td>Constructor</td>
+                    <td>Matches the class name, no return type</td>
+                    <td>Yes — refers to the object currently being constructed</td>
+                </tr>
+                <tr>
+                    <td>Class method</td>
+                    <td><code>static</code></td>
+                    <td>No — belongs to the class itself, not to any one object</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h3>⚠️ Watch Out</h3>
+            <p>
+                If the compiler reports that <code>this</code> cannot be used in a static
+                context, that's a strong signal the method was meant to be — or
+                accidentally was declared as — a class method, when it actually needed to
+                operate on a specific object's instance variables.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="questions" class="lesson-section">
+
+        <h2>Frequently Starred Questions</h2>
+
+        <p>
+            Here are some of the questions Starr hears most often about the
+            <code>this</code> keyword.
+        </p>
+
+        <div class="faq-list">
+
+            <details class="faq-item">
+                <summary>Do I have to declare this before I can use it?</summary>
+                <p>
+                    No. Inside any instance method or constructor, <code>this</code> is
+                    automatically available and already refers to the current object —
+                    there's nothing to declare or initialize.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Does this ever refer to a different object partway through a method?</summary>
+                <p>
+                    No. For the entire duration of a single method or constructor call,
+                    <code>this</code> stays bound to the one object that call is running
+                    on. It only changes between separate calls, not within one.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Why would I ever pass this as an argument instead of just doing the work inside the class?</summary>
+                <p>
+                    Sometimes another object needs to keep a reference to this object for
+                    later — like a <code>Roster</code> holding onto every enrolled
+                    <code>Student</code> — which requires handing that reference over with
+                    <code>this</code> rather than duplicating the object's data.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I add static to a method just to use this inside it?</summary>
+                <p>
+                    No — that would have the opposite effect. Adding <code>static</code>
+                    removes any connection to a specific object, which is exactly what
+                    makes <code>this</code> unavailable in the first place.
+                </p>
+            </details>
+
+        </div>
+
+    </section>
+
+    <section id="misconceptions" class="lesson-section">
+
+        <h2>Common Starrfalls</h2>
+
+        <h3>"this only exists to fix naming conflicts with instance variables"</h3>
+
+        <p>
+            Resolving shadowed variable names is one use of <code>this</code>, but not
+            its only purpose. <code>this</code> is fundamentally a reference to the
+            current object, which is also what allows it to be passed as an argument to
+            another method entirely.
+        </p>
+
+        <h3>"Every method in a class has access to this"</h3>
+
+        <p>
+            Class methods do not have a <code>this</code> reference. Only instance
+            methods and constructors — code that runs in the context of a specific
+            object — have <code>this</code> available.
+        </p>
+
+        <h3>"this is a copy of the object"</h3>
+
+        <p>
+            <code>this</code> is a reference to the actual current object, not a copy.
+            Changing an instance variable through <code>this</code> changes the real
+            object's state, and passing <code>this</code> to another method hands over a
+            reference to that same real object.
+        </p>
+
+    </section>
+
+    <section id="ask-online" class="lesson-section">
+
+        <h2>Starr Online</h2>
+
+        <p>
+            <code>this</code> can feel abstract until you trace through exactly which
+            object it refers to at each point in a program. Ask Starr to walk through a
+            method call and identify what <code>this</code> refers to at every step, or
+            to explain why a specific static method can't use <code>this</code>.
+        </p>
+
+        <div class="tip-box">
+            <h3>🤖 Ask Starr</h3>
+            <p>
+                Try asking Starr: "Trace through this method call and tell me exactly
+                what this refers to at each line."
+            </p>
+        </div>
+
+    </section>
+
+    `
+    ,
+
 };
