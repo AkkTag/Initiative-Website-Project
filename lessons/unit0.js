@@ -62,7 +62,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="what-youll-learn" class="lesson-section">
+        <section id="questions" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -241,7 +241,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="what-youll-learn" class="lesson-section">
+        <section id="questions" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -401,7 +401,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="what-youll-learn" class="lesson-section">
+        <section id="questions" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
@@ -708,7 +708,7 @@ lessonContentData["Unit 0"] = {
 
         </section>
 
-        <section id="what-youll-learn" class="lesson-section">
+        <section id="questions" class="lesson-section">
 
             <h2>Frequently Starred Questions</h2>
 
