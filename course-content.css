@@ -54,6 +54,9 @@ body{
     color:white;
 
     height: 100vh;
+
+    /* overflow: hidden; */
+
     padding:18px;
 
     gap:14px;
@@ -143,6 +146,8 @@ body{
 .unit-list{
 
     flex:1;
+
+    /* min-height:0; */
 
     display:flex;
 
