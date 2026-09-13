@@ -148,6 +148,11 @@ function loadLesson(unitName, lessonIndex) {
 
     registerSections();
 
+    // Let other scripts (e.g. the Starr mascot) react to a lesson change.
+    document.dispatchEvent(new CustomEvent("lesson:loaded", {
+        detail: { unit: unitName, lesson: lessonName, index: lessonIndex }
+    }));
+
 }
 
 function registerSections() {

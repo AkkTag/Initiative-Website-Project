@@ -1,0 +1,597 @@
+/* ===========================
+   CELEBRATIONS — lesson + unit complete overlays
+=========================== */
+
+.cele{
+    position:fixed;
+    inset:0;
+    z-index:3000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:24px;
+
+    background:rgba(17,24,39,.55);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+
+    font-family:'Poppins', sans-serif;
+
+    opacity:0;
+    transition:opacity .35s ease;
+}
+
+.cele.is-open{
+    opacity:1;
+}
+
+.cele.is-closing{
+    opacity:0;
+    pointer-events:none;
+}
+
+.cele-canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+}
+
+.cele-canvas-floating{
+    z-index:3001;
+}
+
+/* ---------- card ---------- */
+
+.cele-card{
+    position:relative;
+
+    width:min(440px, 100%);
+
+    background:white;
+    color:#1F2937;
+
+    border-radius:28px;
+
+    padding:44px 32px 30px;
+
+    text-align:center;
+
+    box-shadow:0 30px 80px rgba(0,0,0,.35);
+
+    transform:scale(.7) translateY(30px);
+    opacity:0;
+}
+
+.cele.is-open .cele-card{
+    animation:cele-pop .6s cubic-bezier(.2,1.4,.4,1) .1s forwards;
+}
+
+@keyframes cele-pop{
+    to{ transform:scale(1) translateY(0); opacity:1; }
+}
+
+/* ---------- mascot ---------- */
+
+.cele-mascot{
+    width:124px;
+    height:124px;
+
+    margin:-108px auto 6px;
+
+    filter:drop-shadow(0 14px 18px rgba(17,24,39,.3));
+
+    opacity:0;
+    animation:cele-drop .7s cubic-bezier(.2,1.4,.4,1) .35s forwards, cele-float 3s ease-in-out 1.1s infinite;
+}
+
+.cele-mascot svg{
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
+
+/* the cloned Starr face: force the grin + keep the sparkles twinkling */
+
+.cele-mascot .starr-mouth{ display:none; }
+.cele-mascot .starr-mouth-grin{ display:block; }
+
+.cele-mascot .starr-sparkle{
+    opacity:0;
+    transform-box:fill-box;
+    transform-origin:center;
+    animation:cele-sparkle 1.5s ease-out .9s infinite;
+}
+
+.cele-mascot .starr-sparkle:nth-child(2){ animation-delay:1.3s; }
+.cele-mascot .starr-sparkle:nth-child(3){ animation-delay:1.7s; }
+
+@keyframes cele-drop{
+    0%  { opacity:0; transform:translateY(-70px) scale(.5) rotate(-15deg); }
+    60% { opacity:1; transform:translateY(8px)   scale(1.08) rotate(3deg); }
+    100%{ opacity:1; transform:translateY(0)     scale(1) rotate(0); }
+}
+
+@keyframes cele-float{
+    0%,100%{ transform:translateY(0); }
+    50%    { transform:translateY(-8px); }
+}
+
+@keyframes cele-sparkle{
+    0%  { opacity:0; transform:scale(0) rotate(0); }
+    40% { opacity:1; transform:scale(1.2) rotate(25deg); }
+    100%{ opacity:0; transform:scale(.4) rotate(50deg); }
+}
+
+/* ---------- text ---------- */
+
+.cele-kicker,
+.cele-title,
+.cele-stats,
+.cele-unlock,
+.cele-score,
+.cele-msg,
+.cele-actions{
+    opacity:0;
+    transform:translateY(14px);
+}
+
+.cele.is-open .cele-kicker { animation:cele-rise .5s ease-out .45s forwards; }
+.cele.is-open .cele-title  { animation:cele-rise .5s ease-out .55s forwards; }
+.cele.is-open .cele-stats  { animation:cele-rise .5s ease-out .7s  forwards; }
+.cele.is-open .cele-unlock { animation:cele-rise .5s ease-out .85s forwards; }
+.cele.is-open .cele-score  { animation:cele-rise .5s ease-out 1s   forwards; }
+.cele.is-open .cele-msg    { animation:cele-rise .5s ease-out 1.3s forwards; }
+.cele.is-open .cele-actions{ animation:cele-rise .5s ease-out 1s   forwards; }
+
+.cele-unit.is-open .cele-actions{ animation-delay:1.6s; }
+
+@keyframes cele-rise{
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.cele-kicker{
+    font-size:.72rem;
+    font-weight:800;
+
+    letter-spacing:.16em;
+    text-transform:uppercase;
+
+    color:#6366F1;
+
+    margin-bottom:6px;
+}
+
+.cele-title{
+    font-size:1.35rem;
+    font-weight:700;
+    line-height:1.3;
+
+    color:#111827;
+
+    margin:0 0 20px;
+}
+
+/* ---------- stats (lesson) ---------- */
+
+.cele-stats{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
+
+    margin-bottom:18px;
+}
+
+.cele-ring{
+    position:relative;
+    width:104px;
+    height:104px;
+}
+
+.cele-ring svg{
+    width:100%;
+    height:100%;
+    transform:rotate(-90deg);
+}
+
+.cele-ring circle{
+    fill:none;
+    stroke-width:11;
+}
+
+.cele-ring .bg{
+    stroke:#EEF2FF;
+}
+
+.cele-ring .fg{
+    stroke:url(#cele-ring-grad);
+    stroke-linecap:round;
+}
+
+.cele-ring-label{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.cele-ring-label strong{
+    font-size:1.25rem;
+    font-weight:800;
+    color:#111827;
+    line-height:1;
+}
+
+.cele-ring-label small{
+    font-size:.62rem;
+    font-weight:600;
+    color:#6B7280;
+    margin-top:3px;
+}
+
+.cele-stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:12px 18px;
+
+    border-radius:16px;
+    background:#F5F7FB;
+}
+
+.cele-stat strong{
+    font-size:2rem;
+    font-weight:800;
+    line-height:1;
+
+    background:linear-gradient(135deg, #6A4CF5, #2AD4E6);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.cele-stat small{
+    font-size:.72rem;
+    font-weight:600;
+    color:#6B7280;
+    margin-top:4px;
+}
+
+.cele-unlock{
+    background:#FEF3C7;
+    color:#92400E;
+
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    font-size:.85rem;
+    font-weight:600;
+
+    margin-bottom:6px;
+}
+
+/* ---------- buttons ---------- */
+
+.cele-actions{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.cele-btn{
+    border:none;
+    border-radius:12px;
+
+    padding:12px 22px;
+
+    font-family:'Poppins', sans-serif;
+    font-size:.92rem;
+    font-weight:700;
+
+    background:#4F46E5;
+    color:white;
+
+    box-shadow:0 5px 0 #3730A3;
+
+    cursor:pointer;
+
+    transition:transform .08s, box-shadow .08s, background .15s;
+}
+
+.cele-btn:hover{ background:#4338CA; }
+
+.cele-btn:active{
+    transform:translateY(5px);
+    box-shadow:0 0 0 #3730A3;
+}
+
+.cele-btn.ghost{
+    background:#EEF2FF;
+    color:#3730A3;
+    box-shadow:0 5px 0 #C7D2FE;
+}
+
+.cele-btn.ghost:hover{ background:#E0E7FF; }
+.cele-btn.ghost:active{ box-shadow:0 0 0 #C7D2FE; }
+
+.cele-btn.gold{
+    background:#FBBF24;
+    color:#451A03;
+    box-shadow:0 5px 0 #B45309;
+}
+
+.cele-btn.gold:hover{ background:#F59E0B; }
+.cele-btn.gold:active{ box-shadow:0 0 0 #B45309; }
+
+.cele-btn.ghost.light{
+    background:rgba(255,255,255,.12);
+    color:white;
+    box-shadow:0 5px 0 rgba(255,255,255,.18);
+}
+
+.cele-btn.ghost.light:hover{ background:rgba(255,255,255,.2); }
+.cele-btn.ghost.light:active{ box-shadow:0 0 0 rgba(255,255,255,.18); }
+
+.cele-btn:focus-visible{
+    outline:3px solid #A5B4FC;
+    outline-offset:3px;
+}
+
+/* ===========================
+   UNIT COMPLETE — the grand one
+=========================== */
+
+.cele-unit{
+    background:radial-gradient(ellipse at center, rgba(106,76,245,.6) 0%, rgba(17,24,39,.9) 70%);
+}
+
+/* rotating sunburst behind everything */
+
+.cele-rays{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:170vmax;
+    height:170vmax;
+
+    background:repeating-conic-gradient(from 0deg, rgba(255,255,255,.09) 0deg 9deg, transparent 9deg 20deg);
+
+    -webkit-mask:radial-gradient(circle, #000 0%, rgba(0,0,0,.6) 25%, transparent 58%);
+    mask:radial-gradient(circle, #000 0%, rgba(0,0,0,.6) 25%, transparent 58%);
+
+    transform:translate(-50%, -50%) rotate(0deg);
+
+    opacity:0;
+    transition:opacity 1.2s ease .3s;
+
+    animation:cele-spin 40s linear infinite;
+
+    pointer-events:none;
+}
+
+.cele.is-open .cele-rays{
+    opacity:1;
+}
+
+@keyframes cele-spin{
+    to{ transform:translate(-50%, -50%) rotate(360deg); }
+}
+
+.cele-unit .cele-card{
+    width:min(560px, 100%);
+
+    background:linear-gradient(180deg, #1E1B4B 0%, #111827 100%);
+    color:white;
+
+    padding:56px 36px 34px;
+
+    box-shadow:0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.08), 0 0 80px rgba(106,76,245,.35);
+}
+
+.cele-unit .cele-kicker{
+    color:#FDE68A;
+}
+
+.cele-unit .cele-title{
+    color:white;
+    font-size:1.55rem;
+    margin-bottom:10px;
+}
+
+/* badge: shockwave rings + big crowned star */
+
+.cele-badge{
+    position:relative;
+
+    width:164px;
+    height:164px;
+
+    margin:-150px auto 12px;
+}
+
+.cele-shock{
+    position:absolute;
+    inset:0;
+
+    border-radius:50%;
+    border:4px solid rgba(253,230,138,.85);
+
+    opacity:0;
+    transform:scale(.5);
+
+    animation:cele-shock 1.2s ease-out .6s forwards;
+}
+
+.cele-shock.two{
+    border-color:rgba(42,212,230,.85);
+    animation-delay:.85s;
+}
+
+@keyframes cele-shock{
+    0%  { opacity:1; transform:scale(.5); }
+    100%{ opacity:0; transform:scale(2.4); }
+}
+
+.cele-mascot-big{
+    width:164px;
+    height:164px;
+
+    margin:0;
+
+    filter:drop-shadow(0 0 30px rgba(253,230,138,.55)) drop-shadow(0 16px 20px rgba(0,0,0,.45));
+
+    opacity:0;
+    animation:cele-badge-in .9s cubic-bezier(.2,1.5,.4,1) .35s forwards, cele-float 3.2s ease-in-out 1.4s infinite;
+}
+
+@keyframes cele-badge-in{
+    0%  { opacity:0; transform:scale(0) rotate(-40deg); }
+    70% { opacity:1; transform:scale(1.12) rotate(4deg); }
+    100%{ opacity:1; transform:scale(1) rotate(0); }
+}
+
+.cele-crown{
+    opacity:0;
+    transform-box:fill-box;
+    transform-origin:center;
+
+    animation:cele-crown .6s cubic-bezier(.3,1.6,.5,1) 1.05s forwards;
+}
+
+@keyframes cele-crown{
+    0%  { opacity:0; transform:translateY(-34px) rotate(-12deg) scale(.6); }
+    100%{ opacity:1; transform:translateY(0) rotate(0) scale(1); }
+}
+
+/* per-letter title */
+
+.cele-title-letters span{
+    display:inline-block;
+
+    opacity:0;
+    transform:translateY(24px) rotate(8deg);
+
+    animation:cele-letter .55s cubic-bezier(.2,1.4,.4,1) forwards;
+}
+
+.cele-title-letters span.sp{
+    width:.32em;
+    animation:none;
+    opacity:1;
+    transform:none;
+}
+
+@keyframes cele-letter{
+    to{ opacity:1; transform:translateY(0) rotate(0); }
+}
+
+/* score */
+
+.cele-score{
+    display:flex;
+    align-items:baseline;
+    justify-content:center;
+    gap:8px;
+
+    margin:6px 0 4px;
+}
+
+.cele-score strong{
+    font-size:3.4rem;
+    font-weight:800;
+    line-height:1;
+
+    color:#FDE68A;
+
+    text-shadow:0 0 30px rgba(253,230,138,.5);
+}
+
+.cele-score span{
+    font-size:1.2rem;
+    font-weight:600;
+    color:rgba(255,255,255,.6);
+}
+
+.cele-stamp{
+    display:inline-block;
+
+    margin:6px 0 4px;
+    padding:6px 16px;
+
+    border:3px solid #FDE68A;
+    border-radius:10px;
+
+    color:#FDE68A;
+
+    font-size:1rem;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+
+    opacity:0;
+    transform:rotate(-8deg) scale(2.4);
+
+    animation:cele-stamp .4s cubic-bezier(.2,1,.3,1) 2s forwards;
+}
+
+@keyframes cele-stamp{
+    to{ opacity:1; transform:rotate(-8deg) scale(1); }
+}
+
+.cele-msg{
+    color:rgba(255,255,255,.8);
+
+    font-size:.95rem;
+    line-height:1.55;
+
+    max-width:380px;
+    margin:10px auto 0;
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width:520px){
+
+    .cele{ padding:16px; }
+
+    .cele-card{
+        padding:40px 20px 24px;
+        border-radius:22px;
+    }
+
+    .cele-unit .cele-card{
+        padding-top:48px;
+    }
+
+    .cele-stats{ gap:16px; }
+
+    .cele-unit .cele-title{ font-size:1.25rem; }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce){
+
+    .cele,
+    .cele *{
+        animation-duration:.01ms !important;
+        animation-delay:0s !important;
+        transition-duration:.01ms !important;
+    }
+
+    .cele-rays{ display:none; }
+}

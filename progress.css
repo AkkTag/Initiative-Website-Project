@@ -1,0 +1,306 @@
+/* ===========================
+   PROGRESS — completion marks + "Mark lesson complete" bar
+=========================== */
+
+/* ---------- unit list ---------- */
+
+.unit-list .unit{
+    position:relative;
+    padding-right:64px;
+    padding-bottom:22px;
+}
+
+.unit-list .unit[data-progress]:not([data-progress=""])::after{
+    content:attr(data-progress);
+
+    position:absolute;
+    right:12px;
+    top:14px;
+
+    font-size:.68rem;
+    font-weight:700;
+
+    padding:2px 8px;
+    border-radius:999px;
+
+    background:rgba(30,58,138,.12);
+    color:#1E3A8A;
+}
+
+.unit-list .unit.active[data-progress]:not([data-progress=""])::after{
+    background:rgba(255,255,255,.22);
+    color:white;
+}
+
+.unit-list .unit.unit-done::after{
+    content:"✓ " attr(data-progress);
+    background:#BEFF62;
+    color:#111827;
+}
+
+.unit-bar{
+    position:absolute;
+    left:16px;
+    right:16px;
+    bottom:8px;
+
+    height:4px;
+    border-radius:4px;
+
+    background:rgba(30,58,138,.15);
+    overflow:hidden;
+}
+
+.unit.active .unit-bar{
+    background:rgba(255,255,255,.25);
+}
+
+.unit-bar::after{
+    content:"";
+    display:block;
+
+    height:100%;
+    width:var(--p, 0%);
+
+    border-radius:4px;
+    background:linear-gradient(90deg, #6A4CF5, #2AD4E6);
+
+    transition:width .6s cubic-bezier(.2,.8,.2,1);
+}
+
+.unit.active .unit-bar::after{
+    background:#BEFF62;
+}
+
+/* ---------- lesson flyout ---------- */
+
+.lesson-sidebar .lesson.lesson-done{
+    position:relative;
+    padding-right:36px;
+}
+
+.lesson-sidebar .lesson.lesson-done::after{
+    content:"✓";
+
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:20px;
+    height:20px;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:.7rem;
+    font-weight:800;
+
+    background:#BEFF62;
+    color:#111827;
+}
+
+.lesson-sidebar .lesson.active.lesson-done::after{
+    background:#111827;
+    color:#BEFF62;
+}
+
+.lesson-sidebar .lesson-unit-test{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-top:6px;
+    padding-top:14px;
+
+    border-top:1px dashed rgba(255,255,255,.25);
+    border-radius:0 0 12px 12px;
+
+    background:transparent;
+}
+
+.lesson-sidebar .lesson-unit-test:hover{
+    background:rgba(255,255,255,.12);
+    transform:none;
+}
+
+.lesson-sidebar .lesson.lesson-unit-test::after,
+.lesson-sidebar .lesson.lesson-unit-test.lesson-done::after{
+    display:none;   /* the entry has its own icon; no trailing check mark */
+}
+
+.lesson-sidebar .lesson.lesson-unit-test.lesson-done{
+    padding-right:12px;
+}
+
+.lesson-sidebar .lesson-unit-test .lut-icon{
+    width:28px;
+    height:28px;
+    flex-shrink:0;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:8px;
+
+    background:linear-gradient(135deg, #6A4CF5, #2AD4E6);
+    color:white;
+
+    font-size:.9rem;
+    font-weight:800;
+}
+
+.lesson-sidebar .lesson-unit-test.lesson-done .lut-icon{
+    background:#BEFF62;
+    color:#111827;
+}
+
+.lesson-sidebar .lesson-unit-test .lut-text{
+    display:flex;
+    flex-direction:column;
+
+    font-weight:600;
+    color:white;
+}
+
+.lesson-sidebar .lesson-unit-test .lut-text small{
+    font-size:.72rem;
+    font-weight:400;
+    opacity:.8;
+}
+
+.lesson-sidebar .lesson-unit-test.is-locked{
+    opacity:.55;
+    cursor:default;
+}
+
+/* ---------- "Mark lesson complete" bar ---------- */
+
+.lesson-complete-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+
+    margin:56px 0 8px;
+    padding:22px 26px;
+
+    border-radius:18px;
+    border:2px dashed #C7D2FE;
+    background:#F5F7FB;
+
+    font-family:'Poppins', sans-serif;
+}
+
+.lesson-complete-bar[data-state="done"]{
+    border:2px solid #86EFAC;
+    background:#F0FDF4;
+}
+
+.lcb-text strong{
+    display:block;
+    color:#111827;
+    font-size:1.05rem;
+    margin-bottom:2px;
+}
+
+.lcb-text span{
+    color:#6B7280;
+    font-size:.9rem;
+}
+
+.lcb-done{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.lcb-check{
+    width:44px;
+    height:44px;
+    flex-shrink:0;
+
+    border-radius:50%;
+    background:#22C55E;
+    color:white;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+    font-weight:800;
+
+    box-shadow:0 6px 16px rgba(34,197,94,.35);
+
+    animation:lcb-pop .45s cubic-bezier(.2,1.5,.4,1);
+}
+
+@keyframes lcb-pop{
+    from{ transform:scale(0) rotate(-30deg); }
+    to  { transform:scale(1) rotate(0); }
+}
+
+.lcb-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.lcb-btn{
+    border:none;
+    border-radius:12px;
+
+    padding:12px 22px;
+
+    font-family:'Poppins', sans-serif;
+    font-size:.92rem;
+    font-weight:700;
+
+    background:#22C55E;
+    color:white;
+
+    box-shadow:0 5px 0 #15803D;
+
+    cursor:pointer;
+
+    transition:transform .08s, box-shadow .08s, background .15s;
+}
+
+.lcb-btn:hover{
+    background:#16A34A;
+}
+
+.lcb-btn:active{
+    transform:translateY(5px);
+    box-shadow:0 0 0 #15803D;
+}
+
+.lcb-btn.ghost{
+    background:white;
+    color:#4B5563;
+
+    box-shadow:0 5px 0 #D1D5DB;
+}
+
+.lcb-btn.ghost:hover{
+    background:#F9FAFB;
+}
+
+.lcb-btn.ghost:active{
+    box-shadow:0 0 0 #D1D5DB;
+}
+
+.lcb-btn:focus-visible{
+    outline:3px solid #86EFAC;
+    outline-offset:2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    .lcb-check{ animation:none; }
+    .unit-bar::after{ transition:none; }
+}
