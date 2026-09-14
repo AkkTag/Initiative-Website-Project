@@ -165,9 +165,52 @@ function registerSections() {
 
 }
 
+let activeHoveredUnit = null;
+let flyoutCloseTimer = null;
+
+function updateLessonSidebarPosition() {
+    if (!activeHoveredUnit || !lessonSidebar.classList.contains("show")) return;
+
+    const sidebar = document.querySelector(".course-sidebar");
+    if (!sidebar) return;
+
+    const sidebarRect = sidebar.getBoundingClientRect();
+    const unitRect = activeHoveredUnit.getBoundingClientRect();
+
+    // Position top aligned with the active unit button relative to course-sidebar
+    let targetTop = unitRect.top - sidebarRect.top;
+
+    // Constrain so it doesn't overflow above top padding or below the profile card
+    const flyoutHeight = lessonSidebar.offsetHeight || 300;
+    const maxAllowedTop = window.innerHeight - flyoutHeight - 110; // 110px profile card clearance
+
+    if (targetTop > maxAllowedTop) {
+        targetTop = Math.max(18, maxAllowedTop);
+    }
+    if (targetTop < 18) {
+        targetTop = 18;
+    }
+
+    lessonSidebar.style.top = `${Math.round(targetTop)}px`;
+}
+
+function scheduleCloseFlyout() {
+    clearTimeout(flyoutCloseTimer);
+    flyoutCloseTimer = setTimeout(() => {
+        closeLessonSidebar();
+    }, 180);
+}
+
+function cancelCloseFlyout() {
+    clearTimeout(flyoutCloseTimer);
+}
+
 function openUnit(unit){
 
-    const unitName = unit.textContent.trim();
+    cancelCloseFlyout();
+    activeHoveredUnit = unit;
+
+    const unitName = unit.childNodes[0]?.textContent?.trim() || unit.textContent.trim();
 
     units.forEach(u => {
         u.classList.remove("active");
@@ -179,21 +222,21 @@ function openUnit(unit){
 
     loadUnit(unitName);
 
-    const index = Array.from(units).indexOf(unit);
-    const unitOffset = index * 58;
-    lessonSidebar.style.top = `${unitOffset}px`;
     lessonSidebar.classList.add("show");
+    updateLessonSidebarPosition();
 
 }
 
 function closeLessonSidebar(){
 
+    activeHoveredUnit = null;
     lessonSidebar.classList.remove("show");
 
     units.forEach(u => {
         u.setAttribute("aria-expanded", "false");
         // Keep the unit whose lesson is currently loaded visually active
-        u.classList.toggle("active", u.textContent.trim() === currentUnit);
+        const name = u.childNodes[0]?.textContent?.trim() || u.textContent.trim();
+        u.classList.toggle("active", name === currentUnit);
     });
 
 }
@@ -203,16 +246,20 @@ units.forEach((unit) => {
     unit.setAttribute("aria-haspopup", "listbox");
     unit.setAttribute("aria-expanded", "false");
 
-    // Mouse users: hover opens the flyout (desktop convenience)
-    unit.addEventListener("mouseenter", () => openUnit(unit));
-
-    // Touch / keyboard users: click opens/selects the flyout for this unit.
-    // (Hover already opens it for mouse users — click should never toggle it closed,
-    // otherwise a normal mouse click reads as "hover-open then click-close".)
-    unit.addEventListener("click", () => {
-
+    // Mouse users: hover opens the flyout
+    unit.addEventListener("mouseenter", () => {
+        cancelCloseFlyout();
         openUnit(unit);
+    });
 
+    unit.addEventListener("mouseleave", () => {
+        scheduleCloseFlyout();
+    });
+
+    // Touch / keyboard users: click opens/selects the flyout for this unit
+    unit.addEventListener("click", () => {
+        cancelCloseFlyout();
+        openUnit(unit);
     });
 
     unit.addEventListener("keydown", (e) => {
@@ -230,38 +277,49 @@ units.forEach((unit) => {
 
 });
 
-lessonSidebar.addEventListener("mouseenter",()=>{
-
+lessonSidebar.addEventListener("mouseenter", () => {
+    cancelCloseFlyout();
     lessonSidebar.classList.add("show");
-
 });
 
-lessonSidebar.addEventListener("mouseleave",()=>{
-
-    closeLessonSidebar();
-
+lessonSidebar.addEventListener("mouseleave", () => {
+    scheduleCloseFlyout();
 });
 
 const unitList = document.querySelector(".unit-list");
 
-unitList.addEventListener("mouseleave",(e)=>{
+if (unitList) {
+    unitList.addEventListener("scroll", () => {
+        if (lessonSidebar.classList.contains("show")) {
+            updateLessonSidebarPosition();
+        }
+    });
 
-    // Did the cursor enter the flyout?
-    if(lessonSidebar.contains(e.relatedTarget))
-        return;
+    unitList.addEventListener("mouseenter", () => {
+        cancelCloseFlyout();
+    });
 
-    closeLessonSidebar();
+    unitList.addEventListener("mouseleave", (e) => {
+        if (lessonSidebar.contains(e.relatedTarget)) return;
+        scheduleCloseFlyout();
+    });
+}
 
+window.addEventListener("resize", () => {
+    if (lessonSidebar.classList.contains("show")) {
+        updateLessonSidebarPosition();
+    }
 });
 
-// Close the flyout when a click lands outside of it entirely
+// Close the flyout when a click lands outside of both unit list and lesson sidebar
 document.addEventListener("click", (e) => {
 
-    if(!lessonSidebar.contains(e.target) && !unitList.contains(e.target)){
+    if(!lessonSidebar.contains(e.target) && !unitList?.contains(e.target)){
         closeLessonSidebar();
     }
 
 });
+
 
 
 const tabs = document.querySelectorAll(".lesson-tabs .tab");

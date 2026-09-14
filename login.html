@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <title>Login - Constarration</title>
   <link rel="stylesheet" href="login.css">
   
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
@@ -18,25 +17,88 @@
     <div class="login-card">
         <h2>Login</h2>
 
-        <div class="input-group">
-        <label>Username</label>
-        <input type="text" placeholder="Enter username">
-        </div>
+        <div id="auth-error" class="auth-error" style="display: none;"></div>
 
-        <div class="input-group">
-        <label>Password</label>
-        <input type="password" placeholder="Enter password">
-        </div>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Enter username" required autofocus>
+            </div>
 
-        <button class="login-btn">Login</button>
+            <div class="input-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <button type="button" id="demo-login-btn" class="demo-btn">1-Click Demo Login (Akshaj)</button>
 
         <div class="links">
-        <a href="#">Forgot password</a>
-        <a href="#">Create an account</a>
+            <a href="#" id="forgot-password-link">Forgot password?</a>
+            <a href="signup.html">Create an account</a>
         </div>
     </div>
 
   </div>
   
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("login-form");
+      const errorBox = document.getElementById("auth-error");
+      const userInput = document.getElementById("login-username");
+      const passInput = document.getElementById("login-password");
+      const demoBtn = document.getElementById("demo-login-btn");
+      const forgotLink = document.getElementById("forgot-password-link");
+
+      function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.style.display = "block";
+      }
+
+      function hideError() {
+        errorBox.style.display = "none";
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        hideError();
+
+        const username = userInput.value.trim();
+        const password = passInput.value;
+
+        const result = Auth.login(username, password);
+        if (result.success) {
+          window.location.href = "dashboard.html";
+        } else {
+          showError(result.message);
+        }
+      });
+
+      demoBtn.addEventListener("click", () => {
+        hideError();
+        // Log in directly with default Akshaj account
+        const result = Auth.login("Akshaj", "password123");
+        if (result.success) {
+          window.location.href = "dashboard.html";
+        } else {
+          // If password was changed, auto-login via user list
+          const users = Auth.getUsers();
+          const first = Object.values(users)[0];
+          if (first) {
+            Auth.login(first.username, first.password);
+            window.location.href = "dashboard.html";
+          }
+        }
+      });
+
+      forgotLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert("For demo purposes, the default credentials are:\nUsername: Akshaj\nPassword: password123\n\nYou can also click the '1-Click Demo Login' button or create a new account.");
+      });
+    });
+  </script>
 </body>
 </html>

@@ -421,7 +421,7 @@
         restore.classList.remove("is-open");
         state.hidden = false;
         saveState();
-        say("I'm back! Click me whenever you need a hand.", { pose: "wave", duration: 4500 });
+        say("I'm back! Click me whenever you need a Starr.", { pose: "wave", duration: 4500 });
     }
 
     restore.addEventListener("click", show);

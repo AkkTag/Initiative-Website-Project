@@ -70,6 +70,30 @@
 
 }
 
+.logout-btn-mini{
+    margin-left: auto;
+    background: rgba(0, 0, 0, 0.08);
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1F2937;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.logout-btn-mini:hover{
+    background: rgba(239, 68, 68, 0.2);
+    color: #DC2626;
+    transform: scale(1.08);
+}
+
+
 /*RESPONSIVE*/
 
 @media(max-width:900px){

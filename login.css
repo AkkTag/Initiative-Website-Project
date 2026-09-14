@@ -112,10 +112,41 @@ body {
 .links a {
   text-decoration: none;
   color: #4a90e2;
+  font-weight: 500;
 }
 
 .links a:hover {
   text-decoration: underline;
+}
+
+.auth-error {
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #B91C1C;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.demo-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px;
+  border: 1px solid #4a90e2;
+  border-radius: 10px;
+  background: transparent;
+  color: #4a90e2;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+}
+
+.demo-btn:hover {
+  background: #EEF6FF;
+  transform: translateY(-1px);
 }
 
 .auth-wrapper{
@@ -128,7 +159,9 @@ body {
     text-align: center;
     font-size: 3rem;
     font-weight: 700;
-    color: #7cb5ff;          /* Blue */
+    color: #ffffff;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.15);
     margin-top: 0px;
+    margin-bottom: 20px;
     letter-spacing: 2px;
 }
