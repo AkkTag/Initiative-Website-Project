@@ -74,8 +74,8 @@
     margin-left: auto;
     background: rgba(0, 0, 0, 0.08);
     border: none;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -83,8 +83,14 @@
     color: #1F2937;
     cursor: pointer;
     font-size: 14px;
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s, transform 0.2s, color 0.2s;
     flex-shrink: 0;
+}
+
+.logout-btn-mini svg{
+    display: block;
+    color: inherit;
+    stroke: currentColor;
 }
 
 .logout-btn-mini:hover{
@@ -92,6 +98,7 @@
     color: #DC2626;
     transform: scale(1.08);
 }
+
 
 
 /*RESPONSIVE*/
@@ -244,8 +251,8 @@ width:60%;
 
 }
 
-/*badge at the top-right of the screen, can modify later if needed*/
-.badge{
+/* Old badge on banners if needed */
+.banner-badge{
 
     position:absolute;
 
@@ -265,6 +272,7 @@ width:60%;
     backdrop-filter:blur(6px);
 
 }
+
 
 .logo-star {
     position: absolute;

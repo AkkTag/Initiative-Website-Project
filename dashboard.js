@@ -1,32 +1,46 @@
 // ==========================================
-// DASHBOARD CONTROLLER
+// DASHBOARD CONTROLLER & REAL-TIME PROGRESS
 // ==========================================
 
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Course Progress percentages
+function updateDashboardProgress() {
+    // 1. Base progress for other courses
     const courseProgress = {
-        "apcsa-card": 72,
+        "apcsa-card": 0,
         "adfunc-card": 58,
         "chem-card": 45,
         "econ-card": 61
     };
 
-    // Calculate real AP CSA progress from localStorage if present
-    try {
-        const raw = localStorage.getItem("starr.progress.v1");
-        if (raw) {
-            const parsed = JSON.parse(raw);
-            const doneCount = Object.keys(parsed.lessons || {}).length;
-            // AP CSA has 4 + 15 + 12 + 9 + 17 = 57 lessons across units 0-4
-            if (doneCount > 0) {
-                const calculated = Math.min(100, Math.round((doneCount / 57) * 100));
-                courseProgress["apcsa-card"] = Math.max(courseProgress["apcsa-card"], calculated);
-            }
+    // 2. Real AP CSA progress calculation for active student
+    let apcsaPercent = 0;
+    let doneLessons = 0;
+    let totalLessons = 57;
+
+    if (window.Progress) {
+        if (typeof window.Progress.reload === "function") {
+            window.Progress.reload();
         }
-    } catch (e) {
-        // use fallback
+        if (typeof window.Progress.overallPercent === "function") {
+            apcsaPercent = window.Progress.overallPercent();
+            doneLessons = window.Progress.totalCourseLessonsDone();
+            totalLessons = window.Progress.totalCourseLessons() || 57;
+        }
+    } else {
+        try {
+            const raw = localStorage.getItem("starr.progress.v1");
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                doneLessons = Object.keys(parsed.lessons || {}).length;
+                apcsaPercent = Math.min(100, Math.round((doneLessons / 57) * 100));
+            }
+        } catch (e) {
+            apcsaPercent = 0;
+        }
     }
 
+    courseProgress["apcsa-card"] = apcsaPercent;
+
+    // 3. Update DOM for all course cards
     for (const id in courseProgress) {
         const card = document.getElementById(id);
         if (!card) continue;
@@ -40,9 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (text) {
-            text.textContent = `${percent}% Complete`;
+            if (id === "apcsa-card") {
+                text.textContent = doneLessons > 0 
+                    ? `${percent}% Complete (${doneLessons}/${totalLessons} lessons)`
+                    : `0% Complete (0/${totalLessons} lessons)`;
+            } else {
+                text.textContent = `${percent}% Complete`;
+            }
         }
     }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Initial progress render
+    updateDashboardProgress();
 
     // 2. Hook up Course Card navigation
     const apcsaCard = document.getElementById("apcsa-card");
@@ -73,3 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// Update progress whenever tab becomes active or storage changes
+window.addEventListener("storage", updateDashboardProgress);
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        updateDashboardProgress();
+    }
+});
+window.addEventListener("pageshow", updateDashboardProgress);

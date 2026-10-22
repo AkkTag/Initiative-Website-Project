@@ -8,6 +8,8 @@
   
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -16,6 +18,37 @@
 
     <div class="login-card">
         <h2>Login</h2>
+
+        <p class="social-title">Sign in with</p>
+
+        <div class="social-buttons">
+            <button type="button" class="social-btn google" data-provider="Google">
+                <svg class="social-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Google</span>
+            </button>
+            <button type="button" class="social-btn microsoft" data-provider="Microsoft">
+                <svg class="social-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#F25022" d="M1 1h10v10H1z"/>
+                    <path fill="#7FBA00" d="M13 1h10v10H13z"/>
+                    <path fill="#00A4EF" d="M1 13h10v10H1z"/>
+                    <path fill="#FFB900" d="M13 13h10v10H13z"/>
+                </svg>
+                <span>Microsoft</span>
+            </button>
+            <button type="button" class="social-btn yahoo" data-provider="Yahoo">
+                <span class="yahoo-letter-icon">Y!</span>
+                <span>Yahoo</span>
+            </button>
+        </div>
+
+        <div class="divider">
+            <span>or with password</span>
+        </div>
 
         <div id="auth-error" class="auth-error" style="display: none;"></div>
 
@@ -42,6 +75,67 @@
     </div>
 
   </div>
+
+  <!-- OAuth 2.0 Permission Consent Modal -->
+  <div id="oauth-modal" class="oauth-modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="oauth-backdrop"></div>
+      <div class="oauth-card">
+          <button type="button" class="oauth-close" id="oauth-close-btn" aria-label="Cancel authorization">&times;</button>
+          
+          <div class="oauth-provider-header">
+              <div id="oauth-provider-icon" class="oauth-provider-icon"></div>
+              <div class="oauth-provider-text">
+                  <span id="oauth-provider-name" class="oauth-provider-name">Google</span>
+                  <h3>Sign in to <span class="oauth-app-highlight">Constarration</span></h3>
+              </div>
+          </div>
+
+          <p class="oauth-subtitle">
+              Authorize Constarration to access your account to personalize your AP Computer Science learning experience.
+          </p>
+
+          <form id="oauth-form">
+              <div class="oauth-input-group">
+                  <label for="oauth-name">Your Full Name (Displayed on Profile & Dashboard)</label>
+                  <input type="text" id="oauth-name" placeholder="Enter your real name" required>
+              </div>
+
+              <div class="oauth-input-group">
+                  <label for="oauth-email">Account Email</label>
+                  <input type="email" id="oauth-email" placeholder="Enter your email" required>
+              </div>
+
+              <div class="oauth-permissions-box">
+                  <div class="oauth-permissions-title">
+                      <i class="fas fa-shield-alt"></i> Permissions requested by Constarration:
+                  </div>
+                  <ul class="oauth-permissions-list">
+                      <li>
+                          <i class="fas fa-check-circle"></i>
+                          <span>View your basic profile information (Full Name & Avatar)</span>
+                      </li>
+                      <li>
+                          <i class="fas fa-check-circle"></i>
+                          <span>Access your email address for course updates</span>
+                      </li>
+                      <li>
+                          <i class="fas fa-check-circle"></i>
+                          <span>Save and track your AP CSA lesson completion & quiz scores</span>
+                      </li>
+                  </ul>
+              </div>
+
+              <p class="oauth-privacy-note">
+                  By clicking <strong>Allow & Continue</strong>, you permit Constarration to use your account information according to their Terms of Service and Privacy Policy.
+              </p>
+
+              <div class="oauth-actions">
+                  <button type="button" id="oauth-cancel-btn" class="oauth-btn oauth-cancel">Cancel</button>
+                  <button type="submit" id="oauth-submit-btn" class="oauth-btn oauth-submit">Allow & Continue</button>
+              </div>
+          </form>
+      </div>
+  </div>
   
   <script src="auth.js"></script>
   <script>
@@ -52,6 +146,60 @@
       const passInput = document.getElementById("login-password");
       const demoBtn = document.getElementById("demo-login-btn");
       const forgotLink = document.getElementById("forgot-password-link");
+      const socialBtns = document.querySelectorAll(".social-btn");
+
+      // OAuth Modal Elements
+      const oauthModal = document.getElementById("oauth-modal");
+      const oauthForm = document.getElementById("oauth-form");
+      const oauthNameInput = document.getElementById("oauth-name");
+      const oauthEmailInput = document.getElementById("oauth-email");
+      const oauthProviderName = document.getElementById("oauth-provider-name");
+      const oauthProviderIcon = document.getElementById("oauth-provider-icon");
+      const oauthSubmitBtn = document.getElementById("oauth-submit-btn");
+      const oauthCancelBtn = document.getElementById("oauth-cancel-btn");
+      const oauthCloseBtn = document.getElementById("oauth-close-btn");
+
+      let currentProvider = "Google";
+
+      const providerConfigs = {
+          "Google": {
+              name: "Google Account",
+              sampleName: "Alex Chen",
+              sampleEmail: "alex.chen@gmail.com",
+              buttonColor: "#4285F4",
+              iconHtml: `
+                  <svg width="28" height="28" viewBox="0 0 24 24">
+                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                  </svg>
+              `
+          },
+          "Microsoft": {
+              name: "Microsoft Account",
+              sampleName: "Jordan Taylor",
+              sampleEmail: "jordan.taylor@outlook.com",
+              buttonColor: "#0078D4",
+              iconHtml: `
+                  <svg width="28" height="28" viewBox="0 0 24 24">
+                      <path fill="#F25022" d="M1 1h10v10H1z"/>
+                      <path fill="#7FBA00" d="M13 1h10v10H13z"/>
+                      <path fill="#00A4EF" d="M1 13h10v10H1z"/>
+                      <path fill="#FFB900" d="M13 13h10v10H13z"/>
+                  </svg>
+              `
+          },
+          "Yahoo": {
+              name: "Yahoo! Account",
+              sampleName: "Samantha Reed",
+              sampleEmail: "samantha.reed@yahoo.com",
+              buttonColor: "#6001D2",
+              iconHtml: `
+                  <div style="font-weight:900; font-size: 22px; color: #6001D2; font-family: sans-serif;">Y!</div>
+              `
+          }
+      };
 
       function showError(msg) {
         errorBox.textContent = msg;
@@ -62,14 +210,14 @@
         errorBox.style.display = "none";
       }
 
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         hideError();
 
         const username = userInput.value.trim();
         const password = passInput.value;
 
-        const result = Auth.login(username, password);
+        const result = await Auth.login(username, password);
         if (result.success) {
           window.location.href = "dashboard.html";
         } else {
@@ -77,26 +225,82 @@
         }
       });
 
-      demoBtn.addEventListener("click", () => {
+      // Open OAuth Modal
+      function openOAuthModal(provider) {
+          currentProvider = provider;
+          const config = providerConfigs[provider] || providerConfigs["Google"];
+
+          oauthProviderName.textContent = config.name;
+          oauthProviderIcon.innerHTML = config.iconHtml;
+          oauthNameInput.value = config.sampleName;
+          oauthEmailInput.value = config.sampleEmail;
+          oauthSubmitBtn.style.backgroundColor = config.buttonColor;
+          oauthSubmitBtn.textContent = `Allow & Continue`;
+
+          oauthModal.classList.add("is-open");
+          oauthModal.setAttribute("aria-hidden", "false");
+          oauthNameInput.focus();
+      }
+
+      function closeOAuthModal() {
+          oauthModal.classList.remove("is-open");
+          oauthModal.setAttribute("aria-hidden", "true");
+      }
+
+      socialBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+              const provider = btn.dataset.provider || "Google";
+              openOAuthModal(provider);
+          });
+      });
+
+      oauthCancelBtn.addEventListener("click", closeOAuthModal);
+      oauthCloseBtn.addEventListener("click", closeOAuthModal);
+      document.querySelector(".oauth-backdrop")?.addEventListener("click", closeOAuthModal);
+
+      document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && oauthModal.classList.contains("is-open")) {
+              closeOAuthModal();
+          }
+      });
+
+      oauthForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const fullName = oauthNameInput.value.trim();
+          const email = oauthEmailInput.value.trim();
+
+          if (!fullName) {
+              alert("Please enter your name.");
+              return;
+          }
+
+          oauthSubmitBtn.disabled = true;
+          oauthSubmitBtn.textContent = "Signing in...";
+
+          const result = await Auth.loginSocial(currentProvider, fullName, email);
+          if (result.success) {
+              window.location.href = "dashboard.html";
+          } else {
+              alert("Sign-in failed. Please try again.");
+              oauthSubmitBtn.disabled = false;
+              oauthSubmitBtn.textContent = "Allow & Continue";
+          }
+      });
+
+      demoBtn.addEventListener("click", async () => {
         hideError();
         // Log in directly with default Akshaj account
-        const result = Auth.login("Akshaj", "password123");
+        const result = await Auth.login("Akshaj", "password123");
         if (result.success) {
           window.location.href = "dashboard.html";
         } else {
-          // If password was changed, auto-login via user list
-          const users = Auth.getUsers();
-          const first = Object.values(users)[0];
-          if (first) {
-            Auth.login(first.username, first.password);
-            window.location.href = "dashboard.html";
-          }
+          showError("Demo login failed. Please try logging in with username: Akshaj, password: password123");
         }
       });
 
       forgotLink.addEventListener("click", (e) => {
         e.preventDefault();
-        alert("For demo purposes, the default credentials are:\nUsername: Akshaj\nPassword: password123\n\nYou can also click the '1-Click Demo Login' button or create a new account.");
+        alert("For demo purposes, the default credentials are:\nUsername: Akshaj\nPassword: password123\n\nYou can also click the '1-Click Demo Login' button, use Google/Microsoft/Yahoo, or create a new account.");
       });
     });
   </script>

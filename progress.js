@@ -17,15 +17,33 @@
 //
 // Celebrations listen for the events above (see celebrations.js).
 
-(function () {
-
-    const KEY = "starr.progress.v1";
+    function getStorageKey() {
+        try {
+            if (window.Auth && typeof window.Auth.getCurrentUser === "function") {
+                const user = window.Auth.getCurrentUser();
+                if (user && user.username) {
+                    const safeName = user.username.toLowerCase().replace(/[^a-z0-9_]/g, "_");
+                    return `starr.progress.${safeName}.v1`;
+                }
+            }
+        } catch (e) {
+            // fallback
+        }
+        return "starr.progress.v1";
+    }
 
     let data = load();
 
     function load() {
         try {
-            const raw = localStorage.getItem(KEY);
+            const key = getStorageKey();
+            let raw = localStorage.getItem(key);
+            
+            // Seamless migration from legacy global key for default user
+            if (!raw && key.includes("akshaj")) {
+                raw = localStorage.getItem("starr.progress.v1");
+            }
+
             const parsed = raw ? JSON.parse(raw) : {};
             return { lessons: parsed.lessons || {}, units: parsed.units || {} };
         } catch (e) {
@@ -34,8 +52,12 @@
     }
 
     function save() {
-        try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) { /* ignore */ }
+        try { 
+            const key = getStorageKey();
+            localStorage.setItem(key, JSON.stringify(data)); 
+        } catch (e) { /* ignore */ }
     }
+
 
     function emit(name, detail) {
         document.dispatchEvent(new CustomEvent(name, { detail }));
@@ -110,8 +132,40 @@
             save();
             emit("progress:reset", {});
             refreshAll();
+        },
+
+        totalCourseLessons() {
+            if (!hasCourse || typeof courseData === "undefined") return 57;
+            return Object.values(courseData).reduce((sum, u) => sum + (u.lessons?.length || 0), 0);
+        },
+
+        totalCourseLessonsDone() {
+            if (!hasCourse || typeof courseData === "undefined") {
+                return Object.keys(data.lessons || {}).length;
+            }
+            let done = 0;
+            for (const unit in courseData) {
+                done += Progress.lessonsDone(unit);
+            }
+            return done;
+        },
+
+        overallPercent() {
+            const total = Progress.totalCourseLessons();
+            if (total === 0) return 0;
+            const done = Progress.totalCourseLessonsDone();
+            return Math.min(100, Math.round((done / total) * 100));
+        },
+
+        reload() {
+            data = load();
+            if (typeof refreshAll === "function") {
+                refreshAll();
+            }
         }
     };
+
+
 
     window.Progress = Progress;
 

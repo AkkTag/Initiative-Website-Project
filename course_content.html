@@ -28,10 +28,20 @@
     <aside class="course-sidebar">
 
         <div class="sidebar-header">
+            <a href="dashboard.html" class="back-dashboard-btn" title="Return to Course Dashboard">
+                <i class="fas fa-arrow-left"></i> <span>Dashboard</span>
+            </a>
             <h2>Computer Science A</h2>
-            <div class="badge">AP</div>
-            <div class="badge">Grade 11-12</div>
-
+            <div class="badge-row">
+                <button type="button" class="badge badge-btn" data-badge="ap" aria-haspopup="dialog" aria-expanded="false" title="Click for details on AP">
+                    <span>AP</span>
+                    <i class="fas fa-info-circle badge-info-icon" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="badge badge-btn" data-badge="grade" aria-haspopup="dialog" aria-expanded="false" title="Click for details on Grade 11-12">
+                    <span>Grade 11-12</span>
+                    <i class="fas fa-info-circle badge-info-icon" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
 
         <div class="unit-list" role="listbox" aria-label="Course units">
@@ -163,6 +173,27 @@
         <div class="lesson-body"></div>
         
     </main>
+
+    <!-- Badge Information Modal Dialog -->
+    <div id="badge-modal" class="badge-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="badge-modal-backdrop"></div>
+        <div class="badge-modal-container">
+            <button type="button" class="badge-modal-close" aria-label="Close information modal">&times;</button>
+            <div class="badge-modal-header">
+                <div class="badge-modal-icon" id="badge-modal-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="badge-modal-pill" id="badge-modal-pill">AP Course</div>
+            </div>
+            <h3 id="badge-modal-title">Advanced Placement (AP)</h3>
+            <div id="badge-modal-desc" class="badge-modal-body">
+                Explanation text goes here.
+            </div>
+            <div class="badge-modal-footer">
+                <button type="button" class="badge-modal-action-btn">Got it</button>
+            </div>
+        </div>
+    </div>
 
 </div>
 

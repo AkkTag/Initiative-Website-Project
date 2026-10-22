@@ -436,5 +436,76 @@ lessonContent.addEventListener("scroll", () => {
 //     });
 // });
 
+// ==========================================
+// BADGE INFORMATION POP-UP MODAL
+// ==========================================
+
+const BADGE_INFO = {
+    ap: {
+        pill: "College Board Program",
+        title: "Advanced Placement (AP)",
+        icon: '<i class="fas fa-graduation-cap"></i>',
+        desc: `
+            <p><strong>Advanced Placement (AP)</strong> is an internationally recognized program created by the College Board that offers college-level curricula and examinations to high school students.</p>
+            <p style="margin-top: 10px;">Scoring well on the <strong>AP Computer Science A Exam</strong> can earn you college computer science credits, advanced course standing, and a strong STEM foundation.</p>
+        `
+    },
+    grade: {
+        pill: "Target Audience",
+        title: "Grade 11–12 Recommendation",
+        icon: '<i class="fas fa-user-graduate"></i>',
+        desc: `
+            <p>This course curriculum is designed for <strong>11th and 12th grade high school students</strong> (or students with fundamental algebra and problem-solving skills).</p>
+            <p style="margin-top: 10px;">It covers object-oriented programming in <strong>Java</strong>, including classes, methods, data structures (Arrays, ArrayLists, 2D Arrays), standard algorithms (Searching, Sorting), and recursion.</p>
+        `
+    }
+};
+
+const badgeModal = document.getElementById("badge-modal");
+const badgeModalTitle = document.getElementById("badge-modal-title");
+const badgeModalDesc = document.getElementById("badge-modal-desc");
+const badgeModalPill = document.getElementById("badge-modal-pill");
+const badgeModalIcon = document.getElementById("badge-modal-icon");
+const badgeModalClose = document.querySelector(".badge-modal-close");
+const badgeModalActionBtn = document.querySelector(".badge-modal-action-btn");
+const badgeModalBackdrop = document.querySelector(".badge-modal-backdrop");
+
+function openBadgeModal(type) {
+    const info = BADGE_INFO[type];
+    if (!info || !badgeModal) return;
+
+    badgeModalPill.textContent = info.pill;
+    badgeModalTitle.textContent = info.title;
+    badgeModalIcon.innerHTML = info.icon;
+    badgeModalDesc.innerHTML = info.desc;
+
+    badgeModal.classList.add("is-open");
+    badgeModal.setAttribute("aria-hidden", "false");
+    badgeModalClose?.focus();
+}
+
+function closeBadgeModal() {
+    if (!badgeModal) return;
+    badgeModal.classList.remove("is-open");
+    badgeModal.setAttribute("aria-hidden", "true");
+}
+
+document.querySelectorAll(".badge-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const type = btn.dataset.badge;
+        openBadgeModal(type);
+    });
+});
+
+badgeModalClose?.addEventListener("click", closeBadgeModal);
+badgeModalActionBtn?.addEventListener("click", closeBadgeModal);
+badgeModalBackdrop?.addEventListener("click", closeBadgeModal);
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && badgeModal?.classList.contains("is-open")) {
+        closeBadgeModal();
+    }
+});
+
 loadUnit("Unit 0");
 loadLesson("Unit 0",0);
