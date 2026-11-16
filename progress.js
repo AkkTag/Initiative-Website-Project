@@ -17,6 +17,8 @@
 //
 // Celebrations listen for the events above (see celebrations.js).
 
+(function () {
+
     function getStorageKey() {
         try {
             if (window.Auth && typeof window.Auth.getCurrentUser === "function") {
@@ -263,10 +265,15 @@
 
     // ---------- "Mark lesson complete" bar ----------
 
+    let lastLoadedPos = null;
+
     function currentPos() {
-        const unit = typeof currentUnit !== "undefined" ? currentUnit : null;
-        const lesson = typeof currentLessonName !== "undefined" ? currentLessonName : null;
-        if (!unit || !lesson || !courseData[unit]) return null;
+        if (lastLoadedPos && courseData && courseData[lastLoadedPos.unit]) {
+            return lastLoadedPos;
+        }
+        const unit = (typeof currentUnit !== "undefined" && currentUnit) ? currentUnit : (window.currentUnit || null);
+        const lesson = (typeof currentLessonName !== "undefined" && currentLessonName) ? currentLessonName : (window.currentLessonName || null);
+        if (!unit || !lesson || !courseData || !courseData[unit]) return null;
         const index = courseData[unit].lessons.indexOf(lesson);
         return { unit, lesson, index };
     }
@@ -345,7 +352,12 @@
         renderBar();
     }
 
-    document.addEventListener("lesson:loaded", refreshAll);
+    document.addEventListener("lesson:loaded", (e) => {
+        if (e && e.detail && e.detail.unit && e.detail.lesson) {
+            lastLoadedPos = { unit: e.detail.unit, lesson: e.detail.lesson, index: e.detail.index };
+        }
+        refreshAll();
+    });
 
     refreshAll();
 

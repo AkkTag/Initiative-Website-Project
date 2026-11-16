@@ -99,6 +99,8 @@ function loadLesson(unitName, lessonIndex) {
 
     currentUnit = unitName;
     currentLessonName = lessonName;
+    window.currentUnit = unitName;
+    window.currentLessonName = lessonName;
 
     // Update header
     unitTitle.textContent = `${unitName} | ${unit.title}`;
