@@ -452,7 +452,7 @@ You do not call the celebrations yourself. They listen for events.
 student clicks "Mark lesson complete"  (progress.js renders that bar at the end of every lesson)
         │
         ▼
-Progress.completeLesson(unit, lesson)   saves to localStorage, fires the "progress:lesson" event
+Progress.completeLesson(unit, lesson)   saves to Firestore for signed-in users and localStorage as a cache, fires the "progress:lesson" event
         │
         ▼
 celebrations.js hears "progress:lesson" → Celebrations.lesson({ unit, lesson })
@@ -469,7 +469,7 @@ celebrations.js hears "progress:unit" → Celebrations.unit({ unit, score, total
 
 So if one day the unit test is replaced by a real exam, the only thing the new code has to do is call `Progress.completeUnit(unit, score, total)` and the grand celebration still plays.
 
-**Progress storage.** Everything is in the browser's localStorage under the key `starr.progress.v1` (Starr's own settings, such as "tour already seen", are under `starr.v1`). It is per browser, not per account. `Progress.reset()` wipes it.
+**Progress storage.** Signed-in users' lesson completions and unit-test results are stored in Firestore at `users/{uid}/appData/progress`, with a per-account local cache in the browser. Signed-out progress remains in `localStorage` under `starr.progress.v1` and is not automatically copied into an account. Starr's own settings, such as "tour already seen", are under `starr.v1`. `Progress.reset()` clears the current user's progress state.
 
 **The "Mark lesson complete" bar** is built by `renderBar()` in `progress.js` and styled by `.lesson-complete-bar` in `progress.css`. The green check that pops in when a lesson is done is `@keyframes lcb-pop`.
 
@@ -567,4 +567,4 @@ These are already followed in the code; keep them when you add things.
 
 * `dashboard.html` loads `script.js`, which does not exist. The real file is `dashboard.js`, so the dashboard progress percentages never fill in. Fix: change the script tag.
 * Units 0 and 4 have no vocabulary boxes yet, so they have no unit test and Starr's quiz says so.
-* Progress lives in the browser (localStorage), not on a server, so it does not follow a student between devices.
+* Signed-in progress follows a student between devices through Firebase Firestore. Signed-out progress remains local to the browser.

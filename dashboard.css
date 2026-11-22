@@ -4,6 +4,10 @@
     box-sizing:border-box;
 }
 
+.page {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
 
 body{
 
@@ -658,6 +662,7 @@ width:100%;
     width:90px;
 } */
 
+/* Background floating stars deactivated for now
 .floating-star{
     position:absolute;
     width:264px;
@@ -696,6 +701,7 @@ width:100%;
     left: 34%;
     transform: translateY(-50%, -50%), translateX(-50%, -50%);
 }
+*/
 
 
 

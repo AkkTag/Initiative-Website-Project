@@ -9,6 +9,11 @@
     
 }
 
+.page {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+
 body{
 
     font-family:'Poppins', sans-serif;

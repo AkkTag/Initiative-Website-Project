@@ -29,6 +29,11 @@ body {
   }
 }
 
+.page {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+}
+
 /* Card */
 .login-card {
   background: rgba(255, 255, 255, 0.85);

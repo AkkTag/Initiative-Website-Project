@@ -3,12 +3,12 @@
 // ==========================================
 
 function updateDashboardProgress() {
-    // 1. Base progress for other courses
+    // 1. Base progress for courses (inactive courses have 0% / empty progress)
     const courseProgress = {
         "apcsa-card": 0,
-        "adfunc-card": 58,
-        "chem-card": 45,
-        "econ-card": 61
+        "adfunc-card": 0,
+        "chem-card": 0,
+        "econ-card": 0
     };
 
     // 2. Real AP CSA progress calculation for active student
@@ -55,29 +55,44 @@ function updateDashboardProgress() {
 
         if (text) {
             if (id === "apcsa-card") {
+                text.style.display = "";
                 text.textContent = doneLessons > 0 
                     ? `${percent}% Complete (${doneLessons}/${totalLessons} lessons)`
                     : `0% Complete (0/${totalLessons} lessons)`;
             } else {
-                text.textContent = `${percent}% Complete`;
+                // Inactive courses cannot be accessed: progress bar is empty and percent complete is hidden
+                text.textContent = "";
+                text.style.display = "none";
             }
         }
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Initial progress render
-    updateDashboardProgress();
+function initDashboard() {
+    // Render after Firebase has resolved sign-in and loaded this account's state.
+    const initialProgress = window.Progress?.whenReady?.() || Promise.resolve();
+    initialProgress.then(updateDashboardProgress);
+    document.addEventListener("progress:lesson", updateDashboardProgress);
+    document.addEventListener("progress:lesson-undone", updateDashboardProgress);
+    document.addEventListener("progress:reset", updateDashboardProgress);
+    document.addEventListener("progress:sync-error", updateDashboardProgress);
 
     // 2. Hook up Course Card navigation
     const apcsaCard = document.getElementById("apcsa-card");
     if (apcsaCard) {
         const btn = apcsaCard.querySelector(".course-btn");
-        const openApcsa = () => { window.location.href = "course_content.html"; };
-        if (btn) btn.addEventListener("click", openApcsa);
+        const openApcsa = (e) => {
+            if (e && e.stopPropagation) e.stopPropagation();
+            window.location.href = "course_content.html";
+        };
+        if (btn) {
+            btn.onclick = openApcsa;
+            btn.addEventListener("click", openApcsa);
+        }
         apcsaCard.style.cursor = "pointer";
+        apcsaCard.onclick = openApcsa;
         apcsaCard.addEventListener("click", (e) => {
-            if (!e.target.closest("button")) openApcsa();
+            openApcsa(e);
         });
     }
 
@@ -86,18 +101,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = document.getElementById(id);
         if (!card) return;
         const btn = card.querySelector(".course-btn");
-        const showComingSoon = () => {
+        const showComingSoon = (e) => {
+            if (e && e.stopPropagation) e.stopPropagation();
             alert("This course is currently being prepared and will be available soon!");
         };
-        if (btn) btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            showComingSoon();
-        });
+        if (btn) {
+            btn.onclick = showComingSoon;
+            btn.addEventListener("click", showComingSoon);
+        }
         card.addEventListener("click", (e) => {
-            if (!e.target.closest("button")) showComingSoon();
+            if (!e.target.closest("button")) showComingSoon(e);
         });
     });
-});
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDashboard);
+} else {
+    initDashboard();
+}
 
 // Update progress whenever tab becomes active or storage changes
 window.addEventListener("storage", updateDashboardProgress);
