@@ -124,26 +124,7 @@ function loadLesson(unitName, lessonIndex) {
 
     console.log("Content found:", content);
 
-    if(content){
-
-        lessonBody.innerHTML = content;
-
-    }
-
-    else{
-
-        lessonBody.innerHTML = `
-            <section class="lesson-section">
-
-                <h2>${lessonName}</h2>
-
-                <p>
-                Lesson content coming soon.
-                </p>
-
-            </section>
-        `;
-    }
+    renderLessonContent(content, lessonName);
 
     console.log(courseData)
     console.log(lessonContentData)
@@ -155,6 +136,165 @@ function loadLesson(unitName, lessonIndex) {
         detail: { unit: unitName, lesson: lessonName, index: lessonIndex }
     }));
 
+}
+
+function renderLessonContent(content, lessonName) {
+    if (!content) {
+        lessonBody.innerHTML = `
+            <div class="lesson-layout-wrapper">
+                <div class="lesson-main-column">
+                    <section class="lesson-section">
+                        <h2>${lessonName}</h2>
+                        <p>Lesson content coming soon.</p>
+                    </section>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    // 1. Parse content to extract vocab and assign IDs to in-content boxes
+    const temp = document.createElement("div");
+    temp.innerHTML = content;
+
+    const vocabList = [];
+    const seen = new Set();
+    const boxes = temp.querySelectorAll(".vocab-box");
+
+    boxes.forEach((box, idx) => {
+        const boxId = box.id || `in-lesson-vocab-${idx + 1}`;
+        box.id = boxId;
+
+        const termEl = box.querySelector(".vocab-term");
+        const p = box.querySelector("p");
+        if (!termEl || !p) return;
+
+        const rawTerm = termEl.textContent.replace(/:\s*$/, "").trim();
+        const clone = p.cloneNode(true);
+        clone.querySelector(".vocab-term")?.remove();
+        const def = clone.textContent.replace(/^\s*:\s*/, "").replace(/\s+/g, " ").trim();
+        const key = rawTerm.toLowerCase();
+
+        if (rawTerm && def && !seen.has(key)) {
+            seen.add(key);
+            vocabList.push({
+                id: boxId,
+                term: rawTerm,
+                def: def
+            });
+        }
+    });
+
+    // 2. Build the vocabulary sidebar HTML
+    let vocabSidebarHtml = "";
+    const countText = vocabList.length === 1 ? "1 Word" : `${vocabList.length} Words`;
+
+    if (vocabList.length > 0) {
+        const cardsHtml = vocabList.map(item => `
+            <div class="vocab-summary-card" data-vocab-target="${item.id}" tabindex="0" role="button" aria-label="Jump to ${item.term} in lesson">
+                <div class="vocab-summary-card-header">
+                    <span class="vocab-label">Vocabulary</span>
+                    <span class="vocab-jump-hint" title="Scroll to term in lesson">
+                        <i class="fas fa-location-arrow"></i>
+                    </span>
+                </div>
+                <div class="vocab-summary-card-body">
+                    <span class="vocab-term">${item.term}:</span>
+                    <p class="vocab-summary-def">${item.def}</p>
+                </div>
+            </div>
+        `).join("");
+
+        vocabSidebarHtml = `
+            <aside class="lesson-vocab-sidebar" id="lesson-vocab-sidebar" aria-label="Lesson Vocabulary">
+                <div class="vocab-sidebar-header">
+                    <div class="vocab-sidebar-title-group">
+                        <div class="vocab-sidebar-icon">
+                            <i class="fas fa-book-bookmark"></i>
+                        </div>
+                        <div>
+                            <h3 class="vocab-sidebar-title">Lesson Vocabulary</h3>
+                            <span class="vocab-sidebar-subtitle">Key terms covered in this lesson</span>
+                        </div>
+                    </div>
+                    <span class="vocab-count-badge">${countText}</span>
+                </div>
+                <div class="vocab-cards-list">
+                    ${cardsHtml}
+                </div>
+            </aside>
+        `;
+    } else {
+        vocabSidebarHtml = `
+            <aside class="lesson-vocab-sidebar empty" id="lesson-vocab-sidebar" aria-label="Lesson Vocabulary">
+                <div class="vocab-sidebar-header">
+                    <div class="vocab-sidebar-title-group">
+                        <div class="vocab-sidebar-icon">
+                            <i class="fas fa-book-bookmark"></i>
+                        </div>
+                        <div>
+                            <h3 class="vocab-sidebar-title">Lesson Vocabulary</h3>
+                            <span class="vocab-sidebar-subtitle">Key terms covered in this lesson</span>
+                        </div>
+                    </div>
+                    <span class="vocab-count-badge">0 Words</span>
+                </div>
+                <div class="vocab-empty-box">
+                    <i class="fas fa-book-open"></i>
+                    <p>No new vocabulary terms introduced in this lesson.</p>
+                </div>
+            </aside>
+        `;
+    }
+
+    // 3. Inject the layout wrapper
+    lessonBody.innerHTML = `
+        <div class="lesson-layout-wrapper">
+            <div class="lesson-main-column">
+                ${temp.innerHTML}
+            </div>
+            ${vocabSidebarHtml}
+        </div>
+    `;
+
+    // 4. Wire click and keyboard handlers to jump to in-content vocab box
+    wireVocabJumpLinks();
+}
+
+function wireVocabJumpLinks() {
+    const cards = lessonBody.querySelectorAll(".vocab-summary-card");
+    cards.forEach(card => {
+        const targetId = card.dataset.vocabTarget;
+        if (!targetId) return;
+
+        const jumpAction = () => {
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+
+            const stickyTop = document.querySelector(".lesson-top-sticky");
+            const offset = stickyTop ? stickyTop.offsetHeight + 30 : 140;
+
+            const rect = targetEl.getBoundingClientRect();
+            const containerRect = lessonContent.getBoundingClientRect();
+            const targetTop = lessonContent.scrollTop + (rect.top - containerRect.top) - offset;
+
+            lessonContent.scrollTo({ top: targetTop, behavior: "smooth" });
+
+            // Visual feedback: temporarily pulse / highlight the in-content box
+            targetEl.classList.remove("vocab-highlight-pulse");
+            void targetEl.offsetWidth; // trigger reflow
+            targetEl.classList.add("vocab-highlight-pulse");
+            setTimeout(() => targetEl.classList.remove("vocab-highlight-pulse"), 2000);
+        };
+
+        card.addEventListener("click", jumpAction);
+        card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                jumpAction();
+            }
+        });
+    });
 }
 
 function registerSections() {
@@ -352,7 +492,9 @@ tabs.forEach(tab => {
 
             if (targetSection && lessonContent) {
                 const offset = stickyTop ? stickyTop.offsetHeight + 24 : 120;
-                const targetTop = targetSection.offsetTop - offset;
+                const rect = targetSection.getBoundingClientRect();
+                const containerRect = lessonContent.getBoundingClientRect();
+                const targetTop = lessonContent.scrollTop + (rect.top - containerRect.top) - offset;
 
                 lessonContent.scrollTo({ top: targetTop, behavior: "smooth" });
             }

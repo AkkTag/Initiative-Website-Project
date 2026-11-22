@@ -1236,6 +1236,273 @@ html{
     border-radius:20px;
 }
 
+/* ===========================
+   LESSON LAYOUT & VOCABULARY SIDEBAR
+=========================== */
+
+.lesson-layout-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 36px;
+    width: 100%;
+}
+
+.lesson-main-column {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 860px;
+}
+
+/* Sidebar container */
+.lesson-vocab-sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 190px;
+    max-height: calc(100vh - 240px);
+    overflow-y: auto;
+    padding-right: 6px;
+    box-sizing: border-box;
+}
+
+.lesson-vocab-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lesson-vocab-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.lesson-vocab-sidebar::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 10px;
+}
+
+.lesson-vocab-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* Sidebar Header */
+.vocab-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #EEF2FF;
+}
+
+.vocab-sidebar-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vocab-sidebar-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #EEF2FF;
+    color: #4F46E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.vocab-sidebar-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.vocab-sidebar-subtitle {
+    font-size: 11.5px;
+    color: #6B7280;
+    margin: 2px 0 0;
+    display: block;
+}
+
+.vocab-count-badge {
+    font-size: 11px;
+    font-weight: 700;
+    background: #EEF2FF;
+    color: #4F46E5;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 1px solid #C7D2FE;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Vocab cards list */
+.vocab-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual Vocab Box (summarized) */
+.vocab-summary-card {
+    position: relative;
+    background: #EEF2FF;
+    border: 1px solid #C7D2FE;
+    border-left: 5px solid #4F46E5;
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    outline: none;
+}
+
+.vocab-summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.12);
+    border-color: #818CF8;
+}
+
+.vocab-summary-card:focus-visible {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.35);
+}
+
+.vocab-summary-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.vocab-summary-card-header .vocab-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4F46E5;
+    background: white;
+    padding: 2px 8px;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.vocab-jump-hint {
+    font-size: 11px;
+    color: #6366F1;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.vocab-summary-card:hover .vocab-jump-hint {
+    opacity: 1;
+    transform: translateX(2px) translateY(-2px);
+    color: #4338CA;
+}
+
+.vocab-summary-card-body .vocab-term {
+    font-size: 15px;
+    font-weight: 700;
+    font-style: italic;
+    color: #1E1B4B;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.vocab-summary-card-body .vocab-summary-def {
+    margin: 0;
+    color: #312E81;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+/* Empty state */
+.vocab-empty-box {
+    background: #F9FAFB;
+    border: 1px dashed #D1D5DB;
+    border-radius: 10px;
+    padding: 22px 16px;
+    text-align: center;
+    color: #6B7280;
+}
+
+.vocab-empty-box i {
+    font-size: 22px;
+    color: #9CA3AF;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.vocab-empty-box p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* In-lesson highlight pulse when jumped to */
+@keyframes vocabBoxHighlight {
+    0% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.5);
+        background: #E0E7FF;
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(79, 70, 229, 0.2);
+        background: #C7D2FE;
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+        background: #EEF2FF;
+    }
+}
+
+.vocab-highlight-pulse {
+    animation: vocabBoxHighlight 1.5s ease-in-out;
+    border-left-color: #3730A3 !important;
+}
+
+/* ===========================
+   RESPONSIVE: SIDEBAR TO BOTTOM
+=========================== */
+
+@media (max-width: 1200px) {
+    .lesson-layout-wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .lesson-main-column {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .lesson-vocab-sidebar {
+        width: 100%;
+        max-width: 900px;
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+        margin-top: 40px;
+        padding-top: 32px;
+        padding-right: 0;
+        border-top: 2px solid #E0E7FF;
+    }
+
+    .vocab-cards-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .vocab-cards-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 
 
