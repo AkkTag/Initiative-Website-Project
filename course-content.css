@@ -65,6 +65,13 @@ body{
     gap:14px;
 }
 
+.course-sidebar .profile-card{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
 
 
 /* ===========================
