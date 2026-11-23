@@ -126,6 +126,10 @@ function loadLesson(unitName, lessonIndex) {
 
     renderLessonContent(content, lessonName);
 
+    if (window.matchMedia("(max-width: 700px)").matches) {
+        closeLessonSidebar();
+    }
+
     console.log(courseData)
     console.log(lessonContentData)
 

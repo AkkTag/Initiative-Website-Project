@@ -47,29 +47,35 @@
             </div>
         </div>
 
-        <div class="unit-list" role="listbox" aria-label="Course units">
+        <details class="mobile-unit-disclosure" open>
+            <summary>
+                <span>Units</span>
+                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </summary>
+            <div id="unit-list" class="unit-list" role="listbox" aria-label="Course units">
 
-            <div class="unit active" role="option" tabindex="0" aria-selected="true">
-                Unit 0
+                <div class="unit active" role="option" tabindex="0" aria-selected="true">
+                    Unit 0
+                </div>
+
+                <div class="unit" role="option" tabindex="0" aria-selected="false">
+                    Unit 1
+                </div>
+
+                <div class="unit" role="option" tabindex="0" aria-selected="false">
+                    Unit 2
+                </div>
+
+                <div class="unit" role="option" tabindex="0" aria-selected="false">
+                    Unit 3
+                </div>
+
+                <div class="unit" role="option" tabindex="0" aria-selected="false">
+                    Unit 4
+                </div>
+
             </div>
-
-            <div class="unit" role="option" tabindex="0" aria-selected="false">
-                Unit 1
-            </div>
-
-            <div class="unit" role="option" tabindex="0" aria-selected="false">
-                Unit 2
-            </div>
-
-            <div class="unit" role="option" tabindex="0" aria-selected="false">
-                Unit 3
-            </div>
-
-            <div class="unit" role="option" tabindex="0" aria-selected="false">
-                Unit 4
-            </div>
-
-        </div>
+        </details>
 
         <!-- Lesson Sidebar -->
 
@@ -161,7 +167,7 @@
 
                     <button class="toolbar-btn">Add Playground</button>
 
-                    <button class="toolbar-btn">Start Exercise</button>
+                    <button class="toolbar-btn">Start Review</button>
 
                 </div>
 

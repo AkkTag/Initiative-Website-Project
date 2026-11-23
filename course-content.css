@@ -10,8 +10,8 @@
 }
 
 .page {
-  width: min(100% - 2rem, 1200px);
-  margin-inline: auto;
+  width: 100%;
+  min-height: 100vh;
 }
 
 body{
@@ -30,7 +30,7 @@ body{
 
 .course-layout{
     display:grid;
-    grid-template-columns:260px 1fr;
+    grid-template-columns:260px minmax(0, 1fr);
     height:100vh;
 
     transition:0.35s;
@@ -189,6 +189,17 @@ body{
 .badge-info-icon {
     font-size: 0.7rem;
     opacity: 0.85;
+}
+
+.mobile-unit-disclosure {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.mobile-unit-disclosure > summary {
+    display: none;
 }
 
 /* ===========================
@@ -1258,7 +1269,7 @@ html{
 .lesson-main-column {
     flex: 1 1 0;
     min-width: 0;
-    max-width: 860px;
+    max-width: none;
 }
 
 /* Sidebar container */
@@ -1507,6 +1518,250 @@ html{
 @media (max-width: 640px) {
     .vocab-cards-list {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    .course-layout {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .course-sidebar {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .sidebar-header {
+        padding: 12px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .mobile-unit-disclosure {
+        flex: none;
+        min-height: 0;
+    }
+
+    .mobile-unit-disclosure > summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 44px;
+        margin: 4px 0 8px;
+        padding: 10px 12px;
+        border: 1px solid rgba(190, 255, 98, 0.35);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #BEFF62;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        list-style: none;
+    }
+
+    .mobile-unit-disclosure > summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .mobile-unit-disclosure > summary i {
+        transition: transform 0.2s ease;
+    }
+
+    .mobile-unit-disclosure:not([open]) > summary i {
+        transform: rotate(-90deg);
+    }
+
+    .badge-row {
+        margin-top: 8px;
+    }
+
+    .unit-list {
+        flex: none;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 2px 2px 8px;
+    }
+
+    .unit {
+        flex: 0 0 auto;
+        padding: 10px 14px;
+    }
+
+    .lesson-sidebar,
+    .lesson-sidebar.show {
+        position: static;
+        width: 100%;
+        max-height: 0;
+        min-height: 0;
+        padding: 0 12px;
+        overflow: hidden;
+        border-radius: 12px;
+        opacity: 0;
+        visibility: hidden;
+        transform: none;
+        box-shadow: none;
+        transition: max-height .25s ease, padding .25s ease, opacity .2s ease;
+    }
+
+    .lesson-sidebar.show {
+        max-height: 40vh;
+        padding: 12px;
+        overflow-y: auto;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .course-sidebar .profile-card {
+        display: none;
+    }
+
+    .lesson-content {
+        width: 100%;
+        height: auto;
+        min-height: 70vh;
+        overflow: visible;
+    }
+
+    .lesson-body {
+        margin: 12px 8px 24px;
+        padding: 24px 18px 32px;
+        border-radius: 16px;
+        min-height: 60vh;
+    }
+
+    .lesson-body p,
+    .lesson-body ul,
+    .lesson-body ol {
+        max-width: none;
+        width: 100%;
+    }
+
+    .lesson-body ul,
+    .lesson-body ol {
+        padding-left: 24px;
+    }
+
+    .content-table,
+    .comparison-table,
+    .card-grid,
+    .info-box,
+    .example-box,
+    .code-block,
+    .quiz-card,
+    .misconception-card,
+    .highlight-box,
+    .takeaways {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .content-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .lesson-header-inner {
+        margin: 0;
+    }
+
+    .lesson-title {
+        padding: 18px 14px 0;
+    }
+
+    .lesson-title .unit-text {
+        font-size: 1.35rem;
+    }
+
+    .lesson-title .lesson-text {
+        font-size: 1rem;
+    }
+
+    .lesson-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 4px 12px 12px;
+    }
+
+    .lesson-content > :not(.lesson-top-sticky) {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .lesson-content h1,
+    .lesson-body h1 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        line-height: 1.25;
+    }
+
+    .lesson-content p,
+    .lesson-body p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .action-tray {
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 8px;
+        margin-bottom: 16px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    .action-btn {
+        min-height: 40px;
+        padding: 8px 12px;
+    }
+
+    .lesson-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 12px;
+        margin-bottom: 12px;
+    }
+
+    .toolbar-group {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+
+    .toolbar-btn {
+        min-height: 44px;
+        padding: 8px 10px;
+        font-size: 0.78rem;
+    }
+
+    .tab {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 14px;
+    }
+
+    .lesson-layout-wrapper {
+        display: block;
+    }
+
+    .lesson-vocab-sidebar {
+        width: 100%;
     }
 }
 

@@ -498,6 +498,55 @@ grid-template-columns:1fr;
 
 }
 
+@media (max-width: 600px) {
+  .dashboard {
+    width: calc(100% - 28px);
+    margin: 20px auto 120px;
+  }
+
+  .welcome-banner {
+    min-height: 180px;
+    height: auto;
+    padding: 28px 18px;
+    margin-bottom: 24px;
+    border-radius: 22px;
+  }
+
+  .overlay h1 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    line-height: 1.15;
+  }
+
+  .overlay p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .course-card {
+    min-height: 0;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .course-card i {
+    font-size: 40px;
+    margin-bottom: 16px;
+  }
+
+  .course-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .course-card p {
+    width: 100%;
+  }
+}
+
 }
 
 /* @media(max-width:900px){
