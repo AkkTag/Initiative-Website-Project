@@ -60,9 +60,10 @@ body{
 
     height: 100vh;
 
-    padding:18px 18px 110px 18px;
+    padding:18px;
 
     gap:14px;
+    min-height: 0;
 }
 
 .course-sidebar .profile-card{
@@ -196,6 +197,44 @@ body{
     flex: 1;
     flex-direction: column;
     min-height: 0;
+    overflow: hidden;
+}
+
+.mobile-unit-disclosure[open] {
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.mobile-unit-disclosure[open] > .unit-list {
+    flex: 0 0 auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: visible;
+    overscroll-behavior: contain;
+}
+
+.mobile-unit-disclosure::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mobile-unit-disclosure::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+.mobile-unit-disclosure::-webkit-scrollbar-thumb {
+    background: #4B5563;
+    border-radius: 10px;
+}
+
+.mobile-unit-disclosure::-webkit-scrollbar-thumb:hover {
+    background: #6B7280;
+}
+
+@media (max-height: 760px) and (min-width: 701px) {
+    .course-sidebar {
+        padding-bottom: 96px;
+    }
 }
 
 .mobile-unit-disclosure > summary {
@@ -1541,6 +1580,7 @@ html{
         min-height: 0;
         padding: 12px 14px;
         gap: 10px;
+        overflow: visible;
     }
 
     .sidebar-header {
@@ -1554,6 +1594,17 @@ html{
     .mobile-unit-disclosure {
         flex: none;
         min-height: 0;
+        overflow: visible;
+    }
+
+    .mobile-unit-disclosure[open] > .unit-list {
+        flex: 0 1 auto;
+        height: min(40vh, 320px);
+        min-height: 0;
+        max-height: min(40vh, 320px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
     }
 
     .mobile-unit-disclosure > summary {
@@ -1591,12 +1642,11 @@ html{
         margin-top: 8px;
     }
 
-    .unit-list {
-        flex: none;
-        flex-direction: row;
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 2px 2px 8px;
+    .mobile-unit-disclosure[open] > .unit-list {
+        flex-direction: column;
+        align-items: stretch;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .unit {

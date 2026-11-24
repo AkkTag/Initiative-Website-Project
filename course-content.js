@@ -458,7 +458,7 @@ window.addEventListener("resize", () => {
 });
 
 document.getElementById("start-review-btn")?.addEventListener("click", () => {
-    window.Starr.quiz();
+    window.Starr?.quiz();
 });
 
 // Close the flyout when a click lands outside of both unit list and lesson sidebar

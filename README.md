@@ -2,7 +2,7 @@
 
 A course website for AP Computer Science A. Students read lessons, get help from **Starr** (the star mascot), quiz themselves on vocabulary, mark lessons complete, and take a unit test at the end of each unit, with Duolingo-style celebrations along the way.
 
-Everything is plain **HTML, CSS and JavaScript**. There is no build step, no framework and no npm install. You edit a file, refresh the browser, and see the change.
+Everything is plain **HTML, CSS and JavaScript**. There is no build step or framework. The project root is also the Firebase Hosting source, so there is only one copy of each site file. Local edits appear on your computer immediately; to publish them to https://constarration.web.app, run `npm run deploy` from this folder and sign in to Firebase if prompted.
 
 ---
 
@@ -24,7 +24,7 @@ Everything is plain **HTML, CSS and JavaScript**. There is no build step, no fra
 
 ---
 
-## Running the site
+## Running and publishing the site
 
 Some browsers block scripts when a page is opened straight from the file system, so run a tiny local server from the project folder:
 
@@ -34,7 +34,7 @@ python -m http.server 8765
 npx serve .
 ```
 
-Then open `http://localhost:8765/course_content.html` (or `dashboard.html`).
+Then open `http://localhost:8765/course_content.html` (or `dashboard.html`).\n\nTo publish changes to the live site, run this from the project folder:\n\n```bash\nnpm run deploy\n```\n\nWait for Firebase to report that deployment completed, then refresh https://constarration.web.app.
 
 ---
 
@@ -568,3 +568,4 @@ These are already followed in the code; keep them when you add things.
 * `dashboard.html` loads `script.js`, which does not exist. The real file is `dashboard.js`, so the dashboard progress percentages never fill in. Fix: change the script tag.
 * Units 0 and 4 have no vocabulary boxes yet, so they have no unit test and Starr's quiz says so.
 * Signed-in progress follows a student between devices through Firebase Firestore. Signed-out progress remains local to the browser.
+
