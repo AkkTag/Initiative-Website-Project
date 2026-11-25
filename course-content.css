@@ -1564,6 +1564,7 @@ html{
     body {
         height: auto;
         min-height: 100vh;
+        min-height: 100dvh;
         overflow: auto;
     }
 
@@ -1581,6 +1582,7 @@ html{
         padding: 12px 14px;
         gap: 10px;
         overflow: visible;
+        padding-bottom: 12px;
     }
 
     .sidebar-header {
@@ -1671,7 +1673,7 @@ html{
     }
 
     .lesson-sidebar.show {
-        max-height: 40vh;
+        max-height: min(35dvh, 280px);
         padding: 12px;
         overflow-y: auto;
         opacity: 1;
@@ -1687,6 +1689,10 @@ html{
         height: auto;
         min-height: 70vh;
         overflow: visible;
+    }
+
+    .lesson-top-sticky {
+        position: static;
     }
 
     .lesson-body {
@@ -1737,7 +1743,8 @@ html{
     }
 
     .lesson-title .unit-text {
-        font-size: 1.35rem;
+        font-size: clamp(1.1rem, 5vw, 1.35rem);
+        line-height: 1.3;
     }
 
     .lesson-title .lesson-text {
@@ -1789,6 +1796,10 @@ html{
     }
 
     .toolbar-group {
+        gap: 8px;
+    }
+
+    .toolbar-group {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         width: 100%;
@@ -1797,7 +1808,9 @@ html{
     .toolbar-btn {
         min-height: 44px;
         padding: 8px 10px;
-        font-size: 0.78rem;
+        font-size: clamp(0.72rem, 3vw, 0.82rem);
+        line-height: 1.25;
+        white-space: normal;
     }
 
     .tab {
@@ -1812,6 +1825,34 @@ html{
 
     .lesson-vocab-sidebar {
         width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .course-sidebar {
+        padding: 10px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1.08rem;
+    }
+
+    .lesson-title {
+        padding-inline: 12px;
+    }
+
+    .lesson-tabs {
+        gap: 4px;
+    }
+
+    .tab {
+        padding-inline: 10px;
+        font-size: 0.82rem;
+    }
+
+    .lesson-body {
+        margin-inline: 4px;
+        padding: 20px 14px 28px;
     }
 }
 

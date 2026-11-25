@@ -461,6 +461,14 @@ document.getElementById("start-review-btn")?.addEventListener("click", () => {
     window.Starr?.quiz();
 });
 
+document.querySelectorAll(".lesson-toolbar .toolbar-btn").forEach(button => {
+    if (button.id === "start-review-btn" || button.textContent.trim() === "Ask Starr") return;
+
+    button.addEventListener("click", () => {
+        window.alert("This feature is currently under development.");
+    });
+});
+
 // Close the flyout when a click lands outside of both unit list and lesson sidebar
 document.addEventListener("click", (e) => {
 
@@ -499,6 +507,16 @@ tabs.forEach(tab => {
             const stickyTop = document.querySelector(".lesson-top-sticky");
 
             if (targetSection && lessonContent) {
+                const isMobileLayout = window.matchMedia("(max-width: 700px)").matches;
+                if (isMobileLayout) {
+                    const offset = stickyTop && getComputedStyle(stickyTop).position === "sticky"
+                        ? stickyTop.offsetHeight + 16
+                        : 16;
+                    const targetTop = window.scrollY + targetSection.getBoundingClientRect().top - offset;
+                    window.scrollTo({ top: targetTop, behavior: "smooth" });
+                    return;
+                }
+
                 const offset = stickyTop ? stickyTop.offsetHeight + 24 : 120;
                 const rect = targetSection.getBoundingClientRect();
                 const containerRect = lessonContent.getBoundingClientRect();

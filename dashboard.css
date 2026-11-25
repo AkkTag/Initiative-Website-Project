@@ -13,37 +13,17 @@ body{
 
     font-family:'Poppins', sans-serif;
 
-    /* Animated gradient */
     background: linear-gradient(-45deg, #98c9fa, #4a90e2, #7fdbff, #6c5ce7);
     background-size: 400% 400%;
     animation: gradientBG 12s ease infinite;
-
-    /* background:
-    radial-gradient(circle at top right,
-    rgba(85,110,230,.06),
-    transparent 40%),
-
-    radial-gradient(circle at bottom left,
-    rgba(12,194,103,.05),
-    transparent 45%),
-
-    #98c9fa; */
-
-    color:#222;
+    color: #111827;
 
 }
 
-/* Animation keyframes */
 @keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* ---------- Main Dashboard ---------- */
@@ -51,8 +31,8 @@ body{
 .dashboard{
 
     position: relative;
-    width:90%;
-    margin:40px auto;
+    width:min(1100px, calc(100% - 48px));
+    margin:40px auto 120px;
 
 }
 
@@ -72,16 +52,11 @@ body{
 
     position: relative;
 
-    height:220px;
+    min-height:200px;
 
-    border-radius:32px;
+    border-radius:24px;
 
-    background:linear-gradient(
-    90deg,
-    #556EE6 0%,
-    #0CC267 35%,
-    #BEFF62 65%,
-    #FFE07A 100%);
+    background:linear-gradient(135deg, #253B73, #354F91);
 
     display:flex;
 
@@ -91,9 +66,9 @@ body{
 
     text-align:center;
 
-    margin-bottom:45px;
+    margin-bottom:32px;
 
-    box-shadow:0px 10px 35px rgba(0,0,0,.12);
+    box-shadow:0 12px 30px rgba(17,24,39,.12);
 
 }
 
@@ -105,7 +80,7 @@ body{
     right: -30%;
     width: 300px;
     height: 300px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(190, 255, 98, 0.08);
     border-radius: 50%;
     filter: blur(40px);
 }
@@ -118,7 +93,7 @@ body{
 
 .overlay h1{
 
-    font-size:3.3rem;
+    font-size:clamp(2rem, 4vw, 3rem);
 
     font-weight:700;
 
@@ -128,7 +103,7 @@ body{
 
     margin-top:12px;
 
-    font-size:1.3rem;
+    font-size:1.05rem;
 
     font-weight:300;
 
@@ -142,7 +117,7 @@ body{
 
     grid-template-columns:repeat(2,1fr);
 
-    gap:30px;
+    gap:20px;
 
 }
 
@@ -150,9 +125,10 @@ body{
 
 .course-card{
 
-    border-radius:28px;
+    border:2px solid #253B73;
+    border-radius:20px;
 
-    padding:35px;
+    padding:28px;
 
     min-height:210px;
 
@@ -160,37 +136,38 @@ body{
 
     transition:.35s;
 
-    color:white;
+    color:#111827;
 
     position:relative;
 
     overflow:hidden;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.10);
+    box-shadow:0 8px 22px rgba(17,24,39,.06);
 
 }
 
 .course-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-4px);
 
-    box-shadow:0 18px 35px rgba(0,0,0,.18);
+    box-shadow:0 14px 28px rgba(17,24,39,.11);
 
 }
 
 .course-card i{
 
-    font-size:55px;
+    font-size:40px;
 
-    margin-bottom:30px;
+    margin-bottom:22px;
+    color:#9CA3AF;
 
 }
 
 .course-card h2{
 
-    font-size:1.8rem;
+    font-size:1.45rem;
 
-    margin-bottom:15px;
+    margin-bottom:10px;
 
 }
 
@@ -233,25 +210,34 @@ body{
 /* ---------- Palette ---------- */
 
 .blue{
-    background:linear-gradient(135deg,#556EE6,#4A63D8);
+    background:linear-gradient(135deg, #556EE6, #4A63D8);
+    color:#fff;
+    --course-progress-color: #BEFF62;
+    --course-progress-fill-color: #253B73;
+    border-top:3px solid #556EE6;
 }
 
 .green{
-    background:linear-gradient(135deg,#0CC267,#09AF5C);
+    background:linear-gradient(135deg, #0F766E, #11998E);
+    color:#fff;
+    border-top:3px solid #6B7280;
 }
 
 .lime{
-    background:linear-gradient(135deg,#BEFF62,#D3FF8B);
+    background:linear-gradient(135deg, #D8F3A5, #BEFF62);
     color:#1B1B1B;
+    border-top:3px solid #6B7280;
 }
 
 .purple{
-    background:linear-gradient(135deg,#2A0AAE,#3C17C9);
+    background:linear-gradient(135deg, #5966A8, #737FC2);
+    color:#fff;
+    border-top:3px solid #6B7280;
 }
 
 .gold{
 
-    background:#FFE07A;
+    background:#F2C96D;
 
 }
 
@@ -545,6 +531,27 @@ grid-template-columns:1fr;
   .course-card p {
     width: 100%;
   }
+
+  .course-btn {
+    min-height: 44px;
+    padding: 11px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard {
+    width: calc(100% - 20px);
+    margin-top: 12px;
+  }
+
+  .welcome-banner {
+    padding: 24px 14px;
+    border-radius: 18px;
+  }
+
+  .course-card {
+    padding: 20px;
+  }
 }
 
 }
@@ -622,7 +629,7 @@ width:100%;
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #4f46e5, #06b6d4);
+    background: var(--course-progress-fill-color, #556EE6);
     border-radius: 20px;
     transition: width 0.8s ease;
 }
@@ -637,7 +644,7 @@ width:100%;
 .progress-text {
     font-size: 12px;
     margin-top: 6px;
-    color: #BEFF62;
+    color: var(--course-progress-color, #6B7280);
 }
 
 /*
@@ -683,7 +690,7 @@ width:100%;
 .lime-progress-text {
     font-size: 12px;
     margin-top: 6px;
-    color: #2A0AAE;
+    color: #6B7280;
 }
 
 .course-btn {
@@ -702,6 +709,7 @@ width:100%;
     background: #374151;
     transform: translateY(-2px);
 }
+
 
 /* .floating-star{
     position:absolute;
