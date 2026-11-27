@@ -509,11 +509,17 @@ tabs.forEach(tab => {
             if (targetSection && lessonContent) {
                 const isMobileLayout = window.matchMedia("(max-width: 700px)").matches;
                 if (isMobileLayout) {
-                    const offset = stickyTop && getComputedStyle(stickyTop).position === "sticky"
-                        ? stickyTop.offsetHeight + 16
-                        : 16;
-                    const targetTop = window.scrollY + targetSection.getBoundingClientRect().top - offset;
-                    window.scrollTo({ top: targetTop, behavior: "smooth" });
+                    // Mobile scrolls the document, while desktop scrolls the lesson panel.
+                    // Measure after layout settles so the sticky header's full height is
+                    // accounted for and the section heading remains visible below it.
+                    requestAnimationFrame(() => {
+                        const headerHeight = stickyTop?.getBoundingClientRect().height ?? 0;
+                        const targetTop = window.scrollY
+                            + targetSection.getBoundingClientRect().top
+                            - headerHeight
+                            - 28;
+                        window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+                    });
                     return;
                 }
 

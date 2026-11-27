@@ -10,7 +10,7 @@
     const user = auth.currentUser;
     return user ? {
       uid: user.uid,
-      username: user.displayName || (user.email || "Student").split("@")[0],
+      username: user.displayName || (user.email || "").split("@")[0] || "Student",
       email: user.email || "",
       grade: "Student Account",
       avatarColor: "#556EE6",
@@ -61,6 +61,9 @@
           button.addEventListener("click", () => this.logout());
           card.appendChild(button);
         }
+      });
+      document.querySelectorAll("[data-auth-name]").forEach(name => {
+        name.textContent = user.username;
       });
       const title = document.querySelector(".welcome-banner .overlay h1");
       if (title) title.textContent = `Welcome back, ${user.username}!`;

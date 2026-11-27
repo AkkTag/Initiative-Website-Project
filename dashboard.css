@@ -32,6 +32,7 @@ body{
 
     position: relative;
     width:min(1100px, calc(100% - 48px));
+    min-width: 0;
     margin:40px auto 120px;
 
 }
@@ -487,7 +488,31 @@ grid-template-columns:1fr;
 @media (max-width: 600px) {
   .dashboard {
     width: calc(100% - 28px);
+    max-width: 100%;
     margin: 20px auto 120px;
+  }
+
+  .profile-card {
+    width: min(280px, calc(100vw - 16px));
+    min-height: 68px;
+    padding: 8px 12px;
+    gap: 10px;
+    border-radius: 0 14px 0 0;
+  }
+
+  .profile-card .avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .profile-card .avatar i {
+    font-size: 22px;
+  }
+
+  .profile-card .logout-btn-mini {
+    min-width: 32px;
+    height: 32px;
+    padding-inline: 8px;
   }
 
   .welcome-banner {
