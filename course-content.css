@@ -1576,6 +1576,8 @@ html{
         height: auto;
         min-height: 100vh;
         min-height: 100dvh;
+        width: 100%;
+        min-width: 0;
     }
 
     .course-sidebar {
@@ -1586,6 +1588,7 @@ html{
         gap: 10px;
         overflow: visible;
         padding-bottom: 12px;
+        min-width: 0;
     }
 
     .sidebar-header {
@@ -1713,6 +1716,7 @@ html{
 
     .lesson-content {
         width: 100%;
+        min-width: 0;
         height: auto;
         min-height: 70vh;
         min-height: 70dvh;
@@ -1801,6 +1805,19 @@ html{
     .lesson-content > :not(.lesson-top-sticky) {
         padding-left: 16px;
         padding-right: 16px;
+    }
+
+    .lesson-body,
+    .lesson-body * {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .lesson-body pre,
+    .lesson-body .code-block {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .lesson-content h1,
@@ -1894,6 +1911,20 @@ html{
     .lesson-body {
         margin-inline: 4px;
         padding: 20px 14px 28px;
+    }
+}
+
+@media (max-width: 360px) {
+    .lesson-body {
+        padding-inline: 12px;
+    }
+
+    .lesson-toolbar {
+        padding-inline: 8px;
+    }
+
+    .toolbar-group {
+        grid-template-columns: 1fr;
     }
 }
 

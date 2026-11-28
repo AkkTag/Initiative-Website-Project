@@ -728,10 +728,51 @@
         width:calc(100vw - 32px);
     }
 
+    /* Keep the quiz/review panel fully inside short phone viewports. */
+    .starr-bubble.is-open,
+    .starr-menu.is-open {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: max(16px, env(safe-area-inset-bottom, 0px));
+        width: auto;
+        max-width: none;
+        max-height: calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        border-radius: 16px;
+        transform-origin: bottom center;
+    }
+
+    .starr-bubble.is-open::after,
+    .starr-menu.is-open::after {
+        display: none;
+    }
+
+    .starr-bubble {
+        padding: 16px;
+    }
+
     .starr,
     .starr-restore{
         right:14px;
         bottom:104px;
+    }
+}
+
+@media (max-width: 360px) {
+    .starr-bubble.is-open,
+    .starr-menu.is-open {
+        left: 10px;
+        right: 10px;
+        bottom: max(10px, env(safe-area-inset-bottom, 0px));
+        max-height: calc(100dvh - 20px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+        padding: 14px;
+    }
+
+    .starr-choice {
+        padding: 9px 11px;
+        font-size: .82rem;
     }
 }
 
